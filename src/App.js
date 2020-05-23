@@ -10,7 +10,7 @@ const App = props => {
     <div className= "App"> 
     <Nav/> 
         <Switch> 
-            <DogContainer/>
+            {/* <DogContainer/> */}
             <Route/> 
         </Switch> 
     </div>
