@@ -4,6 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogProfile from './components/DogProfile'
 import DogIndex from './components/DogIndex'
+// import DogContainer from './containers/DogContainer'
 import Auth from './components/Auth'
 import MainContainer from './containers/MainContainer';
 import SignUp from './components/SignUp'
@@ -23,9 +24,9 @@ class App extends React.Component {
             <Nav/> 
                 <Switch> 
                     <Route path='/dogs/:id' component={DogProfile}/>   
-                    <Route path='/dogs/' component={DogIndex}/> 
+                    <Route path="/dogs" component={DogIndex}/>
                     <Route path='/events/new' component={EventsForm}/> 
-                    <Route path='/events/' component={EventsIndex}/> 
+                    <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' component={Auth}/> 
                     <Route path='/signup' component={SignUp}/> 
                     <Route exact path='/' component={MainContainer}/> 
