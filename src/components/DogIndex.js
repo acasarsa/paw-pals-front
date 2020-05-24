@@ -18,7 +18,7 @@ const DogIndex = () => {
     const renderDogCards = () => {
         if (dogs) {
             console.log('index', dogs)
-            return dogs.map(dog => <DogCard key={dog.id} id={dog.id} {...dog.attributes} /> )
+            return dogs.map(dog => <DogCard key={dog.id} {...dog.attributes} /> )
         }
         // let dogsAttributes = dogs.data
 
