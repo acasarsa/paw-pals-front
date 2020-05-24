@@ -1,5 +1,6 @@
 import React from 'react';
-// import DogCard from './DogCard';
+import DogCard from './DogCard';
+// import DogProfile from './DogProfile'
 
 
 
@@ -10,7 +11,7 @@ class DogIndex extends React.Component {
             <div className="index-page">
                 <h3>Dog Index</h3>
                 <div className="simple-flex-row index-wrap">
-                    {/* {this.state.pets.map(pet => <DogCard key={dog.id} {...pet} />)} */}
+                    {this.state.pets.map(pet => <DogCard  />)}
                 </div>
             </div>
         )
