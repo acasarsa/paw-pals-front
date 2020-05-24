@@ -10,6 +10,7 @@ import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 
+
 const requestHeaders = {
     'Accept': 'application/json',
     'Content-Type': 'application/json' }
