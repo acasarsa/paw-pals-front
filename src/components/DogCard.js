@@ -12,7 +12,6 @@ const DogCardWrapper = styled.div`
     `;
 
 const DogCard = (props) => {
-    console.log("card props",props)
 
     const {id, name, image, status } = props
     // size, age, breed, description, favorite_toy, gender, human, 
