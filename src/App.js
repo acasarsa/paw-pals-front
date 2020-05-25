@@ -18,10 +18,17 @@ import EventsForm from './components/EventsForm'
 // import {DogProfile, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 
 class App extends React.Component {
+    state = {user: null}
+
+    setUser = user => {
+        this.setState({ user: user})
+    }
+
+
     render() {
         return (
             <div className= "App"> 
-            <Nav/> 
+            <Nav /> 
                 <Switch> 
                     <Route path='/dogs/:id' component={DogProfile}/>   
                     <Route path="/dogs" component={DogIndex}/>
