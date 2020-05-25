@@ -1,7 +1,7 @@
 import React from 'react';
 
 class EventsForm extends React.Component {
-   
+
     render(){
         return (
             <div className="index-page">
@@ -11,7 +11,6 @@ class EventsForm extends React.Component {
             </div>
         )
     }
-
 }
 
 export default EventsForm;

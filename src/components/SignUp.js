@@ -13,3 +13,5 @@ class SignUp extends React.Component{
 }
 
 export default SignUp;
+
+// you need to fetch all the dogs or just look at the dogs state 
