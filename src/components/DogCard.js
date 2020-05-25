@@ -14,7 +14,8 @@ const DogCardWrapper = styled.div`
 const DogCard = (props) => {
     console.log("card props",props)
 
-    const {id, name, age, breed, description, favorite_toy, gender, human, image, size, status } = props
+    const {id, name, image, status } = props
+    // size, age, breed, description, favorite_toy, gender, human, 
     let history = useHistory()
 
     
@@ -22,7 +23,7 @@ const DogCard = (props) => {
         <DogCardWrapper>
             <h3>{name}</h3>
             <h5>"{status}"</h5>
-            <img src={image}></img>
+            <img src={image} alt="dog gif"></img>
             <button onClick={() => history.push(`/dogs/${id}`)}>Visit {name}!</button>
         </DogCardWrapper>
     )
