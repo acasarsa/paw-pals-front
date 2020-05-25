@@ -29,7 +29,7 @@ class App extends React.Component {
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' component={Auth}/> 
                     <Route path='/signup' component={SignUp}/> 
-                    <Route path='/' component={MainContainer}/> 
+                    {/* <Route exact path='/' component={MainContainer}/>  */}
                 </Switch> 
             </div>
           );
