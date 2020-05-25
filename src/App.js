@@ -6,7 +6,6 @@ import DogProfile from './components/DogProfile'
 import DogIndex from './components/DogIndex'
 // import DogContainer from './containers/DogContainer'
 import Auth from './components/Auth'
-import MainContainer from './containers/MainContainer';
 import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
@@ -18,16 +17,15 @@ const url = 'http://localhost:3000/api/v1'
 class App extends React.Component {
 
     state = {
-        current_user: '',
-        username: ''
+        logged_in_dog: null,
+        username: '',
     }
 
     // setCurrentUser = (dogs, username) => {
     //     console.log('username', username)
     //     this.setState({
-    //         current_user: dogs.data.map(dog => (dog.attribute.username === username) ? dog.id : <SignUp/>)
+    //         current_user: dogs.data.find(dog => (dog.attribute.username === username) ? dog : "Invalid Username")
     //     }) 
-        
     // }
 
     handleUsername = (event) => {
@@ -35,34 +33,38 @@ class App extends React.Component {
         this.setState({ username: event.target.value })
     }
 
-    handleLogin = (username) => {
+    handleLogin = (event, username) => {
+        event.preventDefault()
 
-        fetch(`${url}/dogs`)
+        fetch(`${url}/dogs/login/${username}`)
             .then(r => r.json())
-            .then(dogs => this.setState({
-                current_user: dogs.data.map(dog => (dog.attribute.username === username) ? console.log("dog id",dog.id) : <SignUp/>)
-            }) )
+            .then(dog => this.setState({ logged_in_dog: dog, username: ''}))
             
     }
+
+    handleSignOut = (event) => {
+        event.preventDefault()
+        this.setState({ logged_in_dog: null })
+    }
+
 // can pass down current_user to events and add a column for event create so we can add logic for 
 // if owner is your friend then you see the events. 
 // add events profile page 
     render() {
-        console.log("hi",this.state.current_user)
-        const {current_user, username} = this.state
+        const {logged_in_dog, username} = this.state
 
         return (
             <div className= "App"> 
-            <Nav/> 
+            <Nav logged_in_dog={logged_in_dog}/> 
                 <Switch> 
-                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} current_user={current_user} /> } />   
+                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} logged_in_dog={logged_in_dog} /> } />   
                     <Route path="/dogs" component={DogIndex}/>
-                    <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} current_user={current_user} /> } />   
+                    <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} logged_in_dog={logged_in_dog} /> } />   
                     <Route path='/events/new' component={EventsForm}/> 
                     <Route path='/events' component={EventsIndex}/> 
-                    <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setCurrentUser={this.handleLogin} current_user={current_user} /> }/> 
+                    <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} logged_in_dog={logged_in_dog} handleSignOut={this.handleSignOut} /> }/> 
                     <Route path='/signup' component={SignUp}/> 
-                    {/* <Route exact path='/' component={MainContainer}/>  */}
+
                 </Switch> 
             </div>
         );
@@ -70,7 +72,7 @@ class App extends React.Component {
 }
 
 
-// this.setCurrentUser
+
 
 export default App;
 
