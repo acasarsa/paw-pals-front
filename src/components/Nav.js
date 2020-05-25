@@ -7,7 +7,7 @@ const Nav = props => {
         <div className="simple-flex-row">
             <Link to="/">Home</Link>
             <Link to="/dogs">Dogs</Link>
-            <Link to="/">Profile</Link>
+            <Link to="/"> Profile</Link>
             <Link to="/">Followers</Link>
             <Link to="/">Events</Link>
             <div className="simple-flex-row right-corner">

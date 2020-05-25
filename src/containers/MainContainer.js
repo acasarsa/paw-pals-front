@@ -1,11 +1,14 @@
 import React  from 'react'
+import Auth from '../components/Auth'
+
+
 
 
 class MainContainer extends React.Component {
     render(){
         return(
         <div>
-                <h1> Home Page</h1>
+            <Auth/>
         </div>
         )
      
@@ -13,3 +16,7 @@ class MainContainer extends React.Component {
 }
 
   export default MainContainer
+
+  //MainContainer is the homepage (LoginPage)
+  // 
+  
