@@ -50,3 +50,11 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.right-corner {
+  margin-right: 15px;
+}
+
+.left-corner {
+  margin-left: 15px;
+}

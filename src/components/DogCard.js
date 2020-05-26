@@ -25,6 +25,7 @@ const DogCard = (props) => {
             <img src={image} alt="dog gif"></img>
             <button onClick={() => history.push(`/dogs/${id}`)}>Visit {name}!</button>
         </DogCardWrapper>
+        
     )
 }
 
