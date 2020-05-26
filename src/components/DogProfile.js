@@ -8,7 +8,8 @@ class DogProfile extends React.Component {
 
     state = {
         dog: null,
-        followers: [],
+        follow_id: ''
+        // followers: [],
     }
 
     componentDidMount() {
@@ -25,7 +26,7 @@ class DogProfile extends React.Component {
         
         if (this.state.dog) {
             this.setState({followers: this.state.dog.followers})
-            this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
+            this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
         }
 
     }
@@ -34,9 +35,11 @@ class DogProfile extends React.Component {
 
     handleFollow = (e) => {
         e.preventDefault()
+        const {loggedInDog} = this.props
+        const {dog} = this.state
         let newFollow = {
-            follower_id: this.props.loggedInDog.id,
-            followee_id: this.state.dog.id
+            follower_id: loggedInDog.id,
+            followee_id: dog.id,
         }
     
         let options = {
@@ -50,34 +53,43 @@ class DogProfile extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( follower => {
-              this.setState({followers: [...this.state.followers, follower] //reset states })
+            .then( followObj => {
+                this.setState({follow_id: followObj.id})
+                let follower_id = followObj.follower_id 
+                // console.log("follower_id",followObj.follower_id)
+                fetch(`${url}/dogs/${follower_id}`)
+                .then( r => r.json())
+                .then( newFollower => this.setFollowState(newFollower))
             })
-            // .then(r => r.json())
-            // .then(follower => this.setState({
-            //     follower
-            // }))
-        })
     }
 
-  
+    setFollowState = (newFollower) => {
+        const {dog} = this.state
+        this.setState({ dog: {...dog, followers: [...dog.followers, newFollower ]}
+    })}
+
+
+// take let id = followobj.follower_id  then do a fetch to that id and 
 
 
     handleUnfollow = (id) => {
+        console.log("id unfollow",id)
+        const {dog} = this.state
         const options = {
             method: 'DELETE'
         }
-        fetch(`http://localhost:3000/endpoint/id`, options)
+        fetch(`${url}/follows/${id}`, options)
             .then(r => r.json())
-            .then(this.setState({
-            followers: this.state.followers.filter((follower) => follower.id !== id)
+            .then( () => this.setState({
+                dog: {...dog, followers: dog.followers.filter((follower) => follower.id !== id )  }, follow_id: ''
         }))
         .catch((error) => {
             console.error('Error:', error);
         });
     }
 
-   
+
+    
     // need to get 
 
     /// make it so you can't follow urself. and make it so the follow button 
@@ -89,8 +101,8 @@ class DogProfile extends React.Component {
 
     renderDogProfile = () => {
         if (this.state.dog) {
-            console.log("followers off state on DP", this.state.dog.followers)
-        
+            console.log("followers off state on DP", this.state.followers) 
+            console.log('loggedinDOg', this.props.loggedInDog)
     
         const {name, image, followers} = this.state.dog
 
@@ -100,15 +112,16 @@ class DogProfile extends React.Component {
                     <div>
                         <h2>Name: {name}</h2>
                         <img src={image}></img>
-                        {!followers.includes(this.props.loggedInDog.id) ?
-                            <form onSubmit={this.handleFollow}>
-                                <button > Follow </button>
+                        {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                            <form >
+                                <button onClick={() => this.handleUnfollow(this.state.follow_id)}> Unfollow </button>
                             </form>
-                        : 
-                            <form onSubmit={() => this.handleUnfollow()}>
-                                <button > Unfollow </button>
-                            </form>
-
+                        :
+                        <form onSubmit={this.handleFollow}>
+                            <button > Follow </button>
+                        </form>
+                        
+                        
                         }
                         
                         <hr></hr>
@@ -132,8 +145,8 @@ class DogProfile extends React.Component {
     
 
     render(){
-        console.log("props in dog P", this.props.loggedInDog)
-        
+
+        console.log("follow id",this.state.follow_id)
 
         return  this.state.dog ? this.renderDogProfile() : <div> No Dog Selected... Try going back to Dogs! </div>
 
