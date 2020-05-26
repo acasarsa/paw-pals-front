@@ -60,8 +60,8 @@ class App extends React.Component {
                     <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} logged_in_dog={logged_in_dog} /> } />   
                     <Route path="/dogs" component={DogIndex}/>
                     <Route path='/events/new' component={EventsForm}/> 
+                    <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} logged_in_dog={logged_in_dog} /> } /> 
                     <Route path='/events/edit/:id' component={EditEventForm}/>
-                    <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} logged_in_dog={logged_in_dog} /> } />   
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} logged_in_dog={logged_in_dog} handleSignOut={this.handleSignOut} /> }/> 
                     <Route path='/signup' component={SignUp}/> 

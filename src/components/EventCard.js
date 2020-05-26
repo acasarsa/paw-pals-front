@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
-import EditEventForm from './EditEventForm'
+
 
     const EventCardWrapper = styled.div`
         /* min-width: 360px;  */
@@ -25,16 +25,20 @@ import EditEventForm from './EditEventForm'
 
 
 const EventCard = (props) => {
+    console.log("props",props)
+
+
+
+
 
     const handleDelete = () => {
         let {id} = props
         fetch(`http://localhost:3000/api/v1/events/${id}`, {
             method: "DELETE"
         })   
-        .then(resp => resp.json())
-        .then(data => console.log(data))
+        // .then(resp => resp.json())
+        .then(props.fetchEvents)
     }
-
 
 
 
@@ -50,8 +54,8 @@ const EventCard = (props) => {
             <img src={image} alt=""></img>
             <Button >Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
-            <Button onClick={handleDelete} >Delete Event</Button>
-            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
+            <Button onClick={handleDelete}   >Delete Event</Button>
+            {/* <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
         </EventCardWrapper>
     )
 }

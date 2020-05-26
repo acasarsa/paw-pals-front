@@ -2,37 +2,37 @@ import React from 'react'
 // import {useHistory} from 'react-router-dom'
 
 class EditEventForm extends React.Component{
-    state = { 
-        id: 37,
-        title: '',
-        date: '',
-        image: '',
-        description: ''
-    }
+    // state = { 
+    //     id: 56,
+    //     title: '',
+    //     date: '',
+    //     image: '',
+    //     description: ''
+    // }
 
-    handleChange = (event) => {
-        event.preventDefault()
-        let {id, title, date, image, description} = this.state 
+    // handleChange = (event) => {
+    //     event.preventDefault()
+    //     let {id, title, date, image, description} = this.state.data.attributes
         
-        fetch(`http://localhost:3000/api/v1/events/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-type':'application/json'
-            },
-            body: JSON.stringify({
-                title,
-                date,
-                image,
-                description
-            })
-        })
-    }
+    //     fetch(`http://localhost:3000/api/v1/events/${id}`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-type':'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             title,
+    //             date,
+    //             image,
+    //             description
+    //         })
+    //     })
+    // }
 
 
-    eventInfo = (event) => {
-        const {value} = event.target
-        this.setState({[event.target.name]: value})
-    }
+    // eventInfo = (event) => {
+    //     const {value} = event.target
+    //     this.setState({[event.target.name]: value})
+    // }
 
     render(){
 

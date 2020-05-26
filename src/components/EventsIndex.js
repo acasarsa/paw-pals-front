@@ -9,16 +9,21 @@ const EventsIndex = () => {
     const [events, setEvents] = useState([])
 
 
+    const fetchEvents = () => {
+        fetch(`${url}/events`)
+        .then(r => r.json())
+        .then(data => setEvents(data.data))
+    }
+
+
 
     useEffect(() => {
-        fetch(`${url}/events`)
-            .then(r => r.json())
-            .then(data => setEvents(data.data))
+        fetchEvents()
     }, [])
 
     const renderEventCards = () => {
         if (events) {
-            return events.map(event => <EventCard key={event.id} {...event.attributes} />)
+            return events.map(event => <EventCard key={event.id} {...event.attributes}  fetchEvents={fetchEvents} />)
         }
     }
     
