@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
+// import {useHistory} from 'react-router-dom'
 
-
-class EventsForm extends React.Component {
+class EditEventForm extends React.Component{
     state = {
         title: '',
         date: '',
@@ -9,43 +9,13 @@ class EventsForm extends React.Component {
         description: ''
     }
 
-
-    eventInfo = (event) => {
-        const {value} = event.target
-        this.setState({[event.target.name]: value})
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        const {title, date, image, description} = this.state
-        fetch('http://localhost:3000/api/v1/events', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({
-                title, 
-                date,
-                image,
-                description
-            })
-        })
-        .then(this.setState({
-            title:'',
-            date:'',
-            image:'',
-            description:''
-        }))
-    }
-
-
     render(){
-    
-        console.log(this.state)
+
+        // let history = useHistory()
+
         return (
-            <div>
-            <h3>Events Form</h3>
+          <div>
+            <h1>Edit Event Form</h1>
             <form onSubmit={this.handleSubmit}>
             <div>
                 <label>Title of Event: </label>
@@ -84,14 +54,17 @@ class EventsForm extends React.Component {
                 />
             </div>
             <button 
+            // onClick={() => history.push(`/events/`)}
             type="submit"
-            >Create Event</button>
+            >Edit Event</button>
           
         </form>
-            </div>
+        </div>
         )
     }
+
+
+
 }
 
-export default EventsForm;
-/* <div className="simple-flex-row index-wrap"> */
+export default EditEventForm 

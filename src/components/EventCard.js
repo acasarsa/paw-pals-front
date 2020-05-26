@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
-
-const EventCard = (props) => {
 
     const EventCardWrapper = styled.div`
         /* min-width: 360px;  */
@@ -21,23 +19,36 @@ const EventCard = (props) => {
         border-radius: 3px;
         width: fit-content;
         cursor:  pointer;
-        color: white;
-        
+        color: white;        
     `
-    
 
-let history = useHistory()
 
-const {title, image, id, date} = props
+const EventCard = (props) => {
+
+    const handleDelete = () => {
+        let {id} = props
+        fetch(`http://localhost:3000/api/v1/events/${id}`, {
+            method: "DELETE"
+        })   
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+        
+    }
+
+
+    let history = useHistory()
+
+    const {title, image, id, date} = props
 
     return (
         <EventCardWrapper>
             <h3>{title}</h3>
             <h5>Date: {date}</h5>
             <img src={image} alt=""></img>
-            <Button>View Details</Button>
-            <Button>Attend</Button>
-            {/* <button onClick={() => history.push(`/dogs/${id}`)}>Visit {name}!</button> */}
+            <Button >Attend!</Button>
+            <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
+            <Button onClick={handleDelete} >Delete Event</Button>
+            <Button onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
         </EventCardWrapper>
     )
 }
