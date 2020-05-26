@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
+import EditEventForm from './EditEventForm'
 
     const EventCardWrapper = styled.div`
         /* min-width: 360px;  */
@@ -32,11 +33,13 @@ const EventCard = (props) => {
         })   
         .then(resp => resp.json())
         .then(data => console.log(data))
-        
     }
 
 
+
+
     let history = useHistory()
+
 
     const {title, image, id, date} = props
 
@@ -48,7 +51,7 @@ const EventCard = (props) => {
             <Button >Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
             <Button onClick={handleDelete} >Delete Event</Button>
-            <Button onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
+            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
         </EventCardWrapper>
     )
 }

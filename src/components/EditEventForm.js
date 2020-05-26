@@ -2,11 +2,36 @@ import React from 'react'
 // import {useHistory} from 'react-router-dom'
 
 class EditEventForm extends React.Component{
-    state = {
+    state = { 
+        id: 37,
         title: '',
         date: '',
         image: '',
         description: ''
+    }
+
+    handleChange = (event) => {
+        event.preventDefault()
+        let {id, title, date, image, description} = this.state 
+        
+        fetch(`http://localhost:3000/api/v1/events/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify({
+                title,
+                date,
+                image,
+                description
+            })
+        })
+    }
+
+
+    eventInfo = (event) => {
+        const {value} = event.target
+        this.setState({[event.target.name]: value})
     }
 
     render(){
@@ -23,6 +48,7 @@ class EditEventForm extends React.Component{
                  type="text" name="title" 
                  placeholder="Event Name" 
                  value={this.state.title}
+                
                  />
                  
             </div>
@@ -33,6 +59,7 @@ class EditEventForm extends React.Component{
                 name="date"  
                 placeholder="Enter Date"
                 value={this.state.date}
+               
                  />
             </div>
             <div>
@@ -42,6 +69,7 @@ class EditEventForm extends React.Component{
                 name="image" 
                  placeholder="Image"
                  value={this.state.image} 
+            
                  />
             </div>
             <div>
@@ -51,11 +79,13 @@ class EditEventForm extends React.Component{
                 onChange= {this.eventInfo} 
                 placeholder="Description" 
                 value={this.state.description}
+                  
                 />
             </div>
             <button 
             // onClick={() => history.push(`/events/`)}
             type="submit"
+            onClick={this.handleChange}
             >Edit Event</button>
           
         </form>
