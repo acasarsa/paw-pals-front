@@ -10,13 +10,13 @@ import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 import EventProfile from './components/EventProfile'
-import DogCard from './components/DogCard'
+// import DogCard from './components/DogCard'
 // require('log-timestamp')(function() {
 //     return new Date()
 
 // });
 
-
+console.log("////////// top of App /////////")
 // import {DogProfile, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 const url = 'http://localhost:3000/api/v1'
 
@@ -25,8 +25,9 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: '',
-        followers: []
+        username: "user1",
+        // followers: [],
+        follow_id: null,
     }
 
     // setCurrentUser = (dogs, username) => {
@@ -76,12 +77,38 @@ class App extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( followObj => this.setState({
-                loggedInDogFollowees: [...this.state.loggedInDogFollowees, followObj.followee], followers: [...dog.followers, followObj.follower]
-                }) 
-            );
+            .then( followObj => {this.setState({loggedInDogFollowees: [...this.state.loggedInDogFollowees, followObj.followee]})})
+            // .then( 
+            //     fetch(`${url}/dogs/${dog.id}`)
+            //     .then(r => r.json())
+            // )
             
+                // , followers: [...dog.followers, followObj.follower] 
     }
+
+
+    setFollowID = (dog) => {
+        const {loggedInDog} = this.state
+        fetch(`${url}/follows`)
+            .then(r => r.json())
+            .then(follows => this.setState({ follow_id: follows.find( follow => (follow.follower_id === loggedInDog.id && follow.followee_id === dog.id) ? follow.id : "can't find that") }) ) 
+    }
+
+    handleUnfollow = (dog) => {
+        
+        // const {dog} = this.state
+        const options = {
+            method: 'DELETE'
+        }
+        console.log(this.state.follow_id)
+        
+        fetch(`${url}/follows/${this.state.follow_id}`, options)
+            .then(r => r.json())
+            .then(this.setState({ follow_id: null }))
+    }
+
+
+
 
     // reRenderFollowers = () => {
     //     this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
@@ -109,14 +136,17 @@ class App extends React.Component {
 // if owner is your friend then you see the events. 
 // add events profile page 
     render() {
+        console.log("//////////// APP RENDERED ////////////")
         const {loggedInDog, username, loggedInDogFollowees, followers} = this.state
-        console.log("F's in App", this.state.followers)
+        console.log("app Followers", this.state.followers)
+        console.log("loggedin followees", this.state.loggedInDogFollowees)
+
 
         return (
             <div className= "App"> 
             <Nav loggedInDog={loggedInDog}/> 
                 <Switch> 
-                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} followers={followers} loggedInDog={loggedInDog} loggedInDogFollowees={loggedInDogFollowees} handleFollow={this.handleFollow} reRenderFollowers={this.reRenderFollowers} /> } />   
+                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} followers={followers} loggedInDog={loggedInDog} loggedInDogFollowees={loggedInDogFollowees} handleFollow={this.handleFollow} handleUnfollow={this.handleUnfollow} setFollowID={this.setFollowID} follow_id={this.state.follow_id} /> } />   
                     <Route path="/dogs" component={DogIndex}/>
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
                     <Route path='/events/new' component={EventsForm}/> 

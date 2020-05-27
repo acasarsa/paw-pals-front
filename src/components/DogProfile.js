@@ -15,7 +15,10 @@ class DogProfile extends React.Component {
 
     componentDidMount() {
         this.getDogs()
-        
+        // if (this.props.follow_id) {
+
+        //     console.log("follow_id", this.props.follow_id)
+        // }
     }
 
     getDogs = () => {
@@ -28,26 +31,17 @@ class DogProfile extends React.Component {
     renderFollowers = () => {
 
         if (this.state.dog) {
-            console.log("followers", this.props.followers)
+            console.log("followers", this.state.dog.followers)
             // console.log("followers")
-            this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
+            this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
             // this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
+            this.props.setFollowID(this.state.dog)
         }
 
     }
 
 
-    handleUnfollow = () => {
-        let followID = this.state.follow_id
-        console.log("id unfollow",followID)
-        // const {dog} = this.state
-        const options = {
-            method: 'DELETE'
-        }
-        fetch(`${url}/follows/${followID}`, options)
-            .then(r => r.json())
-            .then((deleted_id) => console.log("deleted", deleted_id))
-    }
+    
 
 
 
@@ -67,9 +61,10 @@ class DogProfile extends React.Component {
 
     renderDogProfile = () => {
         if (this.state.dog) {
+            console.log('')
             console.log("dog", this.state.dog)
             console.log("followers off dog", this.state.dog.followers)
-            console.log("followers props from A logged in DogP", this.props.followers) 
+            console.log("followers props from A logged in DogP", this.props.follow_id) 
             console.log('loggedinDOg', this.props.loggedInDog)
             // console.log('follow_id in renderDodpr', this.state.follow_id)
     
@@ -83,9 +78,9 @@ class DogProfile extends React.Component {
                         <h2>Name: {name}</h2>
                         <img src={image}></img>
 
-                        {this.props.followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                        {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form>
-                                <button onClick={this.handleUnfollow}> Unfollow </button>
+                                <button onClick={() => this.props.handleUnfollow(this.state.dog)}> Unfollow </button>
                             </form>
                             
                         :
