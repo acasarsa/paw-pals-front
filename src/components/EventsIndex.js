@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import EventCard from './EventCard'
-// import EventProfile from './EventProfile'
+import EventProfile from './EventProfile'
+// import Eventsform from './EventsForm'
 
 const url = 'http://localhost:3000/api/v1'
 
@@ -28,9 +29,11 @@ const EventsIndex = () => {
     }
     
         return (
+    
             <div className="index-page">
                 <h3>Events Index</h3>
                 <div className="simple-flex-row index-wrap">
+                {/* <Eventsform/> */}
                 {renderEventCards()}
 
                 </div>

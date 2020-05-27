@@ -25,7 +25,7 @@ import {useHistory} from 'react-router-dom'
 
 
 const EventCard = (props) => {
-    console.log("props",props)
+   
 
 
 
@@ -55,7 +55,7 @@ const EventCard = (props) => {
             <Button >Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
             <Button onClick={handleDelete}  >Delete Event</Button>
-            {/* <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
+            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
         </EventCardWrapper>
     )
 }

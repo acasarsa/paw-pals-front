@@ -2,13 +2,13 @@ import React from 'react'
 // import {useHistory} from 'react-router-dom'
 
 class EditEventForm extends React.Component{
-    // state = { 
-    //     id: 56,
-    //     title: '',
-    //     date: '',
-    //     image: '',
-    //     description: ''
-    // }
+    state = { 
+        // id: 56,
+        title: '',
+        date: '',
+        image: '',
+        description: ''
+     }
 
     // handleChange = (event) => {
     //     event.preventDefault()
@@ -36,6 +36,8 @@ class EditEventForm extends React.Component{
 
     render(){
 
+        let {title, image, date, description} = this.state.event.data.attributes
+    
         // let history = useHistory()
 
         return (
@@ -47,7 +49,7 @@ class EditEventForm extends React.Component{
                 <input onChange= {this.eventInfo}
                  type="text" name="title" 
                  placeholder="Event Name" 
-                 value={this.state.title}
+                 value={title}
                 
                  />
                  
@@ -58,7 +60,7 @@ class EditEventForm extends React.Component{
                 onChange= {this.eventInfo} 
                 name="date"  
                 placeholder="Enter Date"
-                value={this.state.date}
+                value={date}
                
                  />
             </div>
@@ -68,7 +70,7 @@ class EditEventForm extends React.Component{
                 onChange= {this.eventInfo} 
                 name="image" 
                  placeholder="Image"
-                 value={this.state.image} 
+                 value={image} 
             
                  />
             </div>
@@ -78,7 +80,7 @@ class EditEventForm extends React.Component{
                 name="description" 
                 onChange= {this.eventInfo} 
                 placeholder="Description" 
-                value={this.state.description}
+                value={description}
                   
                 />
             </div>

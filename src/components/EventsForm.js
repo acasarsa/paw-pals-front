@@ -1,8 +1,10 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 
 
 class EventsForm extends React.Component {
     state = {
+        redirect: false,
         title: '',
         date: '',
         image: '',
@@ -37,13 +39,18 @@ class EventsForm extends React.Component {
             image:'',
             description:''
         }))
+        .then(() => this.setState({ redirect: true }))
     }
 
 
     render(){
-    
+        const { redirect } = this.state;
+        if (redirect) {
+          return <Redirect to='/events'/>;
+        }
         console.log(this.state)
         return (
+            
             <div>
             <h3>Events Form</h3>
             <form onSubmit={this.handleSubmit}>
@@ -90,6 +97,7 @@ class EventsForm extends React.Component {
         </form>
             </div>
         )
+        
     }
 }
 

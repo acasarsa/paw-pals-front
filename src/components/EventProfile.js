@@ -25,30 +25,37 @@ import { Redirect } from 'react-router-dom'
       this.fetchEvent()
     }
 
+    // handleClick = () => {
+    //     const {mode} = this.state 
+    //     this.setState({mode: !mode})
+    //     console.log('mode:', this.state.mode)
+    // }
 
-
-    handleChange = () => {  
+    saveChanges = (event) => {
+        event.preventDefault()
         const {mode} = this.state 
-        this.setState({ mode: !mode}) 
-        console.log('mode', this.state.mode)
-        if(mode === true)
-        {
-            return <div>
-                 <Redirect to='/dogs'/>
-            </div>
+        this.setState({mode: !mode})
+        console.log(this.state.mode)
+        if(mode === true){
+            return (
+                <div>
+                    <EditEventForm/>
+                    <button> Close</button>
+                </div>
+            )
         }
-        else if(mode === false){
-            {
-                return <button> Close </button>
-            }
-        }
+       else if(mode === false){
+           return <button>Edit</button>
+       }
     }
 
 
+
+
     renderEventProfile = () => {
-        if(this.state.event !== null){
-            console.log("event Profile", this.state.event.data.attributes)
-        }
+        // if(this.state.event !== null){
+        //     console.log("event Profile", this.state.event.data.attributes)
+        // }
         let {title, image, date, description} = this.state.event.data.attributes
     
 
@@ -58,7 +65,7 @@ import { Redirect } from 'react-router-dom'
                 <h3>Date: {date}</h3>
                 <img src={image}></img>
                 <h3>Details: {description}</h3>
-                <button  onClick={this.handleChange}> Edit Event </button>
+                <button  onClick={this.saveChanges}> Edit Event </button>
                 <button onClick={this.handleDelete} > Delete Event </button>
             </div>
             )
@@ -72,12 +79,10 @@ import { Redirect } from 'react-router-dom'
             method: 'DELETE'
         })
         .then(() => this.setState({ redirect: true }))
-        // .then(this.fetchEvent)
     }
 
 
     render() {
-      console.log(this.state.event)
       const { redirect } = this.state;
       if (redirect) {
         return <Redirect to='/events'/>;
@@ -88,3 +93,33 @@ import { Redirect } from 'react-router-dom'
 
 
 export default EventProfile;
+
+
+// let {title, image, date, description} = this.state.event.data.attributes
+// const id = this.props.match.params.id
+// fetch(`http://localhost:3000/api/v1/events/${id}`,{
+//     method: "PATCH",
+//     headers: {
+//         'Content-Type':'application/json'
+//     },
+//     body: JSON.stringify({
+//         title, 
+//         image,
+//         date,
+//         description
+//     })
+// })
+
+    // changeInfo = (event) => {
+    //     const {value} = event.target
+    //     this.setState({
+    //         [event.target.name]: value
+    //     })
+    // }
+
+    // (
+    //     <div>
+    //         <EditEventForm/>
+    //         <button> Close</button>
+    //     </div>
+    // )
