@@ -3,7 +3,6 @@ import DogCard from './DogCard';
 // import DogShowPage from './DogShowPage'
 
 
-// const url = 'http://localhost:3000/api/v1'
 
 const DogIndex = (props) => {
     
@@ -30,9 +29,7 @@ const DogIndex = (props) => {
                                     loggedInDogfollowers={loggedInDogfollowers}
                                     handleFollow={handleFollow} 
                                     handleUnfollow={handleUnfollow} /> )
-
     }
-
         return(
             <div className="index-page" >
                 <h1>Dog Index</h1>
@@ -41,9 +38,6 @@ const DogIndex = (props) => {
                 </div>
             </div>
         )
-
-    
-    
 }
 
 
