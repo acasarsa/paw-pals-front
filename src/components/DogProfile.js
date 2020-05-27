@@ -53,13 +53,13 @@ class DogProfile extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( followObj => {
-                this.setState({follow_id: followObj.id})
-                let follower_id = followObj.follower_id 
-                // console.log("follower_id",followObj.follower_id)
-                fetch(`${url}/dogs/${follower_id}`)
-                .then( r => r.json())
-                .then( newFollower => this.setFollowState(newFollower))
+            .then( followObj => { console.log("followObj",followObj)
+                // this.setState({follow_id: followObj.id})
+                // let follower_id = followObj.follower_id 
+    
+                // fetch(`${url}/dogs/${follower_id}`)
+                // .then( r => r.json())
+                // .then( newFollower => this.setFollowState(newFollower))
             })
     }
 
@@ -73,7 +73,7 @@ class DogProfile extends React.Component {
 
 
     handleUnfollow = (id) => {
-        console.log("id unfollow",id)
+        // console.log("id unfollow",id)
         const {dog} = this.state
         const options = {
             method: 'DELETE'
@@ -103,6 +103,8 @@ class DogProfile extends React.Component {
         if (this.state.dog) {
             // console.log("followers off state on DP", this.state.followers) 
             console.log('loggedinDOg', this.props.loggedInDog)
+            console.log("props",this.props)
+            console.log("dog",this.state.dog)
     
         const {name, image, followers} = this.state.dog
         console.log(this.state.dog.id)
@@ -113,6 +115,7 @@ class DogProfile extends React.Component {
                     <div>
                         <h2>Name: {name}</h2>
                         <img src={image}></img>
+
                         {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form >
                                 <button onClick={() => this.handleUnfollow(this.state.follow_id)}> Unfollow </button>

@@ -13,7 +13,7 @@ const DogCardWrapper = styled.div`
 
 const DogCard = (props) => {
 
-    const {id, name, image, status, handleSubmit } = props
+    const {id, name, image, status } = props
     // size, age, breed, description, favorite_toy, gender, human, 
     let history = useHistory()
 
