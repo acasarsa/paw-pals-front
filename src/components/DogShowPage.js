@@ -65,6 +65,7 @@ class DogShowPage extends React.Component {
 
         const {name, image, followers} = this.props.selected_dog
         const {selected_dog} = this.props
+        console.log("followers Show", followers);
 
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
@@ -76,8 +77,8 @@ class DogShowPage extends React.Component {
                         <div>
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
-                            {followers.length > 0 ? 
-                            followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                            
+                            {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form>
                                 <button onClick={() => this.props.handleUnfollow(this.props.selected_dog)}> Unfollow </button>
                             </form>
@@ -88,7 +89,7 @@ class DogShowPage extends React.Component {
                             </form>
                 
                 
-                            : null }
+                                }
                             
                             <hr></hr>
                             

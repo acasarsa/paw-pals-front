@@ -94,12 +94,17 @@ class App extends React.Component {
         fetch(`${url}/follows`, options)
             .then(r => r.json())
             .then( followObj => {this.setState({
+                selected_dog: {
+                    ...selected_dog,
+                    followers: [...selected_dog.followers, loggedInDog]
+                },
                 loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
-                selected_dog: selected_dog.followers.push(loggedInDog),
-                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.push(loggedInDog) : dog ) })})
-                // , followers: [...dog.followers, followObj.follower] 
+                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
+                })
+            })
     }
 
+// selected_dog: prevState.selected_dog.followers.concat(loggedInDog),
 
     // setFollowID = (dog) => {
     //     const {loggedInDog} = this.state
@@ -152,14 +157,15 @@ class App extends React.Component {
     render() {
         console.log("//////////// APP RENDERED ////////////")
         const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
-        console.log("app Followers", followers)
-        console.log("loggedin followees", loggedInDogFollowees)
+        // console.log("app Followers", followers)
+        // console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)
-        console.log("logged in followers", loggedInDogfollowers)
+        // console.log("logged in followers", loggedInDogfollowers)
+        console.log("selected dog", selected_dog)
 
         if (this.state.dogs) {
 
-            console.log("state", this.state.dogs)
+            console.log("dog state", this.state.dogs)
         }
 
         // what about the setFollowId thing do i need that? 
