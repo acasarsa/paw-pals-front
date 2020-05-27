@@ -44,8 +44,6 @@ class DogProfile extends React.Component {
     
 
 
-
-
     
     // need to get 
 
@@ -61,7 +59,7 @@ class DogProfile extends React.Component {
 
     renderDogProfile = () => {
         if (this.state.dog) {
-            console.log('')
+            console.log('props', this.props)
             console.log("dog", this.state.dog)
             console.log("followers off dog", this.state.dog.followers)
             console.log("followers props from A logged in DogP", this.props.follow_id) 
