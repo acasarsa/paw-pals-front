@@ -46,7 +46,14 @@ const DogIndex = (props) => {
             <div className="index-page" >
                 <h1>Dog Index</h1>
                 <div className="simple-flex-row index-wrap">
-                {renderDogCards()}
+                {dogs.map(dog => <DogCard    
+                                    key={dog.id} 
+                                    {...dog.attributes}  
+                                    loggedInDog={loggedInDog}
+                                    loggedInDogFollowees={loggedInDogFollowees}
+                                    loggedInDogfollowers={loggedInDogfollowers}
+                                    handleFollow={handleFollow} 
+                                    handleUnfollow={handleUnfollow} /> )}
                 </div>
             </div>
         )
