@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
+import DogShowPage from './DogShowPage'
+import { Link } from 'react-router-dom';
+
+
 
 
 const DogCardWrapper = styled.div`
@@ -13,35 +17,37 @@ const DogCardWrapper = styled.div`
 
 const DogCard = (props) => {
 
-    const {id, name, image, status } = props
+    // console.log("dogCard props",props)
+    const {id, name, breed, status, age, gender, size, image, description, favorite_toy, human, username, password, followers, followees, getSelectedDog} = props
     // size, age, breed, description, favorite_toy, gender, human, 
-    let history = useHistory()
+    // let history = useHistory()
 
-    
+    let selected_dog = {id, name, breed, status, age, gender, size, image, description, favorite_toy, human, username, password, followers, followees}
+    // console.log("selectedDog",selected_dog)
+    // console.log("dogCard props", props)
+
+
+    // linkToShowPage = () => {
+
+    // }
+
     return(
+
+        <>
+        {/* <DogShowPage  /> */}
         <DogCardWrapper>
             <h3>{name}</h3>
             <h5>"{status}"</h5>
             <img src={image} alt="dog gif"></img>
-            <button onClick={() => history.push(`/dogs/${id}`)}>Visit {name}!</button>
+            <button onClick={() => { getSelectedDog(selected_dog) 
+                                    props.history.push(`/dogs/${id}`)}}
+                                    >
+                Visit {name}! 
+            </button>
         </DogCardWrapper>
+        </>
     )
 }
 
 
 export default DogCard
-
-// age: "puppy"
-// breed: "Appenzeller"
-// description: "long boi"
-// favorite_toy: "stuffed eagle"
-// followees: [{…}]
-// followers: []
-// gender: "Male"
-// human: "Sadie"
-// image: "https://cdn2.thedogapi.com/images/rkq57TpVm.gif"
-// name: "Jasmine"
-// password: "123"
-// size: "medium"
-// status: "bow wow"
-// username: "illustrious gog"
