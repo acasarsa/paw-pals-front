@@ -17,11 +17,20 @@ const DogCardWrapper = styled.div`
 
 const DogCard = (props) => {
 
-    const {id, name, image, status } = props
+    // console.log("dogCard props",props)
+    const {id, name, breed, status, age, gender, size, image, description, favorite_toy, human, username, password, followers, followees, getSelectedDog} = props
     // size, age, breed, description, favorite_toy, gender, human, 
-    let history = useHistory()
+    // let history = useHistory()
 
-    
+    let selected_dog = {id, name, breed, status, age, gender, size, image, description, favorite_toy, human, username, password, followers, followees}
+    // console.log("selectedDog",selected_dog)
+    // console.log("dogCard props", props)
+
+
+    // linkToShowPage = () => {
+
+    // }
+
     return(
 
         <>
@@ -30,7 +39,9 @@ const DogCard = (props) => {
             <h3>{name}</h3>
             <h5>"{status}"</h5>
             <img src={image} alt="dog gif"></img>
-            <button onClick={() => history.push(`/dogs/${id}`)}  >
+            <button onClick={() => { getSelectedDog(selected_dog) 
+                                    props.history.push(`/dogs/${id}`)}}
+                                    >
                 Visit {name}! 
             </button>
         </DogCardWrapper>

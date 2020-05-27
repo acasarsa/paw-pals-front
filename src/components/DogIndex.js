@@ -17,47 +17,31 @@ const DogIndex = (props) => {
     console.log('index props', props)
     const renderDogCards = () => {
         
-        
-        const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow} = props
+        const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = props
             // console.log('index', dogs)
-            // let dogs = Array.from(props.data)
-                dogs.map(dog => <DogCard    
+                return dogs.map(dog => <DogCard
+                                    history={props.history}
                                     key={dog.id} 
                                     {...dog.attributes}  
+                                    getSelectedDog={getSelectedDog}
+                                    selected_dog={selected_dog}
                                     loggedInDog={loggedInDog}
                                     loggedInDogFollowees={loggedInDogFollowees}
                                     loggedInDogfollowers={loggedInDogfollowers}
                                     handleFollow={handleFollow} 
                                     handleUnfollow={handleUnfollow} /> )
-        
-        // let dogsAttributes = dogs.data
-
-        // 
 
     }
-    const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow} = props
-    if(props){
-
-        console.log("dogs",dogs)
-    }
-    // if (props.data) {
 
         return(
             <div className="index-page" >
                 <h1>Dog Index</h1>
                 <div className="simple-flex-row index-wrap">
-                {dogs.map(dog => <DogCard    
-                                    key={dog.id} 
-                                    {...dog.attributes}  
-                                    loggedInDog={loggedInDog}
-                                    loggedInDogFollowees={loggedInDogFollowees}
-                                    loggedInDogfollowers={loggedInDogfollowers}
-                                    handleFollow={handleFollow} 
-                                    handleUnfollow={handleUnfollow} /> )}
+                {renderDogCards()}
                 </div>
             </div>
         )
-    // }
+
     
     
 }

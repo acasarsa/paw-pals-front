@@ -2,43 +2,38 @@ import React, {Fragment} from 'react';
 // import Followers from './Followers'
 import DogCard from './DogCard'
 
-const url = 'http://localhost:3000/api/v1'
+
 
 class DogShowPage extends React.Component {
 
-    state = {
-        dog: null,
-        // follow_id: ''
-        // followers: [],
-    }
     
 
-    // componentDidMount() {
-    //     this.getDogs()
-    //     // if (this.props.follow_id) {
+    componentDidMount() {
+        this.renderDogShowPage()
+        // if (this.props.follow_id) {
 
-    //     //     console.log("follow_id", this.props.follow_id)
-    //     // }
+        //     console.log("follow_id", this.props.follow_id)
+        // }
+    }
+
+    // getDogs = () => {
+    //     fetch(`${url}/dogs/${this.props.match.params.id}`)
+    //         .then(r => r.json())
+    //         .then(dog => this.setState({ dog }), this.renderFollowers())
     // }
 
-    getDogs = () => {
-        fetch(`${url}/dogs/${this.props.match.params.id}`)
-            .then(r => r.json())
-            .then(dog => this.setState({ dog }), this.renderFollowers())
-    }
-
     
-    renderFollowers = () => {
+    // renderFollowers = () => {
 
-        if (this.state.dog) {
-            console.log("followers", this.state.dog.followers)
-            // console.log("followers")
-            this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
-            // this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
-            this.props.setFollowID(this.state.dog)
-        }
+    //     if (this.state.dog) {
+    //         console.log("followers", this.state.dog.followers)
+    //         // console.log("followers")
+    //         this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
+    //         // this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
+    //         this.props.setFollowID(this.state.dog)
+    //     }
 
-    }
+    // }
 
 
 
@@ -61,48 +56,56 @@ class DogShowPage extends React.Component {
 
     renderDogShowPage = () => {
 
-            console.log('props', this.props)
+            console.log('Show Page props', this.props)
             console.log("dog", this.props.dogs)
             // console.log("followers off dog", this.props.dog.followers)
             // console.log("followers props from A logged in DogP", this.props.follow_id) 
             console.log('loggedinDOg', this.props.loggedInDog)
             // console.log('follow_id in renderDodpr', this.state.follow_id)
-    
-        const {name, image, followers} = this.props
+
+        const {name, image, followers} = this.props.selected_dog
+        const {selected_dog} = this.props
+
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
-                return (
-                    <>
-                    <div>
-                        <h2>Name: {name}</h2>
-                        <img src={image}></img>
+                if (selected_dog) {
 
-                        {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                    return (
+                        <>
+                        <div>
+                            <h2>Name: {name}</h2>
+                            <img src={image}></img>
+                            {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form>
-                                <button onClick={() => this.props.handleUnfollow(this.state.dog)}> Unfollow </button>
+                                <button onClick={() => this.props.handleUnfollow(this.props.selected_dog)}> Unfollow </button>
                             </form>
                             
-                        :
-                            <form onSubmit={(event) => this.props.handleFollow(event, this.state.dog)}>
+                            :
+                            <form onSubmit={(event) => this.props.handleFollow(event, this.props.selected_dog)}>
                                 <button > Follow </button>
                             </form>
-                        
-                        /* <form onSubmit={(e) => this.handleFollow(e, this.state.dog)}>
-                            <button > Follow </button>
-                        </form> */
-                        
-                        }
-                        
-                        <hr></hr>
-                        
-                        <h1>{name}'s Followers</h1>
-                        <div className="simple-flex-row index-wrap">
-                            {this.state.dog ?  this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
+                
+                
+                                }
+                            
+                            <hr></hr>
+                            
+                            <h1>{name}'s Followers</h1>
+                            <div className="simple-flex-row index-wrap">
+                                {this.props.selected_dog ?  this.props.selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
+                            </div>
                         </div>
-                    </div>
-                    </>
-                )
+                        </>
+                    )
+                } else {
+                   return (
+                        <>
+                            <h3>Go back and select a dog!</h3>
+                            <button onClick={() => this.props.history.push('/dogs')}>Dog Index</button>
+                        </>
+                        ) 
+                }
             
         // } else {
             
@@ -116,13 +119,11 @@ class DogShowPage extends React.Component {
 
     render(){
 
-        console.log("props",this.props)
-        if (this.state.dog) {
+        console.log("ShowPage props",this.props)
 
-            console.log("state",this.state)
-        }
+        if (this.props) {console.log("is dog a prop?",this.props.dog)}
 
-        return  this.state.dog ? this.renderDogShowPage() : <div> No Dog Selected... Try going back to Dogs! </div>
+        return  this.props ? this.renderDogShowPage() : <div> No Dog Selected... Try going back to Dogs! </div>
 
         
     }
@@ -135,3 +136,18 @@ export default DogShowPage;
      {/* {this.renderFollowers()} */}
                 
             {/* <Followers loggedInDog={this.props.loggedInDog}/> */}
+
+
+
+            // {this.props.selected_dog.followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+            //     <form>
+            //         <button onClick={() => this.props.handleUnfollow(this.props.selected_dog)}> Unfollow </button>
+            //     </form>
+                
+            // :
+            //     <form onSubmit={(event) => this.props.handleFollow(event, this.props.selected_dog)}>
+            //         <button > Follow </button>
+            //     </form>
+            
+            
+            // }

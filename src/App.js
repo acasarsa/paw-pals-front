@@ -29,6 +29,7 @@ class App extends React.Component {
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
+        selected_dog: ''
     }
 
     componentDidMount() {
@@ -46,6 +47,12 @@ class App extends React.Component {
     //     }) 
     // }
 
+    getSelectedDog = (selected_dog) => {
+        this.setState({selected_dog})
+    }
+
+
+
     handleUsername = (event) => {
         event.preventDefault()
         this.setState({ username: event.target.value })
@@ -62,35 +69,35 @@ class App extends React.Component {
 
     handleSignOut = (event) => {
         event.preventDefault()
-        this.setState({ loggedInDog: null })
+        this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
     }
 
-    // handleFollow = (event, dog) => {
-    //     event.preventDefault()
-    //     console.log("followed dog", dog)
-    //     const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers} = this.state
-    //     // const {dog} = this.state
-    //     let newFollow = {
-    //         follower_id: loggedInDog.id,
-    //         followee_id: dog.id,
-    //     }
+    handleFollow = (event, dog) => {
+        event.preventDefault()
+        console.log("followed dog", dog)
+        const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers} = this.state
+        // const {dog} = this.state
+        let newFollow = {
+            follower_id: loggedInDog.id,
+            followee_id: dog.id,
+        }
     
-    //     let options = {
-    //         method: 'POST', 
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Accept: 'application/json'
-    //         },
-    //         body: JSON.stringify(newFollow)
-    //     }
+        let options = {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify(newFollow)
+        }
     
-    //     fetch(`${url}/follows`, options)
-    //         .then(r => r.json())
-    //         .then( followObj => {this.setState({loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], loggedInDogfollowers: [...loggedInDogfollowers, followObj.followers]})})
+        fetch(`${url}/follows`, options)
+            .then(r => r.json())
+            .then( followObj => {this.setState({loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], loggedInDogfollowers: [...loggedInDogfollowers, followObj.followers]})})
         
             
-    //             // , followers: [...dog.followers, followObj.follower] 
-    // }
+                // , followers: [...dog.followers, followObj.follower] 
+    }
 
 
     // setFollowID = (dog) => {
@@ -100,18 +107,18 @@ class App extends React.Component {
     //         .then(follows => this.setState({ follow_id: follows.find( follow => (follow.follower_id === loggedInDog.id && follow.followee_id === dog.id) ? follow.id : "can't find that") }) ) 
     // }
 
-    // handleUnfollow = (dog) => {
+    handleUnfollow = (dog) => {
         
-    //     // const {dog} = this.state
-    //     const options = {
-    //         method: 'DELETE'
-    //     }
-    //     console.log(this.state.follow_id)
+        // const {dog} = this.state
+        const options = {
+            method: 'DELETE'
+        }
+        console.log(this.state.follow_id)
         
-    //     fetch(`${url}/follows/${this.state.follow_id}`, options)
-    //         .then(r => r.json())
-    //         .then(this.setState({ follow_id: null }))
-    // }
+        fetch(`${url}/follows/${this.state.follow_id}`, options)
+            .then(r => r.json())
+            .then(this.setState({ follow_id: null }))
+    }
 
 
 
@@ -143,7 +150,7 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, follow_id, loggedInDogfollowers, dogs} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
         console.log("app Followers", followers)
         console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)
@@ -161,19 +168,31 @@ class App extends React.Component {
 
         ///// QUESTION: should i pass it down via Route or directly? I tried both //////
         //// i tried setting state to dogs.data initially which has worked before but now is not. 
-
+        
         return (
             <div className= "App"> 
             <Nav loggedInDog={loggedInDog}/> 
                 <Switch> 
-                    <Route path='dogs/:id' component={DogShowPage}/>
+                    <Route path='/dogs/:id' render={(routerProps) => 
+                        <DogShowPage 
+                            {...routerProps} 
+                            // dogs={dogs}  
+                            loggedInDog={loggedInDog}
+                            selected_dog={selected_dog}
+                            loggedInDogFollowees={loggedInDogFollowees}
+                            loggedInDogfollowers={loggedInDogfollowers}
+                            handleFollow={this.handleFollow} 
+                            handleUnfollow={this.handleUnfollow} /> } />
 
                     <Route path="/dogs" render={(routerProps) => 
-                        <DogIndex {...routerProps} 
+                        <DogIndex 
+                            {...routerProps} 
                             dogs={dogs}  
                             loggedInDog={loggedInDog}
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
+                            selected_dog={selected_dog}
+                            getSelectedDog={this.getSelectedDog}
                             handleFollow={this.handleFollow} 
                             handleUnfollow={this.handleUnfollow}  /> } 
                     />
