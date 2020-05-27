@@ -104,30 +104,22 @@ class App extends React.Component {
             })
     }
 
-// selected_dog: prevState.selected_dog.followers.concat(loggedInDog),
-
-    // setFollowID = (dog) => {
-    //     const {loggedInDog} = this.state
-    //     fetch(`${url}/follows`)
-    //         .then(r => r.json())
-    //         .then(follows => this.setState({ follow_id: follows.find( follow => (follow.follower_id === loggedInDog.id && follow.followee_id === dog.id) ? follow.id : "can't find that") }) ) 
-    // }
-
-    handleUnfollow = (dog) => {
-        
-        // const {dog} = this.state
-        const options = {
-            method: 'DELETE'
-        }
-        console.log(this.state.follow_id)
-        
-        fetch(`${url}/follows/${this.state.follow_id}`, options)
-            .then(r => r.json())
-            .then(this.setState({ follow_id: null }))
+    handleUnfollow = (selectedDogID) => {
+        // id is selected_dog.id passed in from click 
+        const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
+        this.setState({ 
+            loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
+            selected_dog: {
+                ...selected_dog,
+                followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
+            },
+        })
     }
 
 
+    
 
+// look through the dogs 
 
     // reRenderFollowers = () => {
     //     this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
@@ -200,8 +192,7 @@ class App extends React.Component {
                             loggedInDogfollowers={loggedInDogfollowers}
                             selected_dog={selected_dog}
                             getSelectedDog={this.getSelectedDog}
-                            handleFollow={this.handleFollow} 
-                            handleUnfollow={this.handleUnfollow}  /> } 
+                            /> } 
                     />
 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
