@@ -18,7 +18,7 @@ const DogIndex = () => {
     const renderDogCards = () => {
         if (dogs) {
             // console.log('index', dogs)
-            return dogs.map(dog => <DogCard key={dog.id} {...dog.attributes} /> )
+            return dogs.map(dog => <DogCard key={dog.id} {...dog.attributes}  /> )
         }
         // let dogsAttributes = dogs.data
 
@@ -30,6 +30,14 @@ const DogIndex = () => {
             
             <div className="index-page" >
                 <h1>Dog Index</h1>
+                <div className="dropdown">
+                    <button className="dropbtn">Dropdown</button>
+                    <div className="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
                 <div className="simple-flex-row index-wrap">
                 {renderDogCards()}
                 </div>
