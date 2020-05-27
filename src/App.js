@@ -80,14 +80,30 @@ class App extends React.Component {
                 loggedInDogFollowees: [...this.state.loggedInDogFollowees, followObj.followee], followers: [...dog.followers, followObj.follower]
                 }) 
             );
-            this.reRenderFollowers()
+            
     }
 
-    reRenderFollowers = () => {
-        this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
-        console.log('hit')
-    }
+    // reRenderFollowers = () => {
+    //     this.state.followers.map(follower => <DogCard key={follower.id} {...follower}/> )
+    //     console.log('hit')
+    // }
 
+//     fetch(`${url}/follows`, options)
+//     .then(r => r.json())
+//     .then( followObj => {
+//         this.setState({follow_id: followObj.id})
+//         let follower_id = followObj.follower_id 
+//         // console.log("follower_id",followObj.follower_id)
+//         fetch(`${url}/dogs/${follower_id}`)
+//         .then( r => r.json())
+//         .then( newFollower => this.setFollowState(newFollower))
+//     })
+// }
+
+// setFollowState = (newFollower) => {
+// const {dog} = this.state
+// this.setState({ dog: {...dog, followers: [...dog.followers, newFollower ]}
+// })}
 
 // can pass down current_user to events and add a column for event create so we can add logic for 
 // if owner is your friend then you see the events. 

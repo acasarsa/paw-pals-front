@@ -83,7 +83,7 @@ class DogProfile extends React.Component {
                         <h2>Name: {name}</h2>
                         <img src={image}></img>
 
-                        {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                        {this.props.followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form>
                                 <button onClick={this.handleUnfollow}> Unfollow </button>
                             </form>
