@@ -25,7 +25,7 @@ class DogProfile extends React.Component {
     renderFollowers = () => {
         
         if (this.state.dog) {
-            this.setState({followers: this.state.dog.followers})
+            // this.setState({followers: this.state.dog.followers})
             this.state.dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>)
         }
 
@@ -101,10 +101,11 @@ class DogProfile extends React.Component {
 
     renderDogProfile = () => {
         if (this.state.dog) {
-            console.log("followers off state on DP", this.state.followers) 
+            // console.log("followers off state on DP", this.state.followers) 
             console.log('loggedinDOg', this.props.loggedInDog)
     
         const {name, image, followers} = this.state.dog
+        console.log(this.state.dog.id)
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
                 return (
@@ -146,7 +147,7 @@ class DogProfile extends React.Component {
 
     render(){
 
-        console.log("follow id",this.state.follow_id)
+        // console.log("follow id",this.state.follow_id)
 
         return  this.state.dog ? this.renderDogProfile() : <div> No Dog Selected... Try going back to Dogs! </div>
 
