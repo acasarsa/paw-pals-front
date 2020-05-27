@@ -4,7 +4,7 @@ import DogCard from './DogCard'
 
 const url = 'http://localhost:3000/api/v1'
 
-class DogProfile extends React.Component {
+class DogShowPage extends React.Component {
 
     state = {
         dog: null,
@@ -13,13 +13,13 @@ class DogProfile extends React.Component {
     }
     
 
-    componentDidMount() {
-        this.getDogs()
-        // if (this.props.follow_id) {
+    // componentDidMount() {
+    //     this.getDogs()
+    //     // if (this.props.follow_id) {
 
-        //     console.log("follow_id", this.props.follow_id)
-        // }
-    }
+    //     //     console.log("follow_id", this.props.follow_id)
+    //     // }
+    // }
 
     getDogs = () => {
         fetch(`${url}/dogs/${this.props.match.params.id}`)
@@ -57,16 +57,16 @@ class DogProfile extends React.Component {
 
 
 
-    renderDogProfile = () => {
-        if (this.state.dog) {
+    renderDogShowPage = () => {
+
             console.log('props', this.props)
-            console.log("dog", this.state.dog)
-            console.log("followers off dog", this.state.dog.followers)
-            console.log("followers props from A logged in DogP", this.props.follow_id) 
+            console.log("dog", this.props.dogs)
+            // console.log("followers off dog", this.props.dog.followers)
+            // console.log("followers props from A logged in DogP", this.props.follow_id) 
             console.log('loggedinDOg', this.props.loggedInDog)
             // console.log('follow_id in renderDodpr', this.state.follow_id)
     
-        const {name, image, followers} = this.state.dog
+        const {name, image, followers} = this.props
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
@@ -101,7 +101,7 @@ class DogProfile extends React.Component {
                     </div>
                     </>
                 )
-            }
+            
         // } else {
             
         // }
@@ -120,14 +120,14 @@ class DogProfile extends React.Component {
             console.log("state",this.state)
         }
 
-        return  this.state.dog ? this.renderDogProfile() : <div> No Dog Selected... Try going back to Dogs! </div>
+        return  this.state.dog ? this.renderDogShowPage() : <div> No Dog Selected... Try going back to Dogs! </div>
 
         
     }
 }
     
 
-export default DogProfile;
+export default DogShowPage;
 
 
      {/* {this.renderFollowers()} */}

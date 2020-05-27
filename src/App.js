@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
-import DogProfile from './components/DogProfile'
+import DogShowPage from './components/DogShowPage'
 import DogIndex from './components/DogIndex'
 // import DogContainer from './containers/DogContainer'
 import Auth from './components/Auth'
@@ -17,7 +17,7 @@ import EventProfile from './components/EventProfile'
 // });
 
 console.log("////////// top of App /////////")
-// import {DogProfile, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
+// import {DogShowPage, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 const url = 'http://localhost:3000/api/v1'
 
 class App extends React.Component {
@@ -26,9 +26,18 @@ class App extends React.Component {
         loggedInDog: null,
         loggedInDogFollowees: [],
         username: "user1",
-        // followers: [],
-        follow_id: null,
+        loggedInDogfollowers: [],
+        follow_id: null, //maybe keep
+        dogs: [],
     }
+
+    componentDidMount() {
+        fetch(`${url}/dogs`)
+        .then(r => r.json())
+        .then( dogs => this.setState({ dogs: dogs}))
+            // console.log("dogs",dogs.data.attributes) )
+    }
+    
 
     // setCurrentUser = (dogs, username) => {
     //     console.log('username', username)
@@ -47,7 +56,7 @@ class App extends React.Component {
 
         fetch(`${url}/dogs/login/${username}`)
             .then(r => r.json())
-            .then(dog => this.setState({ loggedInDog: dog, loggedInDogFollowees: dog.followees, username: ''}))
+            .then(dog => this.setState({ loggedInDog: dog, loggedInDogFollowees: dog.followees, loggedInDogfollowers: dog.followers, username: ''}))
             
     }
 
@@ -56,53 +65,53 @@ class App extends React.Component {
         this.setState({ loggedInDog: null })
     }
 
-    handleFollow = (event, dog) => {
-        event.preventDefault()
-        console.log("followed dog", dog)
-        const {loggedInDog} = this.state
-        // const {dog} = this.state
-        let newFollow = {
-            follower_id: loggedInDog.id,
-            followee_id: dog.id,
-        }
+    // handleFollow = (event, dog) => {
+    //     event.preventDefault()
+    //     console.log("followed dog", dog)
+    //     const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers} = this.state
+    //     // const {dog} = this.state
+    //     let newFollow = {
+    //         follower_id: loggedInDog.id,
+    //         followee_id: dog.id,
+    //     }
     
-        let options = {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(newFollow)
-        }
+    //     let options = {
+    //         method: 'POST', 
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Accept: 'application/json'
+    //         },
+    //         body: JSON.stringify(newFollow)
+    //     }
     
-        fetch(`${url}/follows`, options)
-            .then(r => r.json())
-            .then( followObj => {this.setState({loggedInDogFollowees: [...this.state.loggedInDogFollowees, followObj.followee]})})
+    //     fetch(`${url}/follows`, options)
+    //         .then(r => r.json())
+    //         .then( followObj => {this.setState({loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], loggedInDogfollowers: [...loggedInDogfollowers, followObj.followers]})})
         
             
-                // , followers: [...dog.followers, followObj.follower] 
-    }
+    //             // , followers: [...dog.followers, followObj.follower] 
+    // }
 
 
-    setFollowID = (dog) => {
-        const {loggedInDog} = this.state
-        fetch(`${url}/follows`)
-            .then(r => r.json())
-            .then(follows => this.setState({ follow_id: follows.find( follow => (follow.follower_id === loggedInDog.id && follow.followee_id === dog.id) ? follow.id : "can't find that") }) ) 
-    }
+    // setFollowID = (dog) => {
+    //     const {loggedInDog} = this.state
+    //     fetch(`${url}/follows`)
+    //         .then(r => r.json())
+    //         .then(follows => this.setState({ follow_id: follows.find( follow => (follow.follower_id === loggedInDog.id && follow.followee_id === dog.id) ? follow.id : "can't find that") }) ) 
+    // }
 
-    handleUnfollow = (dog) => {
+    // handleUnfollow = (dog) => {
         
-        // const {dog} = this.state
-        const options = {
-            method: 'DELETE'
-        }
-        console.log(this.state.follow_id)
+    //     // const {dog} = this.state
+    //     const options = {
+    //         method: 'DELETE'
+    //     }
+    //     console.log(this.state.follow_id)
         
-        fetch(`${url}/follows/${this.state.follow_id}`, options)
-            .then(r => r.json())
-            .then(this.setState({ follow_id: null }))
-    }
+    //     fetch(`${url}/follows/${this.state.follow_id}`, options)
+    //         .then(r => r.json())
+    //         .then(this.setState({ follow_id: null }))
+    // }
 
 
 
@@ -134,18 +143,41 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, follow_id} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, followers, follow_id, loggedInDogfollowers, dogs} = this.state
         console.log("app Followers", followers)
         console.log("loggedin followees", loggedInDogFollowees)
-        console.log("follow id", follow_id)
+        // console.log("follow id", follow_id)
+        console.log("logged in followers", loggedInDogfollowers)
 
+        if (this.state.dogs) {
+
+            console.log("state", this.state.dogs)
+        }
+
+        // what about the setFollowId thing do i need that? 
+        // just fetch all the follows maybe? pass it down too?
+        //              setFollowID={this.setFollowID} 
+                        // follow_id={follow_id}
+
+        ///// QUESTION: should i pass it down via Route or directly? I tried both //////
+        //// i tried setting state to dogs.data initially which has worked before but now is not. 
 
         return (
             <div className= "App"> 
             <Nav loggedInDog={loggedInDog}/> 
                 <Switch> 
-                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} loggedInDog={loggedInDog} loggedInDogFollowees={loggedInDogFollowees} handleFollow={this.handleFollow} handleUnfollow={this.handleUnfollow} setFollowID={this.setFollowID} follow_id={follow_id} /> } />   
-                    <Route path="/dogs" component={DogIndex}/>
+                    <Route path='dogs/:id' component={DogShowPage}/>
+
+                    <Route path="/dogs" render={(routerProps) => <DogIndex {...routerProps} 
+                        {...dogs}  
+                        loggedInDog={loggedInDog}
+                        loggedInDogFollowees={loggedInDogFollowees}
+                        loggedInDogfollowers={loggedInDogfollowers}
+                        handleFollow={this.handleFollow} 
+                        handleUnfollow={this.handleUnfollow}  /> } 
+                    
+                    />
+
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
                     <Route path='/events/new' component={EventsForm}/> 
                     <Route path='/events' component={EventsIndex}/> 

@@ -1,7 +1,9 @@
 import React, {Fragment} from 'react'
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
+import DogShowPage from './DogShowPage'
 import { Link } from 'react-router-dom';
+
 
 
 
@@ -23,6 +25,7 @@ const DogCard = (props) => {
     return(
 
         <>
+        {/* <DogShowPage  /> */}
         <DogCardWrapper>
             <h3>{name}</h3>
             <h5>"{status}"</h5>
