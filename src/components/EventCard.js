@@ -54,7 +54,7 @@ const EventCard = (props) => {
             <img src={image} alt=""></img>
             <Button >Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
-            <Button onClick={handleDelete}   >Delete Event</Button>
+            <Button onClick={handleDelete}  >Delete Event</Button>
             {/* <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
         </EventCardWrapper>
     )
