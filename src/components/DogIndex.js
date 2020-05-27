@@ -14,20 +14,21 @@ const DogIndex = (props) => {
     //     .then(r => r.json())
     //     .then(data => setDogs(data.data))
     // }, [])
-    console.log('index props', props.data)
+    console.log('index props', props)
     const renderDogCards = () => {
         
         
-        const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow} = props
+        const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow} = props
             // console.log('index', dogs)
-            let dogs = Array.from(props.data)
-            return props.data.map(dog => <DogCard key={dog.id} 
-                {...dog.attributes}  
-                loggedInDog={loggedInDog}
-                loggedInDogFollowees={loggedInDogFollowees}
-                loggedInDogfollowers={loggedInDogfollowers}
-                handleFollow={handleFollow} 
-                handleUnfollow={handleUnfollow} /> )
+            // let dogs = Array.from(props.data)
+                dogs.map(dog => <DogCard    
+                                    key={dog.id} 
+                                    {...dog.attributes}  
+                                    loggedInDog={loggedInDog}
+                                    loggedInDogFollowees={loggedInDogFollowees}
+                                    loggedInDogfollowers={loggedInDogfollowers}
+                                    handleFollow={handleFollow} 
+                                    handleUnfollow={handleUnfollow} /> )
         
         // let dogsAttributes = dogs.data
 
@@ -37,16 +38,15 @@ const DogIndex = (props) => {
     const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow} = props
     if(props){
 
-        console.log(dogs)
+        console.log("dogs",dogs)
     }
     // if (props.data) {
 
         return(
-            
             <div className="index-page" >
                 <h1>Dog Index</h1>
                 <div className="simple-flex-row index-wrap">
-                {/* {renderDogCards()} */}
+                {renderDogCards()}
                 </div>
             </div>
         )

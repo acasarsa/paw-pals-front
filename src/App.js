@@ -34,7 +34,7 @@ class App extends React.Component {
     componentDidMount() {
         fetch(`${url}/dogs`)
         .then(r => r.json())
-        .then( dogs => this.setState({ dogs: dogs}))
+        .then( dogs => this.setState({ dogs: dogs.data}))
             // console.log("dogs",dogs.data.attributes) )
     }
     
@@ -168,14 +168,14 @@ class App extends React.Component {
                 <Switch> 
                     <Route path='dogs/:id' component={DogShowPage}/>
 
-                    <Route path="/dogs" render={(routerProps) => <DogIndex {...routerProps} 
-                        {...dogs}  
-                        loggedInDog={loggedInDog}
-                        loggedInDogFollowees={loggedInDogFollowees}
-                        loggedInDogfollowers={loggedInDogfollowers}
-                        handleFollow={this.handleFollow} 
-                        handleUnfollow={this.handleUnfollow}  /> } 
-                    
+                    <Route path="/dogs" render={(routerProps) => 
+                        <DogIndex {...routerProps} 
+                            dogs={dogs}  
+                            loggedInDog={loggedInDog}
+                            loggedInDogFollowees={loggedInDogFollowees}
+                            loggedInDogfollowers={loggedInDogfollowers}
+                            handleFollow={this.handleFollow} 
+                            handleUnfollow={this.handleUnfollow}  /> } 
                     />
 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
@@ -194,4 +194,9 @@ class App extends React.Component {
 
 
 export default App;
+
+
+
+
+
 
