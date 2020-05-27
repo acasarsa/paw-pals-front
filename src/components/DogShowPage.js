@@ -99,10 +99,7 @@ class DogShowPage extends React.Component {
                         </>
                         ) 
                 }
-            
-        // } else {
-            
-        // }
+    
     }
 
     // why does this work? but if i remove any of it it doesn't work anymore?? it seems like it's repeating itself ??
@@ -124,23 +121,3 @@ class DogShowPage extends React.Component {
     
 
 export default DogShowPage;
-
-
-     {/* {this.renderFollowers()} */}
-                
-            {/* <Followers loggedInDog={this.props.loggedInDog}/> */}
-
-
-
-            // {this.props.selected_dog.followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
-            //     <form>
-            //         <button onClick={() => this.props.handleUnfollow(this.props.selected_dog)}> Unfollow </button>
-            //     </form>
-                
-            // :
-            //     <form onSubmit={(event) => this.props.handleFollow(event, this.props.selected_dog)}>
-            //         <button > Follow </button>
-            //     </form>
-            
-            
-            // }
