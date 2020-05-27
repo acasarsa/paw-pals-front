@@ -1,6 +1,7 @@
 import React from 'react'
 import EditEventForm from './EditEventForm'
 import { Redirect } from 'react-router-dom'
+import DogCard from './DogCard'
 
 
  class EventProfile extends React.Component {
@@ -8,10 +9,11 @@ import { Redirect } from 'react-router-dom'
         redirect: false,
         event: null,
         mode: false,
+        id: this.props.match.params.id,
         title: '',
         date: '',
         image: '',
-        description: ''
+        description: '',
     }
 
 
@@ -35,18 +37,6 @@ import { Redirect } from 'react-router-dom'
         event.preventDefault()
         const {mode} = this.state 
         this.setState({mode: !mode})
-        console.log(this.state.mode)
-        if(mode === true){
-            return (
-                <div>
-                    <EditEventForm/>
-                    <button> Close</button>
-                </div>
-            )
-        }
-       else if(mode === false){
-           return <button>Edit</button>
-       }
     }
 
 
@@ -57,16 +47,23 @@ import { Redirect } from 'react-router-dom'
         //     console.log("event Profile", this.state.event.data.attributes)
         // }
         let {title, image, date, description} = this.state.event.data.attributes
-    
-
+        let dogs = this.state.event.data.attributes.dogs
+        let attendee = dogs.map((dog) => {
+            return [dog.name]
+        })
+           
         return (
              <div>
                 <h3>Event: {title}</h3>
                 <h3>Date: {date}</h3>
-                <img src={image}></img>
+                <img src={image} alt="" style={{width:800}} ></img>
                 <h3>Details: {description}</h3>
-                <button  onClick={this.saveChanges}> Edit Event </button>
+                <h3>Attending: </h3>
+                <br/>
+                 { this.state.mode?  null : <button onClick={this.saveChanges}> Edit Event </button> }
                 <button onClick={this.handleDelete} > Delete Event </button>
+                { this.state.mode ?  <EditEventForm  {...this.state} /> : null}
+            
             </div>
             )
         
@@ -85,7 +82,7 @@ import { Redirect } from 'react-router-dom'
     render() {
       const { redirect } = this.state;
       if (redirect) {
-        return <Redirect to='/events'/>;
+        return <Redirect to='/events/'/>;
       }
         return this.state.event ? this.renderEventProfile() : null
     }

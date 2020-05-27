@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
+import EditEventForm from './EditEventForm'
 
 
     const EventCardWrapper = styled.div`
@@ -26,10 +27,7 @@ import {useHistory} from 'react-router-dom'
 
 const EventCard = (props) => {
    
-
-
-
-
+    console.log("props",props)
 
     const handleDelete = () => {
         let {id} = props
@@ -46,7 +44,7 @@ const EventCard = (props) => {
 
 
     const {title, image, id, date} = props
-
+    
     return (
         <EventCardWrapper>
             <h3>{title}</h3>
@@ -54,8 +52,9 @@ const EventCard = (props) => {
             <img src={image} alt=""></img>
             <Button >Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
-            <Button onClick={handleDelete}  >Delete Event</Button>
-            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button>
+            {/* <Button onClick={handleDelete}  >Delete Event</Button>
+            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
+            {/* <EditEventForm/> */}
         </EventCardWrapper>
     )
 }

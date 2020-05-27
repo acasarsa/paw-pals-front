@@ -1,42 +1,59 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 // import {useHistory} from 'react-router-dom'
 
 class EditEventForm extends React.Component{
     state = { 
-        // id: 56,
-        title: '',
-        date: '',
-        image: '',
-        description: ''
+        redirect: null,
+        title: this.props.event.data.attributes.title,
+        date: this.props.event.data.attributes.date,
+        image: this.props.event.data.attributes.image,
+        description: this.props.event.data.attributes.description
      }
 
-    // handleChange = (event) => {
-    //     event.preventDefault()
-    //     let {id, title, date, image, description} = this.state.data.attributes
-        
-    //     fetch(`http://localhost:3000/api/v1/events/${id}`, {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-type':'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             title,
-    //             date,
-    //             image,
-    //             description
-    //         })
-    //     })
-    // }
+    handleChange = (event) => {
+        event.preventDefault()
+        let {title, date, image, description} = this.state
+        console.log("title", this.props.title)
+        let id = this.props.id
+        fetch(`http://localhost:3000/api/v1/events/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify({
+                title,
+                date,
+                image,
+                description
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({
+                title: data.title,
+                date: data.date,
+                image: data.image,
+                description: data.description
+            })
+        })
+        .then(() => this.setState({ redirect: true }))
+        console.log(this.props.routerProps)
+    }
 
 
-    // eventInfo = (event) => {
-    //     const {value} = event.target
-    //     this.setState({[event.target.name]: value})
-    // }
+    eventInfo = (event) => {
+        const {value} = event.target
+        this.setState({[event.target.name]: value})
+    }
 
     render(){
-
-        let {title, image, date, description} = this.state.event.data.attributes
+        console.log(this.props)
+        let {title, image, date, description} = this.state
+        const { redirect } = this.state;
+      if (redirect) {
+        return <Redirect to={`/events/`}/>;
+      }
     
         // let history = useHistory()
 

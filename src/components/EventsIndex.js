@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import EventCard from './EventCard'
-import EventProfile from './EventProfile'
+// import EventProfile from './EventProfile'
 // import Eventsform from './EventsForm'
 
 const url = 'http://localhost:3000/api/v1'
