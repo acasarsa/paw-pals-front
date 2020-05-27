@@ -76,7 +76,8 @@ class DogShowPage extends React.Component {
                         <div>
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
-                            {followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
+                            {followers.length > 0 ? 
+                            followers.find((dog) => dog.id === this.props.loggedInDog.id) ?
                             <form>
                                 <button onClick={() => this.props.handleUnfollow(this.props.selected_dog)}> Unfollow </button>
                             </form>
@@ -87,7 +88,7 @@ class DogShowPage extends React.Component {
                             </form>
                 
                 
-                                }
+                            : null }
                             
                             <hr></hr>
                             

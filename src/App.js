@@ -75,7 +75,7 @@ class App extends React.Component {
     handleFollow = (event, dog) => {
         event.preventDefault()
         console.log("followed dog", dog)
-        const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers} = this.state
+        const {loggedInDog, loggedInDogFollowees, selected_dog, dogs} = this.state
         // const {dog} = this.state
         let newFollow = {
             follower_id: loggedInDog.id,
@@ -93,9 +93,10 @@ class App extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( followObj => {this.setState({loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], loggedInDogfollowers: [...loggedInDogfollowers, followObj.followers]})})
-        
-            
+            .then( followObj => {this.setState({
+                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
+                selected_dog: selected_dog.followers.push(loggedInDog),
+                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.push(loggedInDog) : dog ) })})
                 // , followers: [...dog.followers, followObj.follower] 
     }
 
