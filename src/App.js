@@ -78,10 +78,7 @@ class App extends React.Component {
         fetch(`${url}/follows`, options)
             .then(r => r.json())
             .then( followObj => {this.setState({loggedInDogFollowees: [...this.state.loggedInDogFollowees, followObj.followee]})})
-            // .then( 
-            //     fetch(`${url}/dogs/${dog.id}`)
-            //     .then(r => r.json())
-            // )
+        
             
                 // , followers: [...dog.followers, followObj.follower] 
     }
@@ -137,16 +134,17 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers} = this.state
-        console.log("app Followers", this.state.followers)
-        console.log("loggedin followees", this.state.loggedInDogFollowees)
+        const {loggedInDog, username, loggedInDogFollowees, followers, follow_id} = this.state
+        console.log("app Followers", followers)
+        console.log("loggedin followees", loggedInDogFollowees)
+        console.log("follow id", follow_id)
 
 
         return (
             <div className= "App"> 
             <Nav loggedInDog={loggedInDog}/> 
                 <Switch> 
-                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} followers={followers} loggedInDog={loggedInDog} loggedInDogFollowees={loggedInDogFollowees} handleFollow={this.handleFollow} handleUnfollow={this.handleUnfollow} setFollowID={this.setFollowID} follow_id={this.state.follow_id} /> } />   
+                    <Route path='/dogs/:id' render={(routerProps) => <DogProfile {...routerProps} loggedInDog={loggedInDog} loggedInDogFollowees={loggedInDogFollowees} handleFollow={this.handleFollow} handleUnfollow={this.handleUnfollow} setFollowID={this.setFollowID} follow_id={follow_id} /> } />   
                     <Route path="/dogs" component={DogIndex}/>
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
                     <Route path='/events/new' component={EventsForm}/> 
