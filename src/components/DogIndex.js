@@ -1,7 +1,7 @@
 import React from 'react'
 import DogCard from './DogCard';
 import Filter from './Filter'
-// import DogShowPage from './DogShowPage'
+
 
 
 
@@ -19,7 +19,7 @@ class DogIndex extends React.Component {
     renderDogCards = (displayDogs) => {
         
         const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = this.props
-            // console.log('index', dogs)
+
                 return displayDogs.map(dog => <DogCard
                                     history={this.props.history}
                                     key={dog.id} 
@@ -34,13 +34,13 @@ class DogIndex extends React.Component {
     }
 
         render () {
-            // console.log('index props', this.props)
+
 
             const {followFilter} = this.state
             const {loggedInDog} = this.props
             let displayDogs = [...this.props.dogs]
             
-            // console.log("dog id", displayDogs.map(dog => dog.id))
+
 
             if( loggedInDog && displayDogs) {
 
