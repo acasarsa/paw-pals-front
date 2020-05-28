@@ -30,8 +30,8 @@ class DogShowPage extends React.Component {
 
     renderDogShowPage = () => {
 
-            console.log('Show Page props', this.props)
-            console.log("dog", this.props.dogs)
+            // console.log('Show Page props', this.props)
+            // console.log("dog", this.props.dogs)
             // console.log("followers off dog", this.props.dog.followers)
             // console.log("followers props from A logged in DogP", this.props.follow_id) 
             console.log('loggedinDOg', this.props.loggedInDog)
@@ -114,9 +114,9 @@ class DogShowPage extends React.Component {
 
     render(){
 
-        console.log("ShowPage props",this.props)
+        // console.log("ShowPage props",this.props)
 
-        if (this.props) {console.log("is dog a prop?",this.props.dog)}
+        // if (this.props) {console.log("is dog a prop?",this.props.dog)}
         
 
             return  ( this.renderDogShowPage() )
