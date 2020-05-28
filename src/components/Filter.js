@@ -1,14 +1,16 @@
 import React from 'react';
 
 const Filter = props => {
+    const {followFilter, handleFilterChange} = props
     
     return (
         <div className="simple-flex-row">
             <label> Followers: 
-                <select value={props.followFilter} onChange={props.handleFilterChange} >
-                    <option>All</option>
-                    <option>My Followers</option>
-                    <option>Who I Follow</option>
+                <select value={followFilter} onChange={handleFilterChange} >
+                    <option name={"All"} >All</option>
+                    <option name={"My Followers"} >My Followers</option>
+                    <option name={"Who I Follow"} >Who I Follow</option>
+                    <option name={"Who I Don't Follow"} >Who I Don't Follow</option>
                 </select>
             </label>
             {/* <label> Favorites? 

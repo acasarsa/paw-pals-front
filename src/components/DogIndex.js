@@ -13,7 +13,13 @@ class DogIndex extends React.Component {
 
     handleFilterChange = event => {
 
-        this.setState({ followFilter: event.target.value })
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
     
     renderDogCards = (displayDogs) => {
@@ -37,8 +43,10 @@ class DogIndex extends React.Component {
             console.log('index props', this.props)
 
             const {followFilter} = this.state
-            const {loggedInDog} = this.props
-            let displayDogs = [...this.props.dogs]
+            const {loggedInDog, dogs} = this.props
+            let displayDogs = [...dogs]
+            let followers = [...loggedInDog.followers]
+            let followedDogs = [...loggedInDog.followees]
             
             // console.log("dog id", displayDogs.map(dog => dog.id))
 
@@ -46,6 +54,7 @@ class DogIndex extends React.Component {
 
                 if (followFilter !== "All") {
                     console.log("displayDogs", loggedInDog)
+
                 }
             } else {
                 displayDogs = displayDogs
