@@ -14,7 +14,7 @@ class Auth extends React.Component {
     render(){
 
         // const {password} = this.state
-        const {setLoggedInDog, username, handleUsername, loggedInDog, handleSignOut} = this.props
+        const {setLoggedInDog, username, handleUsername, loggedInDog, handleSignOut, name} = this.props
 
         if (!loggedInDog ) {
             return (

@@ -100,13 +100,13 @@ class App extends React.Component {
         fetch(`${url}/follows`, options)
             .then(r => r.json())
             .then( followObj => {this.setState({
+                selected_dog: {
+                    ...selected_dog,
+                    followers: [...selected_dog.followers, followObj.follower]
+                },
                 loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
                 loggedInDog: {...loggedInDog, followees: [...loggedInDog.followees, selected_dog ]},
                 dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.attributes.followers.concat(followObj.follower) : dog ),
-                selected_dog: {
-                    ...selected_dog,
-                    followers: [...selected_dog.followers, loggedInDog], selected_dog: ''
-                },
                 })
             })
     }

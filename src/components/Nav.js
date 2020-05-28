@@ -14,7 +14,7 @@ const Nav = props => {
             <Link to="/events">Events</Link>
             {/* <Link to="/dogs">Followers</Link> */}
             <div className="simple-flex-row right-corner">
-                <Link to="/login">{props.loggedInDog ? "Sign Out" : "Sign In" }</Link> 
+            {props.loggedInDog ? <Link to="/login">{`Welcome ${props.loggedInDog.name} | Sign Out`}</Link> : <Link to="/login">Sign In</Link>}
             </div>
         </div>
     )
