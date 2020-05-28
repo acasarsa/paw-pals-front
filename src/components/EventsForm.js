@@ -46,9 +46,9 @@ class EventsForm extends React.Component {
     render(){
         const { redirect } = this.state;
         if (redirect) {
-          return <Redirect to='/events'/>;
+          return <Redirect to={`/events/`}/>;
         }
-        console.log(this.state)
+        // console.log(this.state)
         return (
             
             <div>

@@ -39,19 +39,18 @@ import DogCard from './DogCard'
         this.setState({mode: !mode})
     }
 
-
-
-
     renderEventProfile = () => {
         // if(this.state.event !== null){
         //     console.log("event Profile", this.state.event.data.attributes)
         // }
         let {title, image, date, description} = this.state.event.data.attributes
-        let dogs = this.state.event.data.attributes.dogs
-        let attendee = dogs.map((dog) => {
-            return [dog.name]
-        })
-           
+        // let dogs = this.state.event.data.attributes.dogs
+        // let attendee = dogs.map((dog) => {
+        //     return [dog.name]
+        // })
+        // console.log(this.state.event.data.attributes.dogs)
+        let attendee =  this.state.event.data.attributes.dogs
+        console.log(attendee)
         return (
              <div>
                 <h3>Event: {title}</h3>
@@ -59,11 +58,13 @@ import DogCard from './DogCard'
                 <img src={image} alt="" style={{width:800}} ></img>
                 <h3>Details: {description}</h3>
                 <h3>Attending: </h3>
-                <br/>
+                <hr/>
+                <div className='simple=flex-row index-wrap'>
+                        {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs}  /> )}
+                </div> 
                  { this.state.mode?  null : <button onClick={this.saveChanges}> Edit Event </button> }
                 <button onClick={this.handleDelete} > Delete Event </button>
                 { this.state.mode ?  <EditEventForm  {...this.state} /> : null}
-            
             </div>
             )
         
@@ -80,6 +81,7 @@ import DogCard from './DogCard'
 
 
     render() {
+
       const { redirect } = this.state;
       if (redirect) {
         return <Redirect to='/events/'/>;

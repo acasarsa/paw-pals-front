@@ -8,6 +8,7 @@ const url = 'http://localhost:3000/api/v1'
 const EventsIndex = () => {
 
     const [events, setEvents] = useState([])
+  
 
 
     const fetchEvents = () => {

@@ -14,7 +14,7 @@ class EditEventForm extends React.Component{
     handleChange = (event) => {
         event.preventDefault()
         let {title, date, image, description} = this.state
-        console.log("title", this.props.title)
+        // console.log("title", this.props.title)
         let id = this.props.id
         fetch(`http://localhost:3000/api/v1/events/${id}`, {
             method: 'PATCH',
@@ -54,10 +54,7 @@ class EditEventForm extends React.Component{
       if (redirect) {
         return <Redirect to={`/events/`}/>;
       }
-    
-        // let history = useHistory()
-
-        return (
+     return (
           <div>
             <h1>Edit Event Form</h1>
             <form onSubmit={this.handleSubmit}>
@@ -67,7 +64,6 @@ class EditEventForm extends React.Component{
                  type="text" name="title" 
                  placeholder="Event Name" 
                  value={title}
-                
                  />
                  
             </div>

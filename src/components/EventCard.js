@@ -29,14 +29,21 @@ const EventCard = (props) => {
    
     console.log("props",props)
 
-    const handleDelete = () => {
-        let {id} = props
-        fetch(`http://localhost:3000/api/v1/events/${id}`, {
-            method: "DELETE"
-        })   
-        // .then(resp => resp.json())
-        .then(props.fetchEvents)
+    // const handleDelete = () => {
+    //     let {id} = props
+    //     fetch(`http://localhost:3000/api/v1/events/${id}`, {
+    //         method: "DELETE"
+    //     })   
+    //     // .then(resp => resp.json())
+    //     .then(props.fetchEvents)
+    // }
+
+
+    const disableAttend = (event) => {
+        event.preventDefault()
+        alert("You're in!")
     }
+
 
 
 
@@ -49,8 +56,8 @@ const EventCard = (props) => {
         <EventCardWrapper>
             <h3>{title}</h3>
             <h5>Date: {date}</h5>
-            <img src={image} alt=""></img>
-            <Button >Attend!</Button>
+            <img src={image} alt="" style={{width: 700}}></img>
+            <Button onClick={disableAttend}>Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
             {/* <Button onClick={handleDelete}  >Delete Event</Button>
             <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
