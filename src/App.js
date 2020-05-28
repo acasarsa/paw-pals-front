@@ -25,7 +25,7 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user1",
+        username: "user10",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
@@ -120,7 +120,7 @@ class App extends React.Component {
                 dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
                     ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
                     : dog )
-                
+               
                 })
 
             })
