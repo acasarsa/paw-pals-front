@@ -47,6 +47,10 @@ class App extends React.Component {
     //     }) 
     // }
 
+    onlyUnique = (value, index, self) => { 
+        return self.indexOf(value) === index;
+    }
+
     getSelectedDog = (selected_dog) => {
         this.setState({selected_dog})
     }
@@ -72,6 +76,8 @@ class App extends React.Component {
         this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
     }
 
+    
+
     handleFollow = (event, dog) => {
         event.preventDefault()
         console.log("followed dog", dog)
@@ -96,7 +102,7 @@ class App extends React.Component {
             .then( followObj => {this.setState({
                 selected_dog: {
                     ...selected_dog,
-                    followers: [...selected_dog.followers, loggedInDog]
+                    followers: [...selected_dog.followers, loggedInDog].filter(this.onlyUnique)
                 },
                 loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
                 dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
@@ -104,17 +110,17 @@ class App extends React.Component {
             })
     }
 
-    handleUnfollow = (selectedDogID) => {
-        // id is selected_dog.id passed in from click 
-        const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
-        this.setState({ 
-            loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
-            selected_dog: {
-                ...selected_dog,
-                followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
-            },
-        })
-    }
+    // handleUnfollow = (selectedDogID) => {
+    //     // id is selected_dog.id passed in from click 
+    //     const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
+    //     this.setState({ 
+    //         loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
+    //         selected_dog: {
+    //             ...selected_dog,
+    //             followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
+    //         },
+    //     })
+    // }
 
 
     
