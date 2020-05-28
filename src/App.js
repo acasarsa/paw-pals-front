@@ -24,7 +24,7 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user1",
+        username: "user10",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
@@ -46,6 +46,10 @@ class App extends React.Component {
     //     }) 
     // }
 
+    onlyUnique = (value, index, self) => { 
+        return self.indexOf(value) === index;
+    }
+
     getSelectedDog = (selected_dog) => {
         this.setState({selected_dog})
     }
@@ -62,14 +66,24 @@ class App extends React.Component {
 
         fetch(`${url}/dogs/login/${username}`)
             .then(r => r.json())
-            .then(dog => this.setState({ loggedInDog: dog, loggedInDogFollowees: dog.followees, loggedInDogfollowers: dog.followers, username: ''}))
+            .then(dog => 
+                this.setState({ 
+                    loggedInDog: dog, 
+                    loggedInDogFollowees: dog.followees, 
+                    loggedInDogfollowers: dog.followers, 
+                    username: ''}))
             
     }
 
     handleSignOut = (event) => {
         event.preventDefault()
-        this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
+        this.setState({ 
+            loggedInDog: null,  
+            loggedInDogFollowees: null,  
+            loggedInDogfollowers: null})
     }
+
+
 
     handleFollow = (event, dog) => {
         event.preventDefault()
@@ -92,28 +106,47 @@ class App extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( followObj => {this.setState({
-                selected_dog: {
-                    ...selected_dog,
-                    followers: [...selected_dog.followers, loggedInDog]
-                },
-                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
-                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
+            .then( followObj => {   
+
+                this.setState({
+
+                selected_dog: {...selected_dog, followers: [...selected_dog.followers, followObj.follower]}, 
+
+                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
+
+                loggedInDog: { ...loggedInDog, followees: [...loggedInDog.followees, followObj.followee ]},   
+                        
+                dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
+                    ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
+                    : dog )
+               
                 })
+
             })
     }
 
-    handleUnfollow = (selectedDogID) => {
-        // id is selected_dog.id passed in from click 
-        const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
-        this.setState({ 
-            loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
-            selected_dog: {
-                ...selected_dog,
-                followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
-            },
-        })
-    }
+    
+
+
+    // dogs: dogs.map(dog => 
+    //     dog.id === selected_dog.id 
+    //     ? 
+    //     dog.attributes.followers.concat(followObj.follower) 
+    //     : 
+    //     dog ),
+
+
+    // handleUnfollow = (selectedDogID) => {
+    //     // id is selected_dog.id passed in from click 
+    //     const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
+    //     this.setState({ 
+    //         loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
+    //         selected_dog: {
+    //             ...selected_dog,
+    //             followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
+    //         },
+    //     })
+    // }
 
 
     
@@ -146,8 +179,8 @@ class App extends React.Component {
 // if owner is your friend then you see the events. 
 // add events profile page 
     render() {
-        // console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
+        console.log("//////////// APP RENDERED ////////////")
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
         // console.log("app Followers", followers)
         // console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)
@@ -156,8 +189,8 @@ class App extends React.Component {
 
         // if (this.state.dogs) {
 
-        //     console.log("dog state", this.state.dogs)
-        // }
+            // console.log("dog state", this.state.dogs)
+        
 
         // what about the setFollowId thing do i need that? 
         // just fetch all the follows maybe? pass it down too?
@@ -174,13 +207,14 @@ class App extends React.Component {
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
                             {...routerProps} 
-                            // dogs={dogs}  
+                            dogs={dogs}  
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
                             handleFollow={this.handleFollow} 
-                            handleUnfollow={this.handleUnfollow} /> } />
+                            handleUnfollow={this.handleUnfollow}
+                            onlyUnique={this.onlyUnique} /> } />
 
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 

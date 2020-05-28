@@ -22,6 +22,9 @@ class DogShowPage extends React.Component {
     //     console.log('hit')
     // }
 
+    componentWillUpdate(){
+        this.renderDogShowPage()
+    }
 
 
 
@@ -36,22 +39,29 @@ class DogShowPage extends React.Component {
 
         const {name, image, followers, id} = this.props.selected_dog
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
-        // console.log("followers Show", followers);
+        console.log("followers Show", followers);
 
+        // could make a list of the follower count
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
                 if (selected_dog) {
 
+                    
                     return (
                         
                         <>
+                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
                             <h1>My Profile</h1>
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
+                            
+                            <div>
+                                Follow Count: {selected_dog.followers.length}
+                            </div>
                             
                             <hr></hr>
                             
@@ -66,6 +76,10 @@ class DogShowPage extends React.Component {
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
                             
+                            <div>
+                                Follow Count: {selected_dog.followers.length}
+                            </div>
+
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
                             <form>
                                 <button onClick={() => handleUnfollow(id)}> Unfollow </button>
@@ -112,8 +126,10 @@ class DogShowPage extends React.Component {
         // console.log("ShowPage props",this.props)
 
         // if (this.props) {console.log("is dog a prop?",this.props.dog)}
+        
 
-        return  ( this.renderDogShowPage() )
+            return  ( this.renderDogShowPage() )
+        
 
         
     }

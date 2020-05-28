@@ -15,7 +15,10 @@ const Nav = props => {
             <Link to="/events/new">Create Event</Link>
             {/* <Link to="/dogs">Followers</Link> */}
             <div className="simple-flex-row right-corner">
-                <Link to="/login">{props.loggedInDog ? "Sign Out" : "Sign In" }</Link> 
+
+            {/* {`Welcome ${props.loggedInDog.name}  |  Sign Out` } */}
+            <Link to="/login">{props.loggedInDog ? `Follower Count: ${props.loggedInDog.followers.length} Followee Count: ${props.loggedInDog.followees.length} ${props.loggedInDog.name} | id:${props.loggedInDog.id}  |  Sign Out` : "Sign In" }</Link> 
+
             </div>
         </div>
     )

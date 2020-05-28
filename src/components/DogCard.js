@@ -27,6 +27,11 @@ const DogCard = (props) => {
     // console.log("dogCard props", props)
 
 
+    // {
+    //     ...selected_dog,
+    //     followers: [...selected_dog.followers, followObj.follower]
+    // },
+
     // linkToShowPage = () => {
 
     // }
