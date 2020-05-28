@@ -36,7 +36,6 @@ class App extends React.Component {
         fetch(`${url}/dogs`)
         .then(r => r.json())
         .then( dogs => this.setState({ dogs: dogs.data}))
-            // console.log("dogs",dogs.data.attributes) )
     }
     
 
