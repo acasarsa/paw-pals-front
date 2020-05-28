@@ -49,6 +49,7 @@ class DogShowPage extends React.Component {
                     return (
                         
                         <>
+                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
@@ -69,6 +70,7 @@ class DogShowPage extends React.Component {
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
                             
+
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
                             <form>
                                 <button onClick={() => handleUnfollow(id)}> Unfollow </button>

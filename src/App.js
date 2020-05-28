@@ -110,24 +110,7 @@ class App extends React.Component {
             })
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        let {stateAtt0, stateAtt1, stateAtt2} = this.state
-        let newObj = {stateAtt0, stateAtt1, stateAtt2}
-        
-        fetch('http://localhost:3000/endpoint', {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(newObj),
-        })
-        .then(r => r.json())
-        .then( item => {
-            this.setState({array: [...this.state.array, item], id: null, stateAtt0: '', stateAtt1: '', stateAtt2: '' })
-        })
-    }
+
 
     // handleUnfollow = (selectedDogID) => {
     //     // id is selected_dog.id passed in from click 
@@ -173,7 +156,7 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
         // console.log("app Followers", followers)
         // console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)
@@ -200,7 +183,7 @@ class App extends React.Component {
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
                             {...routerProps} 
-                            // dogs={dogs}  
+                            dogs={dogs}  
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}
