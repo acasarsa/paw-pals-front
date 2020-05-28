@@ -31,6 +31,7 @@ const DogCard = (props) => {
 
     // }
 
+
     return(
 
         <>
@@ -42,6 +43,7 @@ const DogCard = (props) => {
             <button onClick={() => {getSelectedDog(selected_dog) 
                                     props.history.push(`/dogs/${id}`)}}
                                     >
+                                        
                 Visit {name}! 
             </button>
         </DogCardWrapper>
