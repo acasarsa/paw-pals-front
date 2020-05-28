@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
@@ -181,16 +182,9 @@ class App extends React.Component {
     render() {
         console.log("//////////// APP RENDERED ////////////")
         const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
-        // console.log("app Followers", followers)
-        // console.log("loggedin followees", loggedInDogFollowees)
-        // console.log("follow id", follow_id)
-        // console.log("logged in followers", loggedInDogfollowers)
-        // console.log("selected dog", selected_dog)
 
-        // if (this.state.dogs) {
+        console.log("selected dog", selected_dog)
 
-            // console.log("dog state", this.state.dogs)
-        
 
         // what about the setFollowId thing do i need that? 
         // just fetch all the follows maybe? pass it down too?
