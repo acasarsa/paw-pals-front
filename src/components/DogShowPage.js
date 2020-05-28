@@ -133,20 +133,9 @@ class DogShowPage extends React.Component {
 
     render(){
 
-<<<<<<< HEAD
-        console.log("ShowPage props",this.props)
-        console.log("selected_dog", this.props.selected_dog)
-        console.log("dog array", this.props.dogs)
-        if (this.props.dog ) {
-
-            console.log("i am the selected do found in dogs array", this.props.dogs.find(dog => dog.id === this.props.selected_dog.id))
-        }
-
-=======
         // console.log("ShowPage props",this.props)
 
         // if (this.props) {console.log("is dog a prop?",this.props.dog)}
->>>>>>> followers-backup
         
 
             return  ( this.renderDogShowPage() )
