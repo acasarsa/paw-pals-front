@@ -6,13 +6,15 @@ import DogCard from './DogCard';
 
 const DogIndex = (props) => {
     
-    // const [dogs, setDogs] = useState([])
+    state = {
+        followFilter: 'All'
+    }
 
-    // useEffect(() => {
-    //     fetch(`${url}/dogs`)
-    //     .then(r => r.json())
-    //     .then(data => setDogs(data.data))
-    // }, [])
+    handleFilterChange = event => {
+
+        this.setState({ followFilter: event.target.value })
+    }
+    
     console.log('index props', props)
     const renderDogCards = () => {
         
