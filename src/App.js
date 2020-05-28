@@ -25,7 +25,7 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user1",
+        username: "user10",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
@@ -46,6 +46,10 @@ class App extends React.Component {
     //         current_user: dogs.data.find(dog => (dog.attribute.username === username) ? dog : "Invalid Username")
     //     }) 
     // }
+
+    onlyUnique = (value, index, self) => { 
+        return self.indexOf(value) === index;
+    }
 
     getSelectedDog = (selected_dog) => {
         this.setState({selected_dog})
@@ -72,6 +76,8 @@ class App extends React.Component {
         this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
     }
 
+
+
     handleFollow = (event, dog) => {
         event.preventDefault()
         console.log("followed dog", dog)
@@ -96,25 +102,28 @@ class App extends React.Component {
             .then( followObj => {this.setState({
                 selected_dog: {
                     ...selected_dog,
-                    followers: [...selected_dog.followers, loggedInDog]
+                    followers: [...selected_dog.followers, followObj.follower]
                 },
-                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
-                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
+                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
+                loggedInDog: {...loggedInDog, followees: [...loggedInDog.followees, selected_dog ]},
+                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.attributes.followers.concat(followObj.follower) : dog ),
                 })
             })
     }
 
-    handleUnfollow = (selectedDogID) => {
-        // id is selected_dog.id passed in from click 
-        const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
-        this.setState({ 
-            loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
-            selected_dog: {
-                ...selected_dog,
-                followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
-            },
-        })
-    }
+
+
+    // handleUnfollow = (selectedDogID) => {
+    //     // id is selected_dog.id passed in from click 
+    //     const {loggedInDog, loggedInDogFollowees, selected_dog} = this.state
+    //     this.setState({ 
+    //         loggedInDogFollowees: loggedInDogFollowees.filter((followee) => followee.id !== selectedDogID), 
+    //         selected_dog: {
+    //             ...selected_dog,
+    //             followers: selected_dog.followers.filter((follower) => follower.id !== loggedInDog.id)
+    //         },
+    //     })
+    // }
 
 
     
@@ -148,7 +157,7 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
         // console.log("app Followers", followers)
         // console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)
@@ -175,13 +184,14 @@ class App extends React.Component {
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
                             {...routerProps} 
-                            // dogs={dogs}  
+                            dogs={dogs}  
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
                             handleFollow={this.handleFollow} 
-                            handleUnfollow={this.handleUnfollow} /> } />
+                            handleUnfollow={this.handleUnfollow}
+                            onlyUnique={this.onlyUnique} /> } />
 
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 

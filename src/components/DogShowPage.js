@@ -22,6 +22,9 @@ class DogShowPage extends React.Component {
     //     console.log('hit')
     // }
 
+    componentWillUpdate(){
+        this.renderDogShowPage()
+    }
 
 
 
@@ -38,7 +41,8 @@ class DogShowPage extends React.Component {
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
         console.log("followers Show", followers);
 
-
+        let follow = selected_dog.followers
+        let length = selected_dog.followers.length 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
                 if (selected_dog) {
@@ -46,6 +50,7 @@ class DogShowPage extends React.Component {
                     return (
                         
                         <>
+                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
@@ -66,6 +71,7 @@ class DogShowPage extends React.Component {
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
                             
+
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
                             <form>
                                 <button onClick={() => handleUnfollow(id)}> Unfollow </button>
@@ -91,6 +97,16 @@ class DogShowPage extends React.Component {
                         
                         </>
                     )
+                
+                } else if ( (loggedInDog.id ===  selected_dog.id) && follow[length - 1].id === this.props.loggedInDog.id  ) {
+                    
+                    return (
+
+                        <>
+                            <h1> hi </h1>
+
+                        </>
+                    )
                 } else {
                     return (
                         <>
@@ -110,10 +126,17 @@ class DogShowPage extends React.Component {
     render(){
 
         console.log("ShowPage props",this.props)
+        console.log("selected_dog", this.props.selected_dog)
+        console.log("dog array", this.props.dogs)
+        if (this.props.dog ) {
 
-        if (this.props) {console.log("is dog a prop?",this.props.dog)}
+            console.log("i am the selected do found in dogs array", this.props.dogs.find(dog => dog.id === this.props.selected_dog.id))
+        }
 
-        return  ( this.renderDogShowPage() )
+        
+
+            return  ( this.renderDogShowPage() )
+        
 
         
     }
