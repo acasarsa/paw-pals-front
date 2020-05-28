@@ -157,7 +157,7 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, followers, loggedInDogfollowers, dogs, selected_dog} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
         // console.log("app Followers", followers)
         // console.log("loggedin followees", loggedInDogFollowees)
         // console.log("follow id", follow_id)

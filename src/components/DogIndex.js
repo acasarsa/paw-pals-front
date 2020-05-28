@@ -1,10 +1,11 @@
 import React from 'react'
 import DogCard from './DogCard';
+import Filter from './Filter'
 // import DogShowPage from './DogShowPage'
 
 
 
-const DogIndex = (props) => {
+class DogIndex extends React.Component {
     
     state = {
         followFilter: 'All'
@@ -15,13 +16,12 @@ const DogIndex = (props) => {
         this.setState({ followFilter: event.target.value })
     }
     
-    console.log('index props', props)
-    const renderDogCards = () => {
+    renderDogCards = (displayDogs) => {
         
-        const {dogs, loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = props
+        const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = this.props
             // console.log('index', dogs)
-                return dogs.map(dog => <DogCard
-                                    history={props.history}
+                return displayDogs.map(dog => <DogCard
+                                    history={this.props.history}
                                     key={dog.id} 
                                     {...dog.attributes}  
                                     getSelectedDog={getSelectedDog}
@@ -32,15 +32,56 @@ const DogIndex = (props) => {
                                     handleFollow={handleFollow} 
                                     handleUnfollow={handleUnfollow} /> )
     }
-        return(
 
-            <div className="index-page" >
-                <h1>Dog Index</h1>
-                <div className="simple-flex-row index-wrap">
-                {renderDogCards()}
+        render () {
+            console.log('index props', this.props)
+
+            const {followFilter} = this.state
+            const {loggedInDog} = this.props
+            let displayDogs = [...this.props.dogs]
+            
+            // console.log("dog id", displayDogs.map(dog => dog.id))
+
+            if( loggedInDog && displayDogs) {
+
+                if (followFilter !== "All") {
+                    console.log("displayDogs", loggedInDog)
+                }
+            } else {
+                displayDogs = displayDogs
+            }
+            
+            // if(followFilter === "All") {
+            //     // console.log("1",displayDogs.map(dog => dog.id))
+            //     // console.log("1,loggedin",loggedInDog.id)
+            //     displayDogs = displayDogs
+            // } else if (followFilter === "My Followers") {
+            //     console.log(followFilter)
+            //     // console.log("2",displayDogs.map(dog => dog.id))
+            //     // console.log("2-aLoggedin",loggedInDog.id)
+            //     // displayDogs = displayDogs.find(dog => (dog.id === loggedInDog.id) ? dog.attributes.followers : dog)
+            // } else if (followFilter === "Who I Follow") {
+            //     displayDogs = displayDogs.find(dog => (dog.id === loggedInDog.id) ? dog.attributes.followees : dog)
+            // }
+
+        // if i select my followers i want to look through the array of dogs and find the loggedInDog 
+        // if dog.id === loggedInDog.id then show dog.attributes.followers
+
+
+            return (
+                <>
+                <Filter handleFilterChange={this.handleFilterChange} />
+                <div className="index-page" >
+                    <h1>Dog Index</h1>
+                    <div className="simple-flex-row index-wrap">
+                    {this.renderDogCards(displayDogs)}
+                    </div>
                 </div>
-            </div>
-        )
+    
+                </>
+            )
+        }
+
 }
 
 
