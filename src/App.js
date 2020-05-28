@@ -4,17 +4,12 @@ import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
 import DogIndex from './components/DogIndex'
-// import DogContainer from './containers/DogContainer'
 import Auth from './components/Auth'
 import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 import EventProfile from './components/EventProfile'
-// import DogCard from './components/DogCard'
-// require('log-timestamp')(function() {
-//     return new Date()
 
-// });
 
 console.log("////////// top of App /////////")
 // import {DogShowPage, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
@@ -36,25 +31,12 @@ class App extends React.Component {
         fetch(`${url}/dogs`)
         .then(r => r.json())
         .then( dogs => this.setState({ dogs: dogs.data}))
-            // console.log("dogs",dogs.data.attributes) )
-    }
-    
-
-    // setCurrentUser = (dogs, username) => {
-    //     console.log('username', username)
-    //     this.setState({
-    //         current_user: dogs.data.find(dog => (dog.attribute.username === username) ? dog : "Invalid Username")
-    //     }) 
-    // }
-
-    onlyUnique = (value, index, self) => { 
-        return self.indexOf(value) === index;
+        
     }
 
     getSelectedDog = (selected_dog) => {
         this.setState({selected_dog})
     }
-
 
 
     handleUsername = (event) => {
@@ -215,7 +197,7 @@ class App extends React.Component {
                             loggedInDogfollowers={loggedInDogfollowers}
                             handleFollow={this.handleFollow} 
                             handleUnfollow={this.handleUnfollow}
-                            onlyUnique={this.onlyUnique} /> } />
+                            /> } />
 
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 
