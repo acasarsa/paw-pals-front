@@ -40,7 +40,7 @@ class DogIndex extends React.Component {
     }
 
         render () {
-            console.log('index props', this.props)
+            // console.log('index props', this.props)
 
             const {followFilter} = this.state
             const {loggedInDog, dogs} = this.props
