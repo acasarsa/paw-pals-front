@@ -67,13 +67,21 @@ class App extends React.Component {
 
         fetch(`${url}/dogs/login/${username}`)
             .then(r => r.json())
-            .then(dog => this.setState({ loggedInDog: dog, loggedInDogFollowees: dog.followees, loggedInDogfollowers: dog.followers, username: ''}))
+            .then(dog => 
+                this.setState({ 
+                    loggedInDog: dog, 
+                    loggedInDogFollowees: dog.followees, 
+                    loggedInDogfollowers: dog.followers, 
+                    username: ''}))
             
     }
 
     handleSignOut = (event) => {
         event.preventDefault()
-        this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
+        this.setState({ 
+            loggedInDog: null,  
+            loggedInDogFollowees: null,  
+            loggedInDogfollowers: null})
     }
 
 
@@ -99,21 +107,34 @@ class App extends React.Component {
     
         fetch(`${url}/follows`, options)
             .then(r => r.json())
-            .then( followObj => { 
-                console.log("followObj",followObj)
+            .then( followObj => {   
+
                 this.setState({
-                selected_dog: {
-                    ...selected_dog,
-                    followers: [...selected_dog.followers, followObj.follower]
-                }, 
+
+                selected_dog: {...selected_dog, followers: [...selected_dog.followers, followObj.follower]}, 
+
                 loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
-                loggedInDog: {...loggedInDog, followees: [...loggedInDog.followees, followObj.followee ]},
-                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.attributes.followers.concat(followObj.follower) : dog ),
+
+                loggedInDog: { ...loggedInDog, followees: [...loggedInDog.followees, followObj.followee ]},   
+                        
+                dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
+                    ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
+                    : dog )
+                
                 })
-                console.log("the selected do your looking for",this.state.selected_dog)
+
             })
     }
 
+    
+
+
+    // dogs: dogs.map(dog => 
+    //     dog.id === selected_dog.id 
+    //     ? 
+    //     dog.attributes.followers.concat(followObj.follower) 
+    //     : 
+    //     dog ),
 
 
     // handleUnfollow = (selectedDogID) => {

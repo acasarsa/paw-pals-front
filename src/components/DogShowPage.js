@@ -41,11 +41,13 @@ class DogShowPage extends React.Component {
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
         console.log("followers Show", followers);
 
+        // could make a list of the follower count
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
                 if (selected_dog) {
 
+                    
                     return (
                         
                         <>
@@ -56,6 +58,10 @@ class DogShowPage extends React.Component {
                             <h1>My Profile</h1>
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
+                            
+                            <div>
+                                Follow Count: {selected_dog.followers.length}
+                            </div>
                             
                             <hr></hr>
                             
@@ -70,6 +76,9 @@ class DogShowPage extends React.Component {
                             <h2>Name: {name}</h2>
                             <img src={image}></img>
                             
+                            <div>
+                                Follow Count: {selected_dog.followers.length}
+                            </div>
 
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
                             <form>
