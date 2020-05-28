@@ -120,7 +120,7 @@ class App extends React.Component {
                 dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
                     ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
                     : dog )
-                
+            
                 })
 
             })
