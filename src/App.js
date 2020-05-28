@@ -25,7 +25,7 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user1",
+        username: "user10",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
@@ -100,34 +100,18 @@ class App extends React.Component {
         fetch(`${url}/follows`, options)
             .then(r => r.json())
             .then( followObj => {this.setState({
+                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
+                loggedInDog: {...loggedInDog, followees: [...loggedInDog.followees, selected_dog ]},
+                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.attributes.followers.concat(followObj.follower) : dog ),
                 selected_dog: {
                     ...selected_dog,
                     followers: [...selected_dog.followers, loggedInDog], selected_dog: ''
                 },
-                loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
-                dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
                 })
             })
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        let {stateAtt0, stateAtt1, stateAtt2} = this.state
-        let newObj = {stateAtt0, stateAtt1, stateAtt2}
-        
-        fetch('http://localhost:3000/endpoint', {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(newObj),
-        })
-        .then(r => r.json())
-        .then( item => {
-            this.setState({array: [...this.state.array, item], id: null, stateAtt0: '', stateAtt1: '', stateAtt2: '' })
-        })
-    }
+
 
     // handleUnfollow = (selectedDogID) => {
     //     // id is selected_dog.id passed in from click 
@@ -200,7 +184,7 @@ class App extends React.Component {
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
                             {...routerProps} 
-                            // dogs={dogs}  
+                            dogs={dogs}  
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}
