@@ -31,6 +31,7 @@ const DogIndex = (props) => {
                                     handleUnfollow={handleUnfollow} /> )
     }
         return(
+
             <div className="index-page" >
                 <h1>Dog Index</h1>
                 <div className="simple-flex-row index-wrap">

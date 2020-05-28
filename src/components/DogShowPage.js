@@ -22,6 +22,9 @@ class DogShowPage extends React.Component {
     //     console.log('hit')
     // }
 
+    componentWillUpdate(){
+        this.renderDogShowPage()
+    }
 
 
 

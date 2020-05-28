@@ -76,7 +76,7 @@ class App extends React.Component {
         this.setState({ loggedInDog: null,  loggedInDogFollowees: null,  loggedInDogfollowers: null})
     }
 
-    
+
 
     handleFollow = (event, dog) => {
         event.preventDefault()
@@ -102,12 +102,31 @@ class App extends React.Component {
             .then( followObj => {this.setState({
                 selected_dog: {
                     ...selected_dog,
-                    followers: [...selected_dog.followers, loggedInDog].filter(this.onlyUnique)
+                    followers: [...selected_dog.followers, loggedInDog], selected_dog: ''
                 },
                 loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee], 
                 dogs: dogs.map(dog => dog.id === selected_dog.id ? dog.followers.concat(loggedInDog) : dog ),
                 })
             })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        let {stateAtt0, stateAtt1, stateAtt2} = this.state
+        let newObj = {stateAtt0, stateAtt1, stateAtt2}
+        
+        fetch('http://localhost:3000/endpoint', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify(newObj),
+        })
+        .then(r => r.json())
+        .then( item => {
+            this.setState({array: [...this.state.array, item], id: null, stateAtt0: '', stateAtt1: '', stateAtt2: '' })
+        })
     }
 
     // handleUnfollow = (selectedDogID) => {
@@ -187,7 +206,8 @@ class App extends React.Component {
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
                             handleFollow={this.handleFollow} 
-                            handleUnfollow={this.handleUnfollow} /> } />
+                            handleUnfollow={this.handleUnfollow}
+                            onlyUnique={this.onlyUnique} /> } />
 
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 
