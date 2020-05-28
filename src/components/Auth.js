@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Auth extends React.Component {
 
@@ -28,7 +28,7 @@ class Auth extends React.Component {
                         <label>Password</label>
                         <input onChange={this.handleChange} type="password" name="password" value={password}  placeholder="Enter password" />
                     </div> */}
-                    <button onClick={(event) => setLoggedInDog(event, username)}><Link to="/dogs">Sign In</Link></button>
+                    <button onClick={(event) => setLoggedInDog(event, username)}> Sign In </button>
                 </form>
                 )
         } else {

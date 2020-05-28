@@ -112,8 +112,10 @@ class DogShowPage extends React.Component {
         console.log("ShowPage props",this.props)
 
         if (this.props) {console.log("is dog a prop?",this.props.dog)}
+        
 
-        return  ( this.renderDogShowPage() )
+            return  ( this.renderDogShowPage() )
+        
 
         
     }
