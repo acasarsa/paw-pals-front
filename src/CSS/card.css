@@ -11,10 +11,10 @@
 *::after { 
     box-sizing: border-box;
 }
-
+/* 
 html {
     background-color: #f0f0f0;
-}
+} */
 
 body {
     color: @gray;
@@ -54,7 +54,7 @@ ul.no-bullets {
     display: block;
     width: 100%;
 }
- 
+
 .cards {
     display: flex;
     flex-wrap: wrap;

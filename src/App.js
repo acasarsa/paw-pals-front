@@ -18,8 +18,9 @@ const url = 'http://localhost:3000/api/v1'
 
 
 const MainDiv = styled.div `
-    /* background-image: url(%PUBLIC_URL%/pink-paws.png);
-    background-repeat: repeat-x;  */
+    /* background-color: black; */
+    /* background-image: url(https://www.janeclayton.co.uk/Product_Images/fullzoom/JaneChurchill-GetHappyWallpapers-HotDogs-J145W-03-01.jpg); */
+    background-repeat: repeat-x; 
     text-align: center;
 
 `
@@ -34,15 +35,25 @@ class App extends React.Component {
         follow_id: null, //maybe keep
         dogs: [],
         selected_dog: '',
-        search: ''
+        search: '',
+        followPairs: [],
+
     }
 
     componentDidMount() {
         fetch(`${url}/dogs`)
         .then(r => r.json())
         .then( dogs => this.setState({ dogs: dogs.data}))
+
+        this.fetchFollowPairs()
     }
     
+    fetchFollowPairs = () => {
+        fetch(`${url}/follows`)
+        .then( r => r.json())
+        .then ( followPairs => this.setState({followPairs }, console.log("followPairs", this.state.followPairs)) )
+    }
+
 
 
     onlyUnique = (value, index, self) => { 
@@ -81,6 +92,8 @@ class App extends React.Component {
             loggedInDogFollowees: null,  
             loggedInDogfollowers: null})
     }
+
+
 
 
 
@@ -183,17 +196,18 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog, handleSearch, search} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog, search, followPairs} = this.state
+        console.log("fp",followPairs)
 
 
         console.log("selected dog", selected_dog)
-        console.log(search)
+  
 
         let filteredDogs = [...dogs]
 
         if (search.length > 0) {
             filteredDogs = filteredDogs.filter( dog => { 
-            if ( dog.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()) || dog.attributes.status.toLowerCase().includes(this.state.search.toLowerCase()) ) {
+            if ( dog.attributes.name.toLowerCase().includes(search.toLowerCase()) || dog.attributes.status.toLowerCase().includes(search.toLowerCase()) || dog.attributes.description.toLowerCase().includes(search.toLowerCase()) ) {
                 return true
             } else {
                 return false
@@ -221,6 +235,7 @@ class App extends React.Component {
                         <DogShowPage 
                             {...routerProps} 
                             dogs={dogs}  
+                            followPairs={followPairs}
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}

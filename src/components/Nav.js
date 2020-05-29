@@ -1,14 +1,14 @@
 import React from 'react'; 
+import '../CSS/navbar.css'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// import Navbar from 'react-bootstrap/Navbar';
-// import {Navbar} from 'react-bootstrap';
-import '../CSS/navbar.css'
+
 
 const TopNav = styled.div `
     overflow: hidden;
     background-color: black;
+    margin-top: 0px;
 `
 
 // const HoverLink = styled.StyledLink
@@ -64,6 +64,9 @@ const PawPals = styled.div `
     font-size: 25px;
 `
 
+
+
+
 const Nav = props => {
 
     const {loggedInDog, search, handleSearch} = props
@@ -72,12 +75,14 @@ const Nav = props => {
 
         <TopNav >
                         
-            <PawPals to="/">PawPals</PawPals>
+            <PawPals to="/">PawPals  </PawPals>
 
-            <StyledLink to="/dogs">Friendos</StyledLink>
+            <StyledLink to="/dogs">Find Friendos</StyledLink>
             {/* {props.loggedInDog ? <StyledLink to={`/dogs/${props.loggedInDog.id}`}>My Profile</StyledLink> : null} */}
             <StyledLink to="/events">Let's Play Together</StyledLink>
             <StyledLink to="/events/new">Throw A Party!</StyledLink>
+
+            
 
             <StyledInput 
                 type="text" 

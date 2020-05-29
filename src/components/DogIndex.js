@@ -2,13 +2,35 @@ import React from 'react'
 import DogCard from './DogCardLayout';
 import styled from 'styled-components'
 import Filter from './Filter'
-import {Container, Row, Col, Grid} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap'
 
-// const IndexContainer = styled.div `
-//     background-image: url(%PUBLIC_URL%/pink-paws.png);
-//     background-repeat: repeat-x; 
+import { keyframes } from "styled-components";
 
-// `
+
+
+const rotate = keyframes`
+from {
+    transform: rotate(0deg);
+} to {
+    transform: rotate(360deg);
+}
+`;
+
+const RotateReverse = styled.div`
+    display: inline-block;
+    animation: ${rotate} 2s linear infinite;
+    padding: 1rem 1rem;
+    font-size: 3.2rem;
+`;
+
+// Here we create a component that will rotate everything we pass in over two seconds
+const Rotate = styled.div`
+    display: inline-block;
+    animation: ${rotate} 2s linear infinite;
+    padding: 1rem 1rem;
+    font-size: 3.2rem;
+`;
+
 const RainbowText = styled.h1 `  
     background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
     -webkit-background-clip: text;
@@ -85,9 +107,20 @@ class DogIndex extends React.Component {
                 <Filter handleFilterChange={this.handleFilterChange} />
                 <Container fluid className="show-grid">
                     <Row>
+                        <Col> 
+                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        </Col>
                         <Col className="d-flex justify-content-lg-center" 
                         >
-                        <RainbowText>All Your Paw Pals Are Waiting For You</RainbowText>
+                        <RainbowText>All Your Paw Pals Are Waiting For You</RainbowText> 
+                        </Col>
+                        <Col >
+                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="d-flex justify-content-lg-center">
+                        <Rotate>  🐩🦴🐕 </Rotate>
                         </Col>
                     </Row>
                     <div className="index-page" >
