@@ -25,15 +25,15 @@ const EventsIndex = () => {
 
     const renderEventCards = () => {
         if (events) {
-            return events.map(event => <EventCard key={event.id} {...event.attributes}  fetchEvents={fetchEvents} />)
+            return events.map(event => <EventCard  key={event.id} {...event.attributes}  fetchEvents={fetchEvents} />)
         }
     }
     
         return (
     
-            <div className="index-page">
+            <div className="index-page" >
                 <h3>Events Index</h3>
-                <div className="simple-flex-row index-wrap">
+                <div className="simple-flex-row index-wrap" style={{display: 'flex', justifyContent: 'center'}} >
                 {/* <Eventsform/> */}
                 {renderEventCards()}
 

@@ -33,7 +33,8 @@ class Auth extends React.Component {
                     <button onClick={(event) => setLoggedInDog(event, username)}> Sign In </button>
                 </form>
                 )
-        } else {
+        } 
+        else {
             return (
                 <form >
                     <h3>Sign Out</h3>

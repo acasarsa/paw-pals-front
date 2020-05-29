@@ -1,13 +1,23 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
+import {
+ Flex,
+ Box,
+  } from 'rebass'
 
 
 const Nav = props => {
 
     
     return (
+//         <Flex
+//   px={2}
+//   color='white'
+//   bg='black'
+//   alignItems='center'>
+//       <Box mx='auto' />
         <div className="simple-flex-row">
-            <Link className="left-corner" to="/">Home</Link>
+            {/* <Link className="left-corner" to="/">Home</Link> */}
             <Link to="/dogs">Dogs</Link>
             {props.loggedInDog ? <Link to={`/dogs/${props.loggedInDog.id}`}>My Profile</Link> : null}
             
@@ -21,7 +31,9 @@ const Nav = props => {
 
             </div>
         </div>
+        //  </Flex>
     )
 }
 
 export default Nav;
+

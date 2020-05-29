@@ -11,6 +11,20 @@ class EditEventForm extends React.Component{
         description: this.props.event.data.attributes.description
      }
 
+     style =  () =>  {
+        return {
+   background: 'palevioletred',
+   fontSize: '1em',
+   margin: '1em',
+   padding: '0.25em 1em',
+   border: "2px solid palevioletred",
+   borderRadius: "3px",
+   width: "fit-content",
+   cursor:  "pointer",
+   color: "white"
+   }
+}
+
     handleChange = (event) => {
         event.preventDefault()
         let {title, date, image, description} = this.state
@@ -100,6 +114,7 @@ class EditEventForm extends React.Component{
             <button 
             // onClick={() => history.push(`/events/`)}
             type="submit"
+            style={this.style()}
             onClick={this.handleChange}
             >Edit Event</button>
           

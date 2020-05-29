@@ -1,6 +1,8 @@
 import React from 'react'
 import DogCard from './DogCard';
 import Filter from './Filter'
+import { ThemeProvider } from 'emotion-theming'
+import theme from '@rebass/preset'
 
 
 
@@ -30,7 +32,9 @@ class DogIndex extends React.Component {
                                     loggedInDogFollowees={loggedInDogFollowees}
                                     loggedInDogfollowers={loggedInDogfollowers}
                                     handleFollow={handleFollow} 
-                                    handleUnfollow={handleUnfollow} /> )
+                                    handleUnfollow={handleUnfollow} 
+                                    
+                                    /> )
     }
 
         render () {

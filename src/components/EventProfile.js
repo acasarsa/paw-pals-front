@@ -16,6 +16,20 @@ import DogCard from './DogCard'
         description: '',
     }
 
+     style =  () =>  {
+         return {
+    background: 'palevioletred',
+    fontSize: '1em',
+    margin: '1em',
+    padding: '0.25em 1em',
+    border: "2px solid palevioletred",
+    borderRadius: "3px",
+    width: "fit-content",
+    cursor:  "pointer",
+    color: "white"
+    }
+}
+
 
     fetchEvent = () => {
         fetch(`http://localhost:3000/api/v1/events/${this.props.match.params.id}`)
@@ -62,8 +76,12 @@ import DogCard from './DogCard'
                 <div className='simple=flex-row index-wrap'>
                         {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs}  /> )}
                 </div> 
-                 { this.state.mode?  null : <button onClick={this.saveChanges}> Edit Event </button> }
-                <button onClick={this.handleDelete} > Delete Event </button>
+                 { this.state.mode?  null : <button  style={this.style()} onClick={this.saveChanges}> Edit Event </button> }
+                <button 
+                style={this.style()}
+                 onClick={this.handleDelete} 
+                 > Delete Event 
+                 </button>
                 { this.state.mode ?  <EditEventForm  {...this.state} /> : null}
             </div>
             )
