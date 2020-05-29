@@ -67,14 +67,15 @@ import DogCard from './DogCard'
         console.log(attendee)
         return (
              <div>
+                 <br/>
                 <h3>Event: {title}</h3>
                 <h3>Date: {date}</h3>
                 <img src={image} alt="" style={{width:800}} ></img>
                 <h3>Details: {description}</h3>
                 <h3>Attending: </h3>
                 <hr/>
-                <div className='simple=flex-row index-wrap'>
-                        {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs}  /> )}
+                <div className='simple=flex-row index-wrap' style={{backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/51DgB8lONoL._AC_SX522_.jpg'}}  >
+                        {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs} /> )}
                 </div> 
                  { this.state.mode?  null : <button  style={this.style()} onClick={this.saveChanges}> Edit Event </button> }
                 <button 

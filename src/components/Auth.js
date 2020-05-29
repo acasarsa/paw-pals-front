@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+// import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -11,7 +12,19 @@ class Auth extends React.Component {
     //     })
     // }
 
-    
+    style =  () =>  {
+        return {
+   background: 'palevioletred',
+   fontSize: '1em',
+   margin: '1em',
+   padding: '0.25em 1em',
+   border: "2px solid palevioletred",
+   borderRadius: "3px",
+   width: "fit-content",
+   cursor:  "pointer",
+   color: "white"
+   }
+}
 
     render(){
 
@@ -20,7 +33,7 @@ class Auth extends React.Component {
 
         if (!loggedInDog ) {
             return (
-                <form >
+                <form style={{backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/51DgB8lONoL._AC_SX522_.jpg'}}>
                     <h3>Sign In</h3>
                     <div>
                         <label>Username:</label>
@@ -30,23 +43,24 @@ class Auth extends React.Component {
                         <label>Password</label>
                         <input onChange={this.handleChange} type="password" name="password" value={password}  placeholder="Enter password" />
                     </div> */}
-                    <button onClick={(event) => setLoggedInDog(event, username)}> Sign In </button>
+                    <button  style={this.style()}   onClick={(event) => setLoggedInDog(event, username)}> Sign In </button>
                 </form>
                 )
         } 
+    
         else {
-            return (
-                <form >
-                    <h3>Sign Out</h3>
-                    <div>
-                        <p>Come back soon!</p>
-                    </div>
-                    <button onClick={(event) => handleSignOut(event)}>Sign Out</button>
-                </form>
-            )
-        }
+            return <Redirect to={`/dogs/`}/>;
+          }
     }
 }
 export default Auth;
-
+// return (
+//     <form >
+//         <h3>Sign Out</h3>
+//         <div>
+//             <p>Come back soon!</p>
+//         </div>
+//         <button onClick={(event) => handleSignOut(event)}>Sign Out</button>
+//     </form>
+// )
 

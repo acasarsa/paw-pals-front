@@ -74,10 +74,10 @@ class DogIndex extends React.Component {
 
             return (
                 <>
-                <Filter handleFilterChange={this.handleFilterChange} />
-                <div className="index-page" >
+                <Filter handleFilterChange={this.handleFilterChange}  />
+                <div className="index-page"   >
                     <h1>Dog Index</h1>
-                    <div className="simple-flex-row index-wrap">
+                    <div className="simple-flex-row index-wrap"  >
                     {this.renderDogCards(displayDogs)}
                     </div>
                 </div>

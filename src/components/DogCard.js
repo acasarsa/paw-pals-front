@@ -59,7 +59,8 @@ const DogCard = (props) => {
 
         <>
         {/* <DogShowPage  /> */}
-        <Box width={[ 256, 320 ]}>
+        {/* 256, 320 */}
+        <Box width={[ 300, 420 ]}>
         <Card
       sx={{
         // backgroundColor: 'gray',
@@ -67,7 +68,7 @@ const DogCard = (props) => {
         p: 1,
         borderRadius: 2,
         boxShadow: '0 0 16px rgba(0, 0, 0, .25)',
-      }}>
+      }}>   
             {/* <h3>{name}</h3> */}
             {/* <h5>"{status}"</h5> */}
             <Image src={image} alt="dog gif"  />
