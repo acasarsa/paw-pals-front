@@ -33,7 +33,7 @@ class Auth extends React.Component {
 
         if (!loggedInDog ) {
             return (
-                <form style={{backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/51DgB8lONoL._AC_SX522_.jpg'}}>
+                <form >
                     <h3>Sign In</h3>
                     <div>
                         <label>Username:</label>

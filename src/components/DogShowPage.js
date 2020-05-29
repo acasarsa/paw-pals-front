@@ -84,7 +84,10 @@ class DogShowPage extends React.Component {
                             <div>
                                 <strong>  Follow Count: {selected_dog.followers.length}</strong>
                             </div>
+                            <div>
+
                             <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                            </div>
                             <hr></hr>
                             
                             <h1>{name}'s Followers</h1>
@@ -100,6 +103,10 @@ class DogShowPage extends React.Component {
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}
+                            </div>
+                            <div>
+
+                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
                             </div>
 
                             {followers.find((dog) => dog.id === loggedInDog.id) ?

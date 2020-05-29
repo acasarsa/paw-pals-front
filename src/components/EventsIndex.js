@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import EventCard from './EventCard'
+import '../CSS/card.css'
 // import EventProfile from './EventProfile'
 // import Eventsform from './EventsForm'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import DogCard from './DogCardLayout';
 import styled from 'styled-components'
-import Filter from './Filter'
+// import Filter from './Filter'
 import {Container, Row, Col} from 'react-bootstrap'
 
 import { keyframes } from "styled-components";
@@ -104,7 +104,7 @@ class DogIndex extends React.Component {
 
             return (
                 <>
-                <Filter handleFilterChange={this.handleFilterChange} />
+                {/* <Filter handleFilterChange={this.handleFilterChange} /> */}
                 <Container fluid className="show-grid">
                     <Row>
                         <Col> 

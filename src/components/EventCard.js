@@ -24,8 +24,9 @@ import {useHistory} from 'react-router-dom'
         width: fit-content;
         cursor:  pointer;
         color: white;
-        class="center"        
+        class="center";        
     `
+
 
     const Center = styled.div`
         .centered {

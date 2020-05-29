@@ -11,6 +11,17 @@ body {
   
 }
 
+button {
+  background: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+  width: fit-content;
+  cursor:  pointer;
+  color: white;   
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
