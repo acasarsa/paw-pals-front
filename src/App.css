@@ -1,5 +1,14 @@
+body {
+  margin: 0;
+  height: 120%;
+  
+      background: black;
+  }
+
+
 .App {
   text-align: center;
+  
 }
 
 /* .App-logo {
@@ -36,6 +45,14 @@
   border: 1px solid brown;
   padding: 5px;
 }
+
+.index-page {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+}
+
 
 .index-wrap {
   flex-wrap: wrap;

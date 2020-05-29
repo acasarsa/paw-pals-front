@@ -6,6 +6,7 @@ import {Container, Row, Col, Grid} from 'react-bootstrap'
 
 
 
+
 class DogIndex extends React.Component {
     
     state = {
@@ -72,12 +73,22 @@ class DogIndex extends React.Component {
             return (
                 <>
                 <Filter handleFilterChange={this.handleFilterChange} />
-                <div className="index-page" >
-                    <h1>Dog Index</h1>
-                    <div className="simple-flex-row index-wrap">
-                    {this.renderDogCards(displayDogs)}
+                <Container fluid className="show-grid">
+                    <Row>
+                        <Col className="d-flex justify-content-lg-center" 
+                        >
+                        <h1>All your Dog Friends Are Waiting</h1>
+                        </Col>
+                    </Row>
+                    <div className="index-page" >
+                    
+                        <div className="simple-flex-row index-wrap">
+                        {this.renderDogCards(displayDogs)}
+                        </div>
                     </div>
-                </div>
+                                            
+            
+                </Container>
     
                 </>
             )
@@ -87,3 +98,4 @@ class DogIndex extends React.Component {
 
 
 export default DogIndex;
+

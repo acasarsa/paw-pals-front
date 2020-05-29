@@ -26,7 +26,7 @@ import {useHistory} from 'react-router-dom'
 
 
 const EventCard = (props) => {
-   
+
     console.log("props",props)
 
     // const handleDelete = () => {
