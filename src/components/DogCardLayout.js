@@ -44,7 +44,7 @@ const DogCard = (props) => {
                     <img src={image} alt="dog gif"></img>
                 </div>
                 <div className="card__content">
-                    <h1 className="card__title">{name}</h1>
+                   <h1 className="card__title"><strong>{name}</strong></h1>
                     <strong><p className="card__text"> Fav Toy: {favorite_toy}  </p></strong>
                     <p className="card__text">Status: {status}!! </p>
                     <p className="card__text">Description: {description}!! </p>

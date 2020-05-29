@@ -8,7 +8,7 @@ const url = 'http://localhost:3000/api/v1'
 const EventsIndex = () => {
 
     const [events, setEvents] = useState([])
-  
+
 
 
     const fetchEvents = () => {
@@ -25,15 +25,16 @@ const EventsIndex = () => {
 
     const renderEventCards = () => {
         if (events) {
-            return events.map(event => <EventCard key={event.id} {...event.attributes}  fetchEvents={fetchEvents} />)
+            return events.map(event => <EventCard  key={event.id} {...event.attributes}  fetchEvents={fetchEvents} />)
         }
     }
     
         return (
     
-            <div className="index-page">
-                <h3>Events Index</h3>
-                <div className="simple-flex-row index-wrap">
+            <div className="index-page" >
+                <h3>Come Paw With Us</h3>
+                <br/>
+                <div className="simple-flex-row index-wrap" style={{display: 'flex', justifyContent: 'center'}} >
                 {/* <Eventsform/> */}
                 {renderEventCards()}
 

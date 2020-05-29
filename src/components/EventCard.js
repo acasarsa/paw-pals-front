@@ -10,6 +10,8 @@ import {useHistory} from 'react-router-dom'
         margin: 10px;
         border: 1px solid brown;
         padding: 5px;
+        class="center"
+        backgroundColor: blue
     `;
 
     const Button = styled.div `
@@ -21,7 +23,18 @@ import {useHistory} from 'react-router-dom'
         border-radius: 3px;
         width: fit-content;
         cursor:  pointer;
-        color: white;        
+        color: white;
+        class="center"        
+    `
+
+    const Center = styled.div`
+        .centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+      }
     `
 
 
@@ -53,16 +66,18 @@ const EventCard = (props) => {
     const {title, image, id, date} = props
     
     return (
+        <Center>
         <EventCardWrapper>
             <h3>{title}</h3>
             <h5>Date: {date}</h5>
-            <img src={image} alt="dog image" style={{width: 700}}></img>
-            <Button onClick={disableAttend}>Attend!</Button>
-            <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
+            <img src={image} alt="" style={{width: 700}}></img>
+            <Button style={{width: 700 }} onClick={disableAttend}>Attend!</Button>
+            <Button  style={{width: 700 }} onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
             {/* <Button onClick={handleDelete}  >Delete Event</Button>
             <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
             {/* <EditEventForm/> */}
         </EventCardWrapper>
+        </Center>
     )
 }
 
