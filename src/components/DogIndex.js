@@ -61,8 +61,6 @@ class DogIndex extends React.Component {
                                     getSelectedDog={getSelectedDog}
                                     selected_dog={selected_dog}
                                     loggedInDog={loggedInDog}
-                                    loggedInDogFollowees={loggedInDogFollowees}
-                                    loggedInDogfollowers={loggedInDogfollowers}
                                     handleFollow={handleFollow} 
                                     handleUnfollow={handleUnfollow} /> )
     }

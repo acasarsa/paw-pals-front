@@ -44,11 +44,15 @@ class DogShowPage extends React.Component {
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
         console.log("followers Show", followers);
 
+        
+        let follower_id = loggedInDog.id
+        let followee_id = selected_dog.id
         // could make a list of the follower count
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
                 if (selected_dog) {
+
 
                     
                     return (
@@ -84,9 +88,8 @@ class DogShowPage extends React.Component {
                             </div>
 
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
-                            <form>
-                                <button onClick={() => handleUnfollow(id)}> Unfollow </button>
-                            </form>
+                            <h4> {selected_dog.name} is your Paw Pal! </h4>
+
                             
                             :
                             <form onSubmit={(event) => handleFollow(event, selected_dog)}>
@@ -118,6 +121,7 @@ class DogShowPage extends React.Component {
                 }
     
     }
+    
 
     // why does this work? but if i remove any of it it doesn't work anymore?? it seems like it's repeating itself ??
 
@@ -140,3 +144,7 @@ class DogShowPage extends React.Component {
     
 
 export default DogShowPage;
+
+{/* <form>
+<button onClick={() => handleUnfollow(followee_id, follower_id)}> Unfollow </button>
+</form> */}
