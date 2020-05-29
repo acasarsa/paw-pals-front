@@ -29,7 +29,7 @@ class App extends React.Component {
 
     state = {
         loggedInDog: null,
-        username: "user7",
+        username: '',
         follow_id: null, //maybe keep
         dogs: [],
         selected_dog: '',

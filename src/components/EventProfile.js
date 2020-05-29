@@ -2,6 +2,7 @@ import React from 'react'
 import EditEventForm from './EditEventForm'
 import { Redirect } from 'react-router-dom'
 import DogCard from './DogCard'
+import { Container, Row, Col } from 'react-bootstrap'
 
 
 class EventProfile extends React.Component {
@@ -67,7 +68,9 @@ class EventProfile extends React.Component {
         let attendee =  this.state.event.data.attributes.dogs
         console.log(attendee)
         return (
-            <div>
+            <>
+<Container>
+    
                 <br/>
                 <h3>Event: {title}</h3>
                 <h3>Date: {date}</h3>
@@ -75,7 +78,14 @@ class EventProfile extends React.Component {
                 <h3>Details: {description}</h3>
                 <h3>Attending: </h3>
                 <hr/>
-                <div className='simple=flex-row index-wrap' style={{backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/51DgB8lONoL._AC_SX522_.jpg'}}  >
+            <Container>
+            <Row>
+                <Col>
+
+                </Col>
+            <Col justify-content-center>
+
+                <div    >
                         {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs} /> )}
                 </div> 
                     { this.state.mode?  null : <button  style={this.style()} onClick={this.saveChanges}> Edit Event </button> }
@@ -85,7 +95,16 @@ class EventProfile extends React.Component {
                     > Delete Event 
                 </button>
                 { this.state.mode ?  <EditEventForm  {...this.state} /> : null}
-            </div>
+            </Col>
+
+                <Col>
+
+                </Col>
+            </Row>
+            </Container>
+            
+</Container>
+</>
             )
         
     }
