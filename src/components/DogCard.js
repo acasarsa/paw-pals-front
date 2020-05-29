@@ -36,6 +36,7 @@ const DogCard = (props) => {
 
     // }
 
+
     return(
 
         <>
@@ -43,10 +44,11 @@ const DogCard = (props) => {
         <DogCardWrapper>
             <h3>{name}</h3>
             <h5>"{status}"</h5>
-            <img src={image} alt="dog gif"></img>
-            <button onClick={() => { getSelectedDog(selected_dog) 
+            <img src={image} alt="dog gif"   ></img>
+            <button onClick={() => {getSelectedDog(selected_dog) 
                                     props.history.push(`/dogs/${id}`)}}
                                     >
+                                        
                 Visit {name}! 
             </button>
         </DogCardWrapper>
