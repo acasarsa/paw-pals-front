@@ -1,6 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 // import Followers from './Followers'
-import DogCard from './DogCard'
+import DogCard from './DogCardLayout'
+// import DogCard from './DogCard'
+import {Container, Row, Col} from 'react-bootstrap'
+
 
 
 
@@ -65,30 +68,31 @@ class DogShowPage extends React.Component {
                     return (
                         
                         <>
-                        <button style={this.style()}  onClick={() => this.props.history.goBack()} >Go Back</button>
+                        {/* <button style={this.style()}  onClick={() => this.props.history.goBack()} >Go Back</button> */}
+                        
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
                             <h1>My Profile</h1>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                               <strong>  Follow Count: {selected_dog.followers.length}</strong>
                             </div>
-                            
+                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
                             <hr></hr>
                             
                             <h1>{name}'s Followers</h1>
                             <div className="simple-flex-row index-wrap">
-                                {loggedInDog ?  selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
+                                {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
                             </div>
                         </div>
 
                         :
                         <div>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}

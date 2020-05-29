@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
-import {Navbars, Button} from 'react-bootstrap';
+import styled from 'styled-components'
+
+
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
@@ -11,40 +13,48 @@ import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 import EventProfile from './components/EventProfile'
 import EditEventForm from './components/EditEventForm'
-// import DogCard from './components/DogCard'
-// require('log-timestamp')(function() {
-//     return new Date()
 
-// });
-
-// import {DogShowPage, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 const url = 'http://localhost:3000/api/v1'
+
+
+const MainDiv = styled.div `
+    /* background-color: black; */
+    /* background-image: url(https://www.janeclayton.co.uk/Product_Images/fullzoom/JaneChurchill-GetHappyWallpapers-HotDogs-J145W-03-01.jpg); */
+    background-repeat: repeat-x; 
+    text-align: center;
+
+`
 
 class App extends React.Component {
 
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user10",
+        username: "user7",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
-        selected_dog: ''
+        selected_dog: '',
+        search: '',
+        followPairs: [],
+
     }
 
     componentDidMount() {
         fetch(`${url}/dogs`)
         .then(r => r.json())
         .then( dogs => this.setState({ dogs: dogs.data}))
+
+        this.fetchFollowPairs()
     }
     
+    fetchFollowPairs = () => {
+        fetch(`${url}/follows`)
+        .then( r => r.json())
+        .then ( followPairs => this.setState({followPairs }, console.log("followPairs", this.state.followPairs)) )
+    }
 
-    // setCurrentUser = (dogs, username) => {
-    //     console.log('username', username)
-    //     this.setState({
-    //         current_user: dogs.data.find(dog => (dog.attribute.username === username) ? dog : "Invalid Username")
-    //     }) 
-    // }
+
 
     onlyUnique = (value, index, self) => { 
         return self.indexOf(value) === index;
@@ -85,6 +95,8 @@ class App extends React.Component {
 
 
 
+
+
     handleFollow = (event, dog) => {
         event.preventDefault()
         // console.log("followed dog", dog)
@@ -119,13 +131,17 @@ class App extends React.Component {
                 dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
                     ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
                     : dog )
-               
+            
                 })
 
             })
     }
 
     
+    handleSearch = (event) => {
+        this.setState({search: event.target.value})
+    }
+
 
 
     // dogs: dogs.map(dog => 
@@ -180,9 +196,25 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog, search, followPairs} = this.state
+        console.log("fp",followPairs)
+
 
         console.log("selected dog", selected_dog)
+  
+
+        let filteredDogs = [...dogs]
+
+        if (search.length > 0) {
+            filteredDogs = filteredDogs.filter( dog => { 
+            if ( dog.attributes.name.toLowerCase().includes(search.toLowerCase()) || dog.attributes.status.toLowerCase().includes(search.toLowerCase()) || dog.attributes.description.toLowerCase().includes(search.toLowerCase()) ) {
+                return true
+            } else {
+                return false
+            }  
+            })
+        } 
+        console.log("filteredDogs", filteredDogs)
 
 
         // what about the setFollowId thing do i need that? 
@@ -194,13 +226,16 @@ class App extends React.Component {
         //// i tried setting state to dogs.data initially which has worked before but now is not. 
         
         return (
-            <div className= "App"> 
-            <Nav loggedInDog={loggedInDog}/> 
+            <MainDiv > 
+            <Nav handleSearch={this.handleSearch} loggedInDog={loggedInDog}/> 
+
+
                 <Switch> 
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
                             {...routerProps} 
                             dogs={dogs}  
+                            followPairs={followPairs}
                             loggedInDog={loggedInDog}
                             selected_dog={selected_dog}
                             loggedInDogFollowees={loggedInDogFollowees}
@@ -212,7 +247,7 @@ class App extends React.Component {
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 
                             {...routerProps} 
-                            dogs={dogs}  
+                            dogs={filteredDogs}  
                             loggedInDog={loggedInDog}
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
@@ -220,16 +255,17 @@ class App extends React.Component {
                             getSelectedDog={this.getSelectedDog}
                             /> } 
                     /> 
-                     <Route path='/events/new' component={EventsForm}/> 
+                    <Route path='/events/new' component={EventsForm}/> 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
                     <Route exact path='/events/edit/:id' render={(routerProps) => <EditEventForm routerProps={routerProps} /> }/> 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } /> 
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
+                    <Route path='/' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
                     <Route path='/signup' component={SignUp}/> 
 
                 </Switch> 
-            </div>
+            </MainDiv>
         );
     }
 }

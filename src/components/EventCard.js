@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
-import EditEventForm from './EditEventForm'
+
 
 
     const EventCardWrapper = styled.div`
@@ -39,7 +39,7 @@ import EditEventForm from './EditEventForm'
 
 
 const EventCard = (props) => {
-   
+
     console.log("props",props)
 
     // const handleDelete = () => {
