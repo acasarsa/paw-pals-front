@@ -1,23 +1,22 @@
 import React from 'react';
 import './App.css';
-
+import {Navbars, Button} from 'react-bootstrap';
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
 import DogIndex from './components/DogIndex'
-// import DogContainer from './containers/DogContainer'
 import Auth from './components/Auth'
 import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 import EventProfile from './components/EventProfile'
+import EditEventForm from './components/EditEventForm'
 // import DogCard from './components/DogCard'
 // require('log-timestamp')(function() {
 //     return new Date()
 
 // });
 
-console.log("////////// top of App /////////")
 // import {DogShowPage, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 const url = 'http://localhost:3000/api/v1'
 
@@ -37,7 +36,6 @@ class App extends React.Component {
         fetch(`${url}/dogs`)
         .then(r => r.json())
         .then( dogs => this.setState({ dogs: dogs.data}))
-            // console.log("dogs",dogs.data.attributes) )
     }
     
 
@@ -89,7 +87,7 @@ class App extends React.Component {
 
     handleFollow = (event, dog) => {
         event.preventDefault()
-        console.log("followed dog", dog)
+        // console.log("followed dog", dog)
         const {loggedInDog, loggedInDogFollowees, selected_dog, dogs} = this.state
         // const {dog} = this.state
         let newFollow = {
@@ -221,10 +219,11 @@ class App extends React.Component {
                             selected_dog={selected_dog}
                             getSelectedDog={this.getSelectedDog}
                             /> } 
-                    />
-
+                    /> 
+                     <Route path='/events/new' component={EventsForm}/> 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
-                    <Route path='/events/new' component={EventsForm}/> 
+                    <Route exact path='/events/edit/:id' render={(routerProps) => <EditEventForm routerProps={routerProps} /> }/> 
+                    <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } /> 
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
                     <Route path='/signup' component={SignUp}/> 

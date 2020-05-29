@@ -3,7 +3,7 @@ import DogCard from './DogCard'
 
 const Followers = (props) => {
 
-    console.log("logged in",props)
+    // console.log("logged in",props)
     const {loggedInDog} = props
 
 

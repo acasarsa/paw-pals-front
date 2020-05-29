@@ -12,6 +12,7 @@ const Nav = props => {
             {props.loggedInDog ? <Link to={`/dogs/${props.loggedInDog.id}`}>My Profile</Link> : null}
             
             <Link to="/events">Events</Link>
+            <Link to="/events/new">Create Event</Link>
             {/* <Link to="/dogs">Followers</Link> */}
             <div className="simple-flex-row right-corner">
 

@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom'
+import EditEventForm from './EditEventForm'
+
 
     const EventCardWrapper = styled.div`
         /* min-width: 360px;  */
@@ -19,25 +21,47 @@ import {useHistory} from 'react-router-dom'
         border-radius: 3px;
         width: fit-content;
         cursor:  pointer;
-        color: white;
-        
+        color: white;        
     `
-const EventCard = (props) => {
 
-    
+
+const EventCard = (props) => {
+   
+    console.log("props",props)
+
+    // const handleDelete = () => {
+    //     let {id} = props
+    //     fetch(`http://localhost:3000/api/v1/events/${id}`, {
+    //         method: "DELETE"
+    //     })   
+    //     // .then(resp => resp.json())
+    //     .then(props.fetchEvents)
+    // }
+
+
+    const disableAttend = (event) => {
+        event.preventDefault()
+        alert("You're in!")
+    }
+
+
+
 
     let history = useHistory()
 
-    const {title, image, id, date} = props
 
+    const {title, image, id, date} = props
+    
     return (
         <EventCardWrapper>
             <h3>{title}</h3>
             <h5>Date: {date}</h5>
-            <img src={image} alt=""></img>
-            {/* <Button>View Details</Button> */}
-            <Button >Attend!</Button>
+            <img src={image} alt="" style={{width: 700}}></img>
+            <Button onClick={disableAttend}>Attend!</Button>
             <Button onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
+            {/* <Button onClick={handleDelete}  >Delete Event</Button>
+            <Button  onClick={() => history.push(`/events/edit/${id}`)}>Edit Event!</Button> */}
+            {/* <EditEventForm/> */}
         </EventCardWrapper>
     )
 }
