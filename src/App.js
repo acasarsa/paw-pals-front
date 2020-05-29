@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import {Navbars, Button} from 'react-bootstrap';
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'

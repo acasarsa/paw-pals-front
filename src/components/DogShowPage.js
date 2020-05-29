@@ -6,7 +6,21 @@ import DogCard from './DogCard'
 
 class DogShowPage extends React.Component {
 
-    
+    style =  () =>  {
+        return {
+   background: 'palevioletred',
+   fontSize: '1em',
+   margin: '1em',
+   padding: '0.25em 1em',
+   border: "2px solid palevioletred",
+   borderRadius: "3px",
+   width: "fit-content",
+   cursor:  "pointer",
+   color: "white"
+   }
+}
+
+
 
     componentDidMount() {
         this.renderDogShowPage()
@@ -51,7 +65,7 @@ class DogShowPage extends React.Component {
                     return (
                         
                         <>
-                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                        <button style={this.style()}  onClick={() => this.props.history.goBack()} >Go Back</button>
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
@@ -60,7 +74,7 @@ class DogShowPage extends React.Component {
                             <img src={image}></img>
                             
                             <div>
-                                Follow Count: {selected_dog.followers.length}
+                              <strong>  Follow Count: {selected_dog.followers.length}</strong>
                             </div>
                             
                             <hr></hr>
@@ -82,12 +96,12 @@ class DogShowPage extends React.Component {
 
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
                             <form>
-                                <button onClick={() => handleUnfollow(id)}> Unfollow </button>
+                                <button style={this.style()}   onClick={() => handleUnfollow(id)}> Unfollow </button>
                             </form>
                             
                             :
                             <form onSubmit={(event) => handleFollow(event, selected_dog)}>
-                                <button > Follow </button>
+                                <button style={this.style()}  > Follow </button>
                             </form>
                 
                 
@@ -109,7 +123,7 @@ class DogShowPage extends React.Component {
                     return (
                         <>
                             <h3>Go back and select a dog!</h3>
-                            <button onClick={() => this.props.history.push('/dogs')}>Dog Index</button>
+                            <button style={this.style()}  onClick={() => this.props.history.push('/dogs')}>Dog Index</button>
                         </>
                         ) 
                 }
