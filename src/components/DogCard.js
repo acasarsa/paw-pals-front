@@ -78,7 +78,7 @@ const DogCard = (props) => {
           "{status}"
         </Text>
           <center><ButtonStyle onClick={() => {getSelectedDog(selected_dog) 
-                                    props.history.push(`/dogs/${id}`)}}
+                                    props.history.goBack(`/dogs/${id}`)}}
                                     >
                                         
                 Visit {name}! 

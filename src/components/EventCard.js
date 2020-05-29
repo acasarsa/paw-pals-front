@@ -67,11 +67,14 @@ const EventCard = (props) => {
     const {title, image, id, date} = props
     
     return (
+        <center>
+
+       
         <Center>
         <EventCardWrapper>
             <h3>{title}</h3>
             <h5>Date: {date}</h5>
-            <img src={image} alt="" style={{width: 700}}></img>
+            <img src={image} alt="" style={{width: 800}}></img>
             <Button style={{width: 700 }} onClick={disableAttend}>Attend!</Button>
             <Button  style={{width: 700 }} onClick={() => history.push(`/events/${id}`)}>Get More Details!</Button>
             {/* <Button onClick={handleDelete}  >Delete Event</Button>
@@ -79,6 +82,7 @@ const EventCard = (props) => {
             {/* <EditEventForm/> */}
         </EventCardWrapper>
         </Center>
+        </center>
     )
 }
 
