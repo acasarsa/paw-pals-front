@@ -1,6 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 // import Followers from './Followers'
-import DogCard from './DogCard'
+import DogCard from './DogCardLayout'
+// import DogCard from './DogCard'
+import {Container, Row, Col} from 'react-bootstrap'
+
 
 
 
@@ -41,49 +44,52 @@ class DogShowPage extends React.Component {
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
         console.log("followers Show", followers);
 
+        
+        let follower_id = loggedInDog.id
+        let followee_id = selected_dog.id
         // could make a list of the follower count
 
         // if (!followers.includes(this.props.loggedInDog.id)) {
             // make conditoinal that puts the beloow conditional inside it and hides button if loggedinDog id === this.state.dog.id
                 if (selected_dog) {
 
+
                     
                     return (
                         
                         <>
-                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                        
                         { (loggedInDog.id ===  selected_dog.id) ? 
                         
                             <div>
                             <h1>My Profile</h1>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}
                             </div>
-                            
+                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
                             <hr></hr>
                             
                             <h1>{name}'s Followers</h1>
                             <div className="simple-flex-row index-wrap">
-                                {loggedInDog ?  selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
+                                {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
                             </div>
                         </div>
 
                         :
                         <div>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}
                             </div>
 
                             {followers.find((dog) => dog.id === loggedInDog.id) ?
-                            <form>
-                                <button onClick={() => handleUnfollow(id)}> Unfollow </button>
-                            </form>
+                            <h4> {selected_dog.name} is your Paw Pal! </h4>
+
                             
                             :
                             <form onSubmit={(event) => handleFollow(event, selected_dog)}>
@@ -115,6 +121,7 @@ class DogShowPage extends React.Component {
                 }
     
     }
+    
 
     // why does this work? but if i remove any of it it doesn't work anymore?? it seems like it's repeating itself ??
 
@@ -137,3 +144,7 @@ class DogShowPage extends React.Component {
     
 
 export default DogShowPage;
+
+{/* <form>
+<button onClick={() => handleUnfollow(followee_id, follower_id)}> Unfollow </button>
+</form> */}

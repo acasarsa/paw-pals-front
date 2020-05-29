@@ -1,8 +1,42 @@
 import React from 'react'
-import DogCard from './DogCard';
+import DogCard from './DogCardLayout';
+import styled from 'styled-components'
 import Filter from './Filter'
+import {Container, Row, Col} from 'react-bootstrap'
+
+import { keyframes } from "styled-components";
 
 
+
+const rotate = keyframes`
+from {
+    transform: rotate(0deg);
+} to {
+    transform: rotate(360deg);
+}
+`;
+
+const RotateReverse = styled.div`
+    display: inline-block;
+    animation: ${rotate} 2s linear infinite;
+    padding: 1rem 1rem;
+    font-size: 3.2rem;
+`;
+
+// Here we create a component that will rotate everything we pass in over two seconds
+const Rotate = styled.div`
+    display: inline-block;
+    animation: ${rotate} 2s linear infinite;
+    padding: 1rem 1rem;
+    font-size: 3.2rem;
+`;
+
+const RainbowText = styled.h1 `  
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0px 0px 20px 0px;
+`
 
 
 class DogIndex extends React.Component {
@@ -27,8 +61,6 @@ class DogIndex extends React.Component {
                                     getSelectedDog={getSelectedDog}
                                     selected_dog={selected_dog}
                                     loggedInDog={loggedInDog}
-                                    loggedInDogFollowees={loggedInDogFollowees}
-                                    loggedInDogfollowers={loggedInDogfollowers}
                                     handleFollow={handleFollow} 
                                     handleUnfollow={handleUnfollow} /> )
     }
@@ -36,20 +68,20 @@ class DogIndex extends React.Component {
         render () {
 
 
-            const {followFilter} = this.state
-            const {loggedInDog} = this.props
+            // const {followFilter} = this.state
+            // const {loggedInDog} = this.props
             let displayDogs = [...this.props.dogs]
             
 
 
-            if( loggedInDog && displayDogs) {
+            // if( loggedInDog && displayDogs) {
 
-                if (followFilter !== "All") {
-                    console.log("displayDogs", loggedInDog)
-                }
-            } else {
-                displayDogs = displayDogs
-            }
+            //     if (followFilter !== "All") {
+            //         console.log("displayDogs", loggedInDog)
+            //     }
+            // } else {
+            //     displayDogs = displayDogs
+            // }
             
             // if(followFilter === "All") {
             //     // console.log("1",displayDogs.map(dog => dog.id))
@@ -71,12 +103,33 @@ class DogIndex extends React.Component {
             return (
                 <>
                 <Filter handleFilterChange={this.handleFilterChange} />
-                <div className="index-page" >
-                    <h1>Dog Index</h1>
-                    <div className="simple-flex-row index-wrap">
-                    {this.renderDogCards(displayDogs)}
+                <Container fluid className="show-grid">
+                    <Row>
+                        <Col> 
+                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        </Col>
+                        <Col className="d-flex justify-content-lg-center" 
+                        >
+                        <RainbowText>All Your Paw Pals Are Waiting For You</RainbowText> 
+                        </Col>
+                        <Col >
+                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="d-flex justify-content-lg-center">
+                        <Rotate>  🐩🦴🐕 </Rotate>
+                        </Col>
+                    </Row>
+                    <div className="index-page" >
+                    
+                        <div className="simple-flex-row index-wrap">
+                        {this.renderDogCards(displayDogs)}
+                        </div>
                     </div>
-                </div>
+                                            
+            
+                </Container>
     
                 </>
             )
@@ -86,3 +139,4 @@ class DogIndex extends React.Component {
 
 
 export default DogIndex;
+
