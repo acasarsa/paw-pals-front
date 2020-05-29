@@ -1,10 +1,20 @@
 import React from 'react'
-import DogCard from './DogCard';
+import DogCard from './DogCardLayout';
+import styled from 'styled-components'
 import Filter from './Filter'
 import {Container, Row, Col, Grid} from 'react-bootstrap'
 
+// const IndexContainer = styled.div `
+//     background-image: url(%PUBLIC_URL%/pink-paws.png);
+//     background-repeat: repeat-x; 
 
-
+// `
+const RainbowText = styled.h1 `  
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0px 0px 20px 0px;
+`
 
 
 class DogIndex extends React.Component {
@@ -77,7 +87,7 @@ class DogIndex extends React.Component {
                     <Row>
                         <Col className="d-flex justify-content-lg-center" 
                         >
-                        <h1>All your Dog Friends Are Waiting</h1>
+                        <RainbowText>All Your Paw Pals Are Waiting For You</RainbowText>
                         </Col>
                     </Row>
                     <div className="index-page" >

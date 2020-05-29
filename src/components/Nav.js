@@ -1,38 +1,123 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 // import Navbar from 'react-bootstrap/Navbar';
 // import {Navbar} from 'react-bootstrap';
+import '../CSS/navbar.css'
 
+const TopNav = styled.div `
+    overflow: hidden;
+    background-color: black;
+`
 
+// const HoverLink = styled.StyledLink
 
+const StyledLink = styled(Link) `
+    float: left;
+    display: block;
+    color: palevioletred;
+    text-align: center;
+    padding: 24px 6px;
+    text-decoration: none;
+    font-size: 17px;
+
+`
+
+const StyledLinkRight = styled(Link) `
+    float: right;
+    display: block;
+    color: palevioletred;
+    text-align: center;
+    padding: 24px 16px;
+    text-decoration: none;
+    font-size: 17px;
+`
+
+const StyledInput = styled.input ` 
+    float: right;
+    padding: 6px;
+    margin-top: 18px;
+    margin-right: 16px;
+    border: none;
+    font-size: 17px;
+    background: papayawhip;
+`
+
+const FollowCounter = styled.div ` 
+    float: right;
+    display: block;
+    color: palevioletred;
+    text-align: center;
+    padding: 24px 16px;
+    text-decoration: none;
+    font-size: 17px;
+`
+
+const PawPals = styled.div ` 
+    float: left;
+    display: block;
+    color: palevioletred;
+    text-align: center;
+    padding: 14px 20px 14px 29px; 
+    text-decoration: none;
+    font-size: 25px;
+`
 
 const Nav = props => {
 
-    const {loggedInDog} = props
+    const {loggedInDog, search, handleSearch} = props
     
     return (
-        <>
-            <div className="simple-flex-row">
-            <Link className="left-corner" to="/">Home</Link>
-            <Link to="/dogs">Dogs</Link>
-            {loggedInDog ? <Link to={`/dogs/${loggedInDog.id}`}>My Profile</Link> : null}
+
+        <TopNav >
+                        
+            <PawPals to="/">PawPals</PawPals>
+
+            <StyledLink to="/dogs">Friendos</StyledLink>
+            {/* {props.loggedInDog ? <StyledLink to={`/dogs/${props.loggedInDog.id}`}>My Profile</StyledLink> : null} */}
+            <StyledLink to="/events">Let's Play Together</StyledLink>
+            <StyledLink to="/events/new">Throw A Party!</StyledLink>
+
+            <StyledInput 
+                type="text" 
+                value={search} 
+                onChange={(e)=>handleSearch(e)} 
+                placeholder="Search..." ></StyledInput> 
+
+            <StyledLinkRight to="/login"> 
+                {
+                    props.loggedInDog 
+                    ?  "Sign Out" 
+                    : "Please Sign In" 
+                }
+            </StyledLinkRight> 
             
-            <Link to="/events">Events</Link>
-            <Link to="/events/new">Create Event</Link>
-            {/* <Link to="/dogs">Followers</Link> */}
-            <div className="simple-flex-row right-corner">
+            <FollowCounter>
+                {
+                    loggedInDog 
+                    ? `
+                    ${loggedInDog.status}!! 
+                    Hi ${loggedInDog.name}  
+                    |  Follower Count: ${loggedInDog.followers.length}  
+                    |  Followee Count: ${loggedInDog.followees.length}` 
+                    : null
+                } 
+            </FollowCounter>
+            
+        </TopNav>
 
-            {/* {`Welcome ${loggedInDog.name}  |  Sign Out` } */}
-            <Link to="/login">{loggedInDog ? `Follower Count: ${loggedInDog.followers.length} Followee Count: ${loggedInDog.followees.length} ${loggedInDog.name} | id:${loggedInDog.id}  |  Sign Out` : "Sign In" }</Link> 
 
-            </div>
-        </div>
-        </>
+            
+        
 
     )
 }
 
 export default Nav;
+
+
+
 
 
 // import { Link } from 'react-router-dom';

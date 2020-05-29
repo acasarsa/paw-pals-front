@@ -40,7 +40,7 @@ const DogCard = (props) => {
             <h3>{name}</h3>
             <h5>"{status}"</h5>
             <img src={image} alt="dog gif"  ></img>
-            <center><ButtonStyle variant="primary" onClick={() => {getSelectedDog(selected_dog) 
+            <center><ButtonStyle onClick={() => {getSelectedDog(selected_dog) 
                                     props.history.push(`/dogs/${id}`)}}
                                     >
                                         

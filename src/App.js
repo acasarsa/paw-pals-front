@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import styled from 'styled-components'
 
 
 import {Route, Switch} from 'react-router-dom';
@@ -13,14 +13,16 @@ import EventsIndex from './components/EventsIndex'
 import EventsForm from './components/EventsForm'
 import EventProfile from './components/EventProfile'
 import EditEventForm from './components/EditEventForm'
-// import DogCard from './components/DogCard'
-// require('log-timestamp')(function() {
-//     return new Date()
 
-// });
-
-// import {DogShowPage, DogIndex, Auth, MainContainer, Nav, SignUp, EventsIndex, EventsForm } from './components'
 const url = 'http://localhost:3000/api/v1'
+
+
+const MainDiv = styled.div `
+    /* background-image: url(%PUBLIC_URL%/pink-paws.png);
+    background-repeat: repeat-x;  */
+    text-align: center;
+
+`
 
 class App extends React.Component {
 
@@ -31,7 +33,8 @@ class App extends React.Component {
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
-        selected_dog: ''
+        selected_dog: '',
+        search: ''
     }
 
     componentDidMount() {
@@ -41,12 +44,6 @@ class App extends React.Component {
     }
     
 
-    // setCurrentUser = (dogs, username) => {
-    //     console.log('username', username)
-    //     this.setState({
-    //         current_user: dogs.data.find(dog => (dog.attribute.username === username) ? dog : "Invalid Username")
-    //     }) 
-    // }
 
     onlyUnique = (value, index, self) => { 
         return self.indexOf(value) === index;
@@ -128,6 +125,10 @@ class App extends React.Component {
     }
 
     
+    handleSearch = (event) => {
+        this.setState({search: event.target.value})
+    }
+
 
 
     // dogs: dogs.map(dog => 
@@ -182,9 +183,24 @@ class App extends React.Component {
 // add events profile page 
     render() {
         console.log("//////////// APP RENDERED ////////////")
-        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog} = this.state
+        const {loggedInDog, username, loggedInDogFollowees, loggedInDogfollowers, dogs, selected_dog, handleSearch, search} = this.state
+
 
         console.log("selected dog", selected_dog)
+        console.log(search)
+
+        let filteredDogs = [...dogs]
+
+        if (search.length > 0) {
+            filteredDogs = filteredDogs.filter( dog => { 
+            if ( dog.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()) || dog.attributes.status.toLowerCase().includes(this.state.search.toLowerCase()) ) {
+                return true
+            } else {
+                return false
+            }  
+            })
+        } 
+        console.log("filteredDogs", filteredDogs)
 
 
         // what about the setFollowId thing do i need that? 
@@ -196,8 +212,8 @@ class App extends React.Component {
         //// i tried setting state to dogs.data initially which has worked before but now is not. 
         
         return (
-            <div className= "App"> 
-            <Nav loggedInDog={loggedInDog}/> 
+            <MainDiv > 
+            <Nav handleSearch={this.handleSearch} loggedInDog={loggedInDog}/> 
 
 
                 <Switch> 
@@ -216,7 +232,7 @@ class App extends React.Component {
                     <Route path="/dogs" render={(routerProps) => 
                         <DogIndex 
                             {...routerProps} 
-                            dogs={dogs}  
+                            dogs={filteredDogs}  
                             loggedInDog={loggedInDog}
                             loggedInDogFollowees={loggedInDogFollowees}
                             loggedInDogfollowers={loggedInDogfollowers}
@@ -233,7 +249,7 @@ class App extends React.Component {
                     <Route path='/signup' component={SignUp}/> 
 
                 </Switch> 
-            </div>
+            </MainDiv>
         );
     }
 }

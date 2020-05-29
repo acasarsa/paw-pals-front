@@ -1,6 +1,7 @@
 import React from 'react';
 // import Followers from './Followers'
-import DogCard from './DogCard'
+import DogCard from './DogCardLayout'
+// import DogCard from './DogCard'
 
 
 
@@ -67,7 +68,7 @@ class DogShowPage extends React.Component {
                             
                             <h1>{name}'s Followers</h1>
                             <div className="simple-flex-row index-wrap">
-                                {loggedInDog ?  selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
+                                {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
                             </div>
                         </div>
 
