@@ -30,9 +30,9 @@ body {
 }
 
 img {
-    height: auto;
+    /* height: auto;
     max-width: 100%;
-    vertical-align: middle;
+    vertical-align: middle; */
 }
 
 .btn {
