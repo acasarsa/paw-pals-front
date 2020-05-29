@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 // import Followers from './Followers'
 import DogCard from './DogCard'
 
@@ -57,7 +57,7 @@ class DogShowPage extends React.Component {
                             <div>
                             <h1>My Profile</h1>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}
@@ -74,7 +74,7 @@ class DogShowPage extends React.Component {
                         :
                         <div>
                             <h2>Name: {name}</h2>
-                            <img src={image}></img>
+                            <img src={image} alt="dog"></img>
                             
                             <div>
                                 Follow Count: {selected_dog.followers.length}

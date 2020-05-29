@@ -1,6 +1,7 @@
 import React from 'react'
 import DogCard from './DogCard';
 import Filter from './Filter'
+import {Container, Row, Col, Grid} from 'react-bootstrap'
 
 
 
@@ -36,20 +37,20 @@ class DogIndex extends React.Component {
         render () {
 
 
-            const {followFilter} = this.state
-            const {loggedInDog} = this.props
+            // const {followFilter} = this.state
+            // const {loggedInDog} = this.props
             let displayDogs = [...this.props.dogs]
             
 
 
-            if( loggedInDog && displayDogs) {
+            // if( loggedInDog && displayDogs) {
 
-                if (followFilter !== "All") {
-                    console.log("displayDogs", loggedInDog)
-                }
-            } else {
-                displayDogs = displayDogs
-            }
+            //     if (followFilter !== "All") {
+            //         console.log("displayDogs", loggedInDog)
+            //     }
+            // } else {
+            //     displayDogs = displayDogs
+            // }
             
             // if(followFilter === "All") {
             //     // console.log("1",displayDogs.map(dog => dog.id))

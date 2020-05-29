@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
-import {Navbars, Button} from 'react-bootstrap';
+
+
+
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
@@ -25,7 +27,7 @@ class App extends React.Component {
     state = {
         loggedInDog: null,
         loggedInDogFollowees: [],
-        username: "user10",
+        username: "user7",
         loggedInDogfollowers: [],
         follow_id: null, //maybe keep
         dogs: [],
@@ -119,7 +121,7 @@ class App extends React.Component {
                 dogs: dogs.map(dog => parseInt(dog.id) === selected_dog.id 
                     ? {...dog, attributes: {...dog.attributes, followers: [...dog.attributes.followers, followObj.follower]}} 
                     : dog )
-               
+            
                 })
 
             })
@@ -196,6 +198,8 @@ class App extends React.Component {
         return (
             <div className= "App"> 
             <Nav loggedInDog={loggedInDog}/> 
+
+
                 <Switch> 
                     <Route path='/dogs/:id' render={(routerProps) => 
                         <DogShowPage 
@@ -220,7 +224,7 @@ class App extends React.Component {
                             getSelectedDog={this.getSelectedDog}
                             /> } 
                     /> 
-                     <Route path='/events/new' component={EventsForm}/> 
+                    <Route path='/events/new' component={EventsForm}/> 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } />   
                     <Route exact path='/events/edit/:id' render={(routerProps) => <EditEventForm routerProps={routerProps} /> }/> 
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } /> 
