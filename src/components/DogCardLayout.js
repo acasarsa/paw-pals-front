@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import '../CSS/card.css'
+import * as Style from './DogIndex/Styles'
 
 
 
@@ -33,9 +34,13 @@ const DogCard = (props) => {
 
 // if being weird take out the div around the image
 
+
+
+
     return(
 
         <>
+<Style.FlexItem >
 
         <div className="no-bullets cards">
             <div className="cards__item">
@@ -44,7 +49,7 @@ const DogCard = (props) => {
                     <img src={image} alt="dog gif"></img>
                 </div>
                 <div className="card__content">
-                    <h1 className="card__title">{name}</h1>
+                    <h1 className="card__title"><strong>{name}</strong></h1>
                     <strong><p className="card__text"> Fav Toy: {favorite_toy}  </p></strong>
                     <p className="card__text">Status: {status}!! </p>
                     <p className="card__text">Description: {description}!! </p>
@@ -62,6 +67,7 @@ const DogCard = (props) => {
             </div>
         </div>
         
+</Style.FlexItem>
         </>
     )
 }

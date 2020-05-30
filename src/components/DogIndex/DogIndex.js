@@ -1,42 +1,10 @@
 import React from 'react'
-import DogCard from './DogCardLayout';
-import styled from 'styled-components'
-import Filter from './Filter'
+import DogCard from '../DogCardLayout';
+// import Filter from './Filter'
 import {Container, Row, Col} from 'react-bootstrap'
-
-import { keyframes } from "styled-components";
-
+import * as Style from './Styles'
 
 
-const rotate = keyframes`
-from {
-    transform: rotate(0deg);
-} to {
-    transform: rotate(360deg);
-}
-`;
-
-const RotateReverse = styled.div`
-    display: inline-block;
-    animation: ${rotate} 2s linear infinite;
-    padding: 1rem 1rem;
-    font-size: 3.2rem;
-`;
-
-// Here we create a component that will rotate everything we pass in over two seconds
-const Rotate = styled.div`
-    display: inline-block;
-    animation: ${rotate} 2s linear infinite;
-    padding: 1rem 1rem;
-    font-size: 3.2rem;
-`;
-
-const RainbowText = styled.h1 `  
-    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 0px 0px 20px 0px;
-`
 
 
 class DogIndex extends React.Component {
@@ -52,7 +20,7 @@ class DogIndex extends React.Component {
     
     renderDogCards = (displayDogs) => {
         
-        const {loggedInDog, loggedInDogFollowees, loggedInDogfollowers, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = this.props
+        const {loggedInDog, handleFollow, handleUnfollow, getSelectedDog, selected_dog} = this.props
 
                 return displayDogs.map(dog => <DogCard
                                     history={this.props.history}
@@ -62,7 +30,9 @@ class DogIndex extends React.Component {
                                     selected_dog={selected_dog}
                                     loggedInDog={loggedInDog}
                                     handleFollow={handleFollow} 
-                                    handleUnfollow={handleUnfollow} /> )
+                                    handleUnfollow={handleUnfollow} 
+                                    
+                                    /> )
     }
 
         render () {
@@ -102,31 +72,30 @@ class DogIndex extends React.Component {
 
             return (
                 <>
-                <Filter handleFilterChange={this.handleFilterChange} />
+                {/* <Filter handleFilterChange={this.handleFilterChange} /> */}
                 <Container fluid className="show-grid">
                     <Row>
                         <Col> 
-                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        <Style.Rotate>  🦴 </Style.Rotate><Style.Rotate>  🦴 </Style.Rotate><Style.Rotate>  🦴 </Style.Rotate>
                         </Col>
                         <Col className="d-flex justify-content-lg-center" 
                         >
-                        <RainbowText>All Your Paw Pals Are Waiting For You</RainbowText> 
+                        <Style.RainbowText>All Your Paw Pals Are Waiting For You</Style.RainbowText> 
                         </Col>
                         <Col >
-                        <Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate><Rotate>  🦴 </Rotate>
+                        <Style.Rotate>  🦴 </Style.Rotate><Style.Rotate>  🦴 </Style.Rotate><Style.Rotate>  🦴 </Style.Rotate>
                         </Col>
                     </Row>
                     <Row>
                         <Col className="d-flex justify-content-lg-center">
-                        <Rotate>  🐩🦴🐕 </Rotate>
+                        <Style.Rotate>  🐩🦴🐕 </Style.Rotate>
                         </Col>
                     </Row>
-                    <div className="index-page" >
-                    
-                        <div className="simple-flex-row index-wrap">
+                    <Style.FlexContainer >
+                        
                         {this.renderDogCards(displayDogs)}
-                        </div>
-                    </div>
+                    
+                    </Style.FlexContainer>
                                             
             
                 </Container>

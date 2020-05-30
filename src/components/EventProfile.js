@@ -2,9 +2,10 @@ import React from 'react'
 import EditEventForm from './EditEventForm'
 import { Redirect } from 'react-router-dom'
 import DogCard from './DogCard'
+import { Container, Row, Col } from 'react-bootstrap'
 
 
- class EventProfile extends React.Component {
+class EventProfile extends React.Component {
     state = {
         redirect: false,
         event: null,
@@ -16,6 +17,21 @@ import DogCard from './DogCard'
         description: '',
     }
 
+    style =  () =>  {
+        return {
+
+        background: 'palevioletred',
+        fontSize: '1em',
+        margin: '1em',
+        padding: '0.25em 1em',
+        border: "2px solid palevioletred",
+        borderRadius: "3px",
+        width: "fit-content",
+        cursor:  "pointer",
+        color: "white"
+    }
+}
+
 
     fetchEvent = () => {
         fetch(`http://localhost:3000/api/v1/events/${this.props.match.params.id}`)
@@ -24,7 +40,7 @@ import DogCard from './DogCard'
     }
 
     componentDidMount(){
-      this.fetchEvent()
+        this.fetchEvent()
     }
 
     // handleClick = () => {
@@ -52,20 +68,43 @@ import DogCard from './DogCard'
         let attendee =  this.state.event.data.attributes.dogs
         console.log(attendee)
         return (
-             <div>
+            <>
+<Container>
+    
+                <br/>
                 <h3>Event: {title}</h3>
                 <h3>Date: {date}</h3>
                 <img src={image} alt="" style={{width:800}} ></img>
                 <h3>Details: {description}</h3>
                 <h3>Attending: </h3>
                 <hr/>
-                <div className='simple=flex-row index-wrap'>
-                        {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs}  /> )}
+            <Container>
+            <Row>
+                <Col>
+
+                </Col>
+            <Col justify-content-center>
+
+                <div    >
+                        {attendee.map(dogs => <DogCard key={dogs.id}  {...dogs} /> )}
                 </div> 
-                 { this.state.mode?  null : <button onClick={this.saveChanges}> Edit Event </button> }
-                <button onClick={this.handleDelete} > Delete Event </button>
+                    { this.state.mode?  null : <button  style={this.style()} onClick={this.saveChanges}> Edit Event </button> }
+                <button 
+                style={this.style()}
+                    onClick={this.handleDelete} 
+                    > Delete Event 
+                </button>
                 { this.state.mode ?  <EditEventForm  {...this.state} /> : null}
-            </div>
+            </Col>
+
+                <Col>
+
+                </Col>
+            </Row>
+            </Container>
+            
+</Container>
+</>
             )
         
     }

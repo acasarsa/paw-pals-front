@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
-import DogIndex from './components/DogIndex'
+import DogIndex from './components/DogIndex/DogIndex'
 import Auth from './components/Auth'
 import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
@@ -29,7 +29,7 @@ class App extends React.Component {
 
     state = {
         loggedInDog: null,
-        username: "user7",
+        username: '',
         follow_id: null, //maybe keep
         dogs: [],
         selected_dog: '',
@@ -52,10 +52,6 @@ class App extends React.Component {
         .then( r => r.json())
         .then ( followPairs => this.setState({followPairs }) )
     }
-
-   
-
-
     
 
     getSelectedDog = (selected_dog) => {
@@ -63,12 +59,6 @@ class App extends React.Component {
 
         
     }
-
-    // selected_dog: {...selected_dog, followers: [...selected_dog.followers, followObj.follower]}, 
-
-    // loggedInDogFollowees: [...loggedInDogFollowees, followObj.followee],
-
-    // loggedInDog: { ...loggedInDog, followees: [...loggedInDog.followees, followObj.followee ]},  
 
     handleUsername = (event) => {
         event.preventDefault()
@@ -93,8 +83,6 @@ class App extends React.Component {
             loggedInDogFollowees: null,  
             loggedInDogfollowers: null})
     }
-
-
 
 
 
@@ -229,6 +217,7 @@ class App extends React.Component {
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } /> 
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
+                    <Route path='/' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
                     <Route path='/signup' component={SignUp}/> 
 
                 </Switch> 

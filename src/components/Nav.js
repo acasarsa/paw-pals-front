@@ -9,6 +9,7 @@ const TopNav = styled.div `
     overflow: hidden;
     background-color: black;
     margin-top: 0px;
+    opacity: 0.88;
 `
 
 // const HoverLink = styled.StyledLink
