@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import {Route, Switch} from 'react-router-dom';
 import Nav from './components/Nav';
 import DogShowPage from './components/DogShowPage'
-import DogIndex from './components/DogIndex'
+import DogIndex from './components/DogIndex/DogIndex'
 import Auth from './components/Auth'
 import SignUp from './components/SignUp'
 import EventsIndex from './components/EventsIndex'
