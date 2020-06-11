@@ -62,23 +62,23 @@ class EventsForm extends React.Component {
     render(){
         const { redirect } = this.state;
         if (redirect) {
-          return <Redirect to={`/events/`}/>;
+            return <Redirect to={`/events/`}/>;
         }
         // console.log(this.state)
         return (
             // 'url(https://source.unsplash.com/random/1024x768?sky)'
-            <div style={{backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/51DgB8lONoL._AC_SX522_.jpg'}}>
+            <div >
             <h3><strong>Events Form</strong></h3>
             <br/>
             <form onSubmit={this.handleSubmit}>
             <div>
                 <label><strong>Title of Event: </strong></label>
                 <input onChange= {this.eventInfo}
-                 type="text" name="title" 
-                 placeholder="Event Name" 
-                 value={this.state.title}
-                 />
-                 
+                    type="text" name="title" 
+                    placeholder="Event Name" 
+                    value={this.state.title}
+                    />
+                    
             </div>
             <div >
                 <label><strong>Date:</strong> </label>
@@ -87,16 +87,16 @@ class EventsForm extends React.Component {
                 name="date"  
                 placeholder="Enter Date"
                 value={this.state.date}
-                 />
+                />
             </div>
             <div>
                 <label><strong>Image Url: </strong></label>
                 <input 
                 onChange= {this.eventInfo} 
                 name="image" 
-                 placeholder="Image"
-                 value={this.state.image} 
-                 />
+                placeholder="Image"
+                value={this.state.image} 
+                />
             </div>
             <div>
                 
@@ -112,7 +112,7 @@ class EventsForm extends React.Component {
             style={this.style()}
             type="submit"
             >Create Event</button>
-          
+        
         </form>
             </div>
         )

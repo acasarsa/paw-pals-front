@@ -37,7 +37,11 @@ class Auth extends React.Component {
                     <h3>Sign In</h3>
                     <div>
                         <label>Username:</label>
-                        <input onChange={handleUsername} type="text" name="username" value={username} placeholder="Enter Username" />
+                        <input onChange={handleUsername}
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Enter Username" />
                     </div>
                     {/* <div>
                         <label>Password</label>
@@ -50,7 +54,7 @@ class Auth extends React.Component {
     
         else {
             return <Redirect to={`/dogs/`}/>;
-          }
+        }
     }
 }
 export default Auth;

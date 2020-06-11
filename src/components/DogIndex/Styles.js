@@ -43,22 +43,11 @@ export const RainbowText = styled.h1 `
 `
 
 export const FlexContainer = styled.div ` 
-    /* display: gird;
-    grid-template-columns: auto auto auto;
-    align-content: flex-start;
-    padding: 0;
-    margin: auto;
-    height: auto;
-    border: black solid 1px;
-    width: auto;
-    min-height: 1150px; */
+
     display: grid;
     grid-template-columns: auto auto auto;
-    /* width: 50em; */
     align-content: flex-start;
     justify-content: center;
-    /* border: solid rgba(69, 250, 13, 0.7); */
-    /* background-color: rgba(0,0,0,.5); */
     min-height: 1150px;
     min-width: auto;
     margin-top: 50px;
@@ -66,8 +55,6 @@ export const FlexContainer = styled.div `
 
 `
 export const FlexItem = styled.div ` 
-    /* border: black solid 1px; */
-    /* background: blue; */
     padding: 5px;
     width: auto;
     max-height: auto;
@@ -76,6 +63,5 @@ export const FlexItem = styled.div `
     margin: 10px;
     line-height: auto;
     font-weight: bold;
-    /* font-size: 3em; */
 `
 
