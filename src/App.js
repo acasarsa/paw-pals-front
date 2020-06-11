@@ -25,6 +25,8 @@ const MainDiv = styled.div `
 
 `
 
+
+
 class App extends React.Component {
 
     state = {
@@ -217,7 +219,15 @@ class App extends React.Component {
                     <Route path='/events/:id' render={(routerProps) => <EventProfile {...routerProps} loggedInDog={loggedInDog} /> } /> 
                     <Route path='/events' component={EventsIndex}/> 
                     <Route path='/login' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
-                    <Route path='/' render={(routerProps) => <Auth {...routerProps} handleUsername={this.handleUsername} username={username} setLoggedInDog={this.handleLogin} loggedInDog={loggedInDog} handleSignOut={this.handleSignOut} /> }/> 
+                    <Route path='/'
+                        render={(routerProps) =>
+                            <Auth
+                                {...routerProps}
+                                handleUsername={this.handleUsername}
+                                username={username}
+                                setLoggedInDog={this.handleLogin}
+                                loggedInDog={loggedInDog}
+                                handleSignOut={this.handleSignOut} />} /> 
                     <Route path='/signup' component={SignUp}/> 
 
                 </Switch> 
