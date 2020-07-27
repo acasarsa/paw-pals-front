@@ -41,22 +41,18 @@ class DogShowPage extends React.Component {
 
     componentWillUpdate(){
         this.renderDogShowPage()
+
     }
 
 
 
     renderDogShowPage = () => {
 
-            // console.log('Show Page props', this.props)
-            // console.log("dog", this.props.dogs)
-            // console.log("followers off dog", this.props.dog.followers)
-            // console.log("followers props from A logged in DogP", this.props.follow_id) 
             console.log('loggedinDOg', this.props.loggedInDog)
-            // console.log('follow_id in renderDodpr', this.state.follow_id)
 
         const {name, image, followers, id} = this.props.selected_dog
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
-        console.log("followers Show", followers);
+
 
         
         let follower_id = loggedInDog.id
@@ -75,51 +71,72 @@ class DogShowPage extends React.Component {
                         {/* <button style={this.style()}  onClick={() => this.props.history.goBack()} >Go Back</button> */}
                         
                         { (loggedInDog.id ===  selected_dog.id) ? 
-                        
-                            <div>
-                            <h1>My Profile</h1>
-                            <h2>Name: {name}</h2>
-                            <img src={image} alt="dog"></img>
                             
                             <div>
-                                <strong>  Follow Count: {selected_dog.followers.length}</strong>
-                            </div>
-                            <div>
+                                <h1>My Profile</h1>
+                                <h2>Name: {name}</h2>
+                                <img src={image} alt="dog"></img>
+                                
+                                <div>
+                                    <strong>  Follow Count: {selected_dog.followers.length}</strong>
+                                </div>
+                                <div>
 
-                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
-                            </div>
-                            <hr></hr>
+                                <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                                </div>
+                                <hr></hr>
+                                
+                                <h1>{name}'s Followers</h1>
+                                <div className="simple-flex-row index-wrap">
+                                    {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower} />) : "failed"}
+                                </div>
                             
-                            <h1>{name}'s Followers</h1>
-                            <div className="simple-flex-row index-wrap">
-                                {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower}/>) : "failed"}
                             </div>
-                        </div>
 
                         :
                         <div>
-                            <h2>Name: {name}</h2>
-                            <img src={image} alt="dog"></img>
+                            <Row>
+                                <Col>
+                                    <Row>
+
+                                        <img src={image} alt="dog"></img>
+                                    </Row>
+                                    <Row>
+                                        <div>
+
+                                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                                        </div>
+                                    </Row>
+
+                                    {followers.find((dog) => dog.id === loggedInDog.id) ?
+                                    <Row>
+                                        <h4> {selected_dog.name} is your Paw Pal! </h4>
+                                    </Row>
+                                    :
+                                    <Row>
+                                        <form onSubmit={(event) => handleFollow(event, selected_dog)}>
+                                            <button style={this.style()}  > Follow </button>
+                                        </form>
+                                    </Row>
+                        
+                        
+                                        }
+                                </Col>
+                                <Col>
+                                    <Row>
+                                        <h2>Name: {name}</h2>   
+                                    </Row>
+                                    <Row>
+
+                                        <div>
+                                            Follow Count: {selected_dog.followers.length}
+                                        </div>
+                                    </Row>
+
+                                </Col>
+                                <Col></Col>
+                            </Row>
                             
-                            <div>
-                                Follow Count: {selected_dog.followers.length}
-                            </div>
-                            <div>
-
-                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
-                            </div>
-
-                            {followers.find((dog) => dog.id === loggedInDog.id) ?
-                            <h4> {selected_dog.name} is your Paw Pal! </h4>
-
-                            
-                            :
-                            <form onSubmit={(event) => handleFollow(event, selected_dog)}>
-                                <button style={this.style()}  > Follow </button>
-                            </form>
-                
-                
-                                }
                             
                             <hr></hr>
                             
