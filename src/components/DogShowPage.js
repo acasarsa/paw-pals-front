@@ -9,19 +9,27 @@ import {Container, Row, Col} from 'react-bootstrap'
 
 class DogShowPage extends React.Component {
 
-    style =  () =>  {
+    buttonStyle =  () =>  {
         return {
-    background: 'palevioletred',
-    fontSize: '1em',
-    margin: '1em',
-    padding: '0.25em 1em',
-    border: "2px solid palevioletred",
-    borderRadius: "3px",
-    width: "fit-content",
-    cursor:  "pointer",
-    color: "white"
+            background: 'palevioletred',
+            fontSize: '1em',
+            margin: '1em',
+            padding: '0.25em 1em',
+            border: "2px solid palevioletred",
+            borderRadius: "3px",
+            width: "fit-content",
+            cursor:  "pointer",
+            color: "white"
+        }
     }
-}
+
+    rowStyle = () => {
+        return {
+            background: 'lightblue',
+            // padding: '2em',
+            margin: '1em'
+        }
+    }
 
 
 
@@ -73,29 +81,52 @@ class DogShowPage extends React.Component {
                         { (loggedInDog.id ===  selected_dog.id) ? 
                             
                             <div>
-                                <h1>My Profile</h1>
-                                <h2>Name: {name}</h2>
-                                <img src={image} alt="dog"></img>
-                                
-                                <div>
-                                    <strong>  Follow Count: {selected_dog.followers.length}</strong>
-                                </div>
-                                <div>
+                                <Row style={this.rowStyle()}>
+                                    <Col>
+                                        <Row>
 
-                                <button onClick={() => this.props.history.goBack()} >Go Back</button>
-                                </div>
-                                <hr></hr>
+                                            <img src={image} alt="dog"></img>
+                                        </Row>
+                                        <Row>
+                                            <div>
+
+                                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                                            </div>
+                                        </Row>
+
+                                        
+                                    </Col>
+                                    <Col>
+                                        <Row>
+                                            <h1>My Profile</h1>
+                                        </Row>
+                                        <Row>
+                                            <h2>Name: {name}</h2>   
+                                        </Row>
+                                        <Row>
+
+                                            <div>
+                                                Follow Count: {selected_dog.followers.length}
+                                            </div>
+                                        </Row>
+
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+
+                                {/* <hr></hr> */}
                                 
                                 <h1>{name}'s Followers</h1>
                                 <div className="simple-flex-row index-wrap">
                                     {loggedInDog ? selected_dog.followers.map(follower => <DogCard key={follower.id} {...follower} />) : "failed"}
                                 </div>
                             
+
                             </div>
 
                         :
                         <div>
-                            <Row>
+                            <Row style={this.rowStyle()}>
                                 <Col>
                                     <Row>
 
@@ -115,7 +146,7 @@ class DogShowPage extends React.Component {
                                     :
                                     <Row>
                                         <form onSubmit={(event) => handleFollow(event, selected_dog)}>
-                                            <button style={this.style()}  > Follow </button>
+                                            <button style={this.buttonStyle()}  > Follow </button>
                                         </form>
                                     </Row>
                         
@@ -138,7 +169,7 @@ class DogShowPage extends React.Component {
                             </Row>
                             
                             
-                            <hr></hr>
+                            {/* <hr></hr> */}
                             
                             <h1>{name}'s Followers</h1>
                             <div className="simple-flex-row index-wrap">
@@ -154,7 +185,7 @@ class DogShowPage extends React.Component {
                     return (
                         <>
                             <h3>Go back and select a dog!</h3>
-                            <button style={this.style()}  onClick={() => this.props.history.push('/dogs')}>Dog Index</button>
+                            <button style={this.buttonStyle()}  onClick={() => this.props.history.push('/dogs')}>Dog Index</button>
                         </>
                         ) 
                 }
