@@ -31,7 +31,25 @@ class DogShowPage extends React.Component {
         }
     }
 
+    secondaryRow = () => {
+        return {
+            
+        }
+    }
+    
+    imageBox = () => {
+        return {
+            padding: '0.5em'
+        }
+    }
 
+    wrapperCenter = () => {
+        return {
+            textAlign: 'center',
+            objectAlign: 'center',
+
+        }
+    }
 
     componentDidMount() {
         this.renderDogShowPage()
@@ -82,15 +100,15 @@ class DogShowPage extends React.Component {
                             
                             <div>
                                 <Row style={this.rowStyle()}>
-                                    <Col>
-                                        <Row>
+                                    <Col style={this.wrapperCenter()}>
+                                        <Row style={this.imageBox()}>
 
                                             <img src={image} alt="dog"></img>
                                         </Row>
-                                        <Row>
+                                        <Row style={this.secondaryRow()}>
                                             <div>
 
-                                            <button onClick={() => this.props.history.goBack()} >Go Back</button>
+                                            <button style={this.buttonStyle()} onClick={() => this.props.history.goBack()} >Go Back</button>
                                             </div>
                                         </Row>
 
@@ -127,24 +145,24 @@ class DogShowPage extends React.Component {
                         :
                         <div>
                             <Row style={this.rowStyle()}>
-                                <Col>
-                                    <Row>
+                                <Col style={this.wrapperCenter()}>
+                                    <Row style={this.imageBox()}>
 
                                         <img src={image} alt="dog"></img>
                                     </Row>
-                                    <Row>
-                                        <div>
+                                    <Row style={this.secondaryRow()}>
+                                        
 
-                                        <button onClick={() => this.props.history.goBack()} >Go Back</button>
-                                        </div>
+                                        <button style={this.buttonStyle()} onClick={() => this.props.history.goBack()} >Go Back</button>
+                                        
                                     </Row>
 
                                     {followers.find((dog) => dog.id === loggedInDog.id) ?
-                                    <Row>
+                                    <Row style={this.secondaryRow()}>
                                         <h4> {selected_dog.name} is your Paw Pal! </h4>
                                     </Row>
                                     :
-                                    <Row>
+                                    <Row style={this.secondaryRow()}>
                                         <form onSubmit={(event) => handleFollow(event, selected_dog)}>
                                             <button style={this.buttonStyle()}  > Follow </button>
                                         </form>
