@@ -27,19 +27,23 @@ class DogShowPage extends React.Component {
         return {
             background: 'lightblue',
             // padding: '2em',
-            margin: '1em'
+            margin: '10px 0px',
+            // paddingBottom: '1em',
+            // paddingTop: '1em',
+            padding: '1em',
+            opacity: '0.95',
         }
     }
 
-    secondaryRow = () => {
-        return {
-            
-        }
-    }
     
     imageBox = () => {
         return {
-            padding: '0.5em'
+            paddingTop: '0.5em',
+            paddingRight: '2em',
+            paddingLeft: '0.5em',
+            paddingBottom: '0.5em',
+            width: 'auto',
+            height: 'auto'
         }
     }
 
@@ -99,18 +103,25 @@ class DogShowPage extends React.Component {
                         { (loggedInDog.id ===  selected_dog.id) ? 
                             
                             <div>
+                            
+
+                            
                                 <Row style={this.rowStyle()}>
                                     <Col style={this.wrapperCenter()}>
                                         <Row style={this.imageBox()}>
-
                                             <img src={image} alt="dog"></img>
                                         </Row>
-                                        <Row style={this.secondaryRow()}>
+
+                                        
+                                
+                                            
+                                        <Row className="justify-content-center align-items-center" >
                                             <div>
 
                                             <button style={this.buttonStyle()} onClick={() => this.props.history.goBack()} >Go Back</button>
                                             </div>
                                         </Row>
+                                    
 
                                         
                                     </Col>
@@ -131,6 +142,7 @@ class DogShowPage extends React.Component {
                                     </Col>
                                     <Col></Col>
                                 </Row>
+                                
 
                                 {/* <hr></hr> */}
                                 
@@ -150,19 +162,13 @@ class DogShowPage extends React.Component {
 
                                         <img src={image} alt="dog"></img>
                                     </Row>
-                                    <Row style={this.secondaryRow()}>
-                                        
-
-                                        <button style={this.buttonStyle()} onClick={() => this.props.history.goBack()} >Go Back</button>
-                                        
-                                    </Row>
 
                                     {followers.find((dog) => dog.id === loggedInDog.id) ?
-                                    <Row style={this.secondaryRow()}>
+                                    <Row className="justify-content-center align-items-center">
                                         <h4> {selected_dog.name} is your Paw Pal! </h4>
                                     </Row>
                                     :
-                                    <Row style={this.secondaryRow()}>
+                                    <Row className="justify-content-center align-items-center">
                                         <form onSubmit={(event) => handleFollow(event, selected_dog)}>
                                             <button style={this.buttonStyle()}  > Follow </button>
                                         </form>
@@ -170,6 +176,12 @@ class DogShowPage extends React.Component {
                         
                         
                                         }
+                                    <Row className="justify-content-center align-items-center">
+                                        
+
+                                        <button style={this.buttonStyle()} onClick={() => this.props.history.goBack()} >Go Back</button>
+                                        
+                                    </Row>
                                 </Col>
                                 <Col>
                                     <Row>
