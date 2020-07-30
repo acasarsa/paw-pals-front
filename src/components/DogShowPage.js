@@ -80,7 +80,7 @@ class DogShowPage extends React.Component {
 
             console.log('loggedinDOg', this.props.loggedInDog)
 
-        const {name, image, followers, id} = this.props.selected_dog
+        const {name, image, followers, age, breed, description, favorite_toy, gender, human, size, status, id} = this.props.selected_dog
         const {selected_dog, handleFollow, handleUnfollow, loggedInDog} = this.props
 
 
@@ -130,7 +130,8 @@ class DogShowPage extends React.Component {
                                             <h1>My Profile</h1>
                                         </Row>
                                         <Row>
-                                            <h2>Name: {name}</h2>   
+                                            <h2 style={{marginRight: '1.5rem',}}>Name: {name}</h2>
+                                            <p style={{marginTop: '0.6rem'}}>"{status}"</p>     
                                         </Row>
                                         <Row>
 
@@ -157,7 +158,7 @@ class DogShowPage extends React.Component {
                         :
                         <div>
                             <Row style={this.rowStyle()}>
-                                <Col style={this.wrapperCenter()}>
+                                <Col style={this.wrapperCenter()} className="col-auto">
                                     <Row style={this.imageBox()}>
 
                                         <img src={image} alt="dog"></img>
@@ -183,22 +184,50 @@ class DogShowPage extends React.Component {
                                         
                                     </Row>
                                 </Col>
-                                <Col>
-                                    <Row>
-                                        <h2>Name: {name}</h2>   
+                                <Col >
+                                    <Row >
+                                        <h2 style={{marginRight: '1.5rem',}}>Name: {name}</h2>
+                                        <p style={{marginTop: '0.6rem'}}>"{status}"</p>  
                                     </Row>
-                                    <Row>
-
-                                        <div>
+                                    <Row >
+                                        <h6>
                                             Follow Count: {selected_dog.followers.length}
-                                        </div>
+                                        </h6>
                                     </Row>
-
+                                    <Row style={{padding: '4px 0'}}>
+                                        {name} is a {description} who's favorite toy is a {favorite_toy}
+                                    </Row>
+                                    <Row style={{padding: '4px 0'}}>
+                                        Breed: {breed}
+                                    </Row>
+                                    <Row style={{padding: '4px 0'}}>
+                                        Gender: {gender}
+                                    </Row>
+                                    <Row style={{padding: '4px 0'}}>
+                                        Age: {age}
+                                    </Row>
+                                    <Row style={{padding: '4px 0'}}>
+                                        Human: {human}
+                                    </Row>
                                 </Col>
-                                <Col></Col>
+                                {/* <Col className="justify-content-start align-items-left">
+                                    <h2>Doggie Details:</h2>
+                                    
+                                </Col> */}
                             </Row>
                             
-                            
+                        
+{/* breed: "Basset Hound"
+age: "Young"
+description: "Big Ol' Pupper"
+favorite_toy: "Stuffed Clam"
+gender: "Female"
+human: "Jacqualine"
+id: 8
+image: "https://cdn2.thedogapi.com/images/r14eVa6EX.gif"
+name: "Shadow"
+password: "123"
+size: "Small" */}
                             {/* <hr></hr> */}
                             
                             <h1>{name}'s Followers</h1>
