@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const TopNav = styled.div `
     overflow: hidden;
     background-color: black;
-    margin-top: 0px;
+    margin: 0px 0px 20px 0px;
     opacity: 0.88;
 `
 
