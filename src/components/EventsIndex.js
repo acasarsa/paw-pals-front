@@ -33,9 +33,9 @@ const EventsIndex = () => {
         return (
     
             <div className="index-page" >
-                <h3>Come Paw With Us</h3>
+                <h3>Come Play With Us</h3>
                 <br/>
-                <div className="simple-flex-row index-wrap" style={{display: 'flex', justifyContent: 'center'}} >
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}} >
                 {/* <Eventsform/> */}
                 {renderEventCards()}
 
