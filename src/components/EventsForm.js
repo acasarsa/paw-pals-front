@@ -14,16 +14,16 @@ class EventsForm extends React.Component {
 
     style =  () =>  {
         return {
-        background: 'palevioletred',
-        fontSize: '1em',
-        margin: '1em',
-        padding: '0.25em 1em',
-        border: "2px solid palevioletred",
-        borderRadius: "3px",
-        width: "fit-content",
-        cursor:  "pointer",
-        color: "white"
-   }
+            background: 'palevioletred',
+            fontSize: '1em',
+            margin: '1em',
+            padding: '0.25em 1em',
+            border: "2px solid palevioletred",
+            borderRadius: "3px",
+            width: "fit-content",
+            cursor:  "pointer",
+            color: "white"
+        }
 }
 
 
